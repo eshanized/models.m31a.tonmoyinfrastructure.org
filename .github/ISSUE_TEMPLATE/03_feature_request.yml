@@ -1,0 +1,46 @@
+name: "✨ Feature Request"
+description: "Suggest an idea, telemetry metric, or UX improvement for the platform."
+title: "[Feature]: "
+labels: ["kind:enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We welcome community proposals for metrics, filters, export formats, and agent tooling!
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Feature Category
+      options:
+        - "Observability & Canary Metrics (TTFT, throughput, jitter)"
+        - "M31A Agent Integration & Tooling"
+        - "Model Explorer & Visualization"
+        - "API & SDK Exports"
+        - "Automation & DevOps Pipeline"
+        - "Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement / Motivation
+      description: Is your feature request related to a problem? What workflow does this unblock?
+      placeholder: "I'm always frustrated when..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed Solution / Design
+      description: Describe your proposed change or addition.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Any alternative solutions or workarounds you've evaluated?

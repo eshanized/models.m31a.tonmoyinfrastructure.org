@@ -1,161 +1,450 @@
-# NVIDIA Build Model Intelligence Dashboard (`models.m31a.tonmoyinfrastructure.org`)
+<div align="center">
 
-A production-grade model intelligence dashboard and synthetic observability platform for **NVIDIA Build** foundation models and NVIDIA NIM endpoints, deeply integrated with our canonical model registry and the **M31A autonomous coding agent**.
+# ⚡ NVIDIA Build Model Intelligence Dashboard
+### `models.m31a.tonmoyinfrastructure.org`
+
+**Production-Grade Model Registry, Synthetic Observability Platform & Autonomous Agent Synchronizer**
+
+[![CI Verification](https://github.com/eshanized/models.m31a.tonmoyinfrastructure.org/actions/workflows/ci.yml/badge.svg)](https://github.com/eshanized/models.m31a.tonmoyinfrastructure.org/actions/workflows/ci.yml)
+[![Daily Catalog Sync](https://github.com/eshanized/models.m31a.tonmoyinfrastructure.org/actions/workflows/daily-catalog-sync.yml/badge.svg)](https://github.com/eshanized/models.m31a.tonmoyinfrastructure.org/actions/workflows/daily-catalog-sync.yml)
+[![Synthetic Endpoint Probes](https://github.com/eshanized/models.m31a.tonmoyinfrastructure.org/actions/workflows/probe-endpoints.yml/badge.svg)](https://github.com/eshanized/models.m31a.tonmoyinfrastructure.org/actions/workflows/probe-endpoints.yml)
+[![Deploy Platform](https://github.com/eshanized/models.m31a.tonmoyinfrastructure.org/actions/workflows/deploy.yml/badge.svg)](https://github.com/eshanized/models.m31a.tonmoyinfrastructure.org/actions/workflows/deploy.yml)
+<br>
+[![Next.js 16](https://img.shields.io/badge/Next.js-16.3.8-black?style=flat&logo=next.js)](https://nextjs.org/)
+[![React 19](https://img.shields.io/badge/React-19.3.0-61dafb?style=flat&logo=react)](https://react.dev/)
+[![TypeScript 6](https://img.shields.io/badge/TypeScript-6.0.3-3178c6?style=flat&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS 4](https://img.shields.io/badge/Tailwind_CSS-4.3.3-38bdf8?style=flat&logo=tailwindcss)](https://tailwindcss.com/)
+[![Drizzle ORM](https://img.shields.io/badge/Drizzle_ORM-0.45.4-c5f74f?style=flat&logo=drizzle)](https://orm.drizzle.team/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Supabase-4169e1?style=flat&logo=postgresql)](https://supabase.com/)
+[![OpenAPI 3.1](https://img.shields.io/badge/OpenAPI-3.1-6ba300?style=flat&logo=openapiinitiative)](https://models.m31a.tonmoyinfrastructure.org/api/v1/openapi.json)
+[![M31A Integrated](https://img.shields.io/badge/M31A_Agent-Integrated-8a2be2?style=flat&logo=openai)](https://models.m31a.tonmoyinfrastructure.org/data/m31a-models.json)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+[🌐 Live Dashboard](https://models.m31a.tonmoyinfrastructure.org) • [📖 API Reference](https://models.m31a.tonmoyinfrastructure.org/docs/api) • [📋 OpenAPI Spec](https://models.m31a.tonmoyinfrastructure.org/api/v1/openapi.json) • [🤖 M31A Contract](https://models.m31a.tonmoyinfrastructure.org/data/m31a-models.json) • [🏗️ Architecture](ARCHITECTURE.md)
+
+</div>
 
 ---
 
-## 1. System Mission & Core Answers
+## 📌 Executive Summary
 
-The platform answers three fundamental questions for systems engineers, AI architects, and autonomous agents:
+**NVIDIA Build Model Intelligence Dashboard** is an enterprise-grade observability, metadata catalog, and synchronization engine for foundation models and NIM endpoints hosted on [NVIDIA Build](https://build.nvidia.com).
 
-1. **What models are in the catalog?**
-   - Full discovery across all official NVIDIA Build foundation models, publishers, architectures, modalities, and capabilities.
-   - Preserves canonical TOML records as the single source of truth.
-2. **Which models have recently passed or failed endpoint availability checks?**
-   - Transparent, honest classification: `operational`, `degraded`, `unavailable`, `unknown`, `stale`, `catalog_only`, and `downloadable_only`.
-   - Strictly isolates authentication failures (401/403) and rate limits (429) from true upstream infrastructure downtime.
-3. **How have response latency and reliability changed over time?**
-   - Controlled synthetic canaries measure HTTP request duration, Time to First Token (TTFT), and token generation throughput.
-   - Zero manufactured statistics or fake GPU loads.
+Designed for AI architects, platform engineers, and autonomous coding agents (including the **M31A autonomous agent**), the platform provides:
+- **Canonical Model Registry**: High-precision TOML definitions as the deterministic source of truth.
+- **Honest Synthetic Observability**: Real-world canary probes with Time to First Token (TTFT) and token throughput tracking without fabricated metrics.
+- **Direct Agent Synchronization**: Zero-overhead JSON contract mirrors `~/.config/m31a/models_cache.json` for agent model routing.
+- **Strict Anomaly Isolation**: Upstream rate limits (HTTP 429) and authentication errors (HTTP 401/403) are never conflated with actual infrastructure downtime.
 
 ---
 
-## 2. Architecture & Components
+## 🎯 Core Questions Answered
 
 ```
-                ┌─────────────────────────────────────────────────────────┐
-                │          Official NVIDIA Discovery Sources              │
-                │  https://build.nvidia.com | https://assets.ngc.nvidia.com│
-                └───────────────────────────┬─────────────────────────────┘
-                                            │ Daily Scheduled Workflow
-                                            ▼
-                ┌─────────────────────────────────────────────────────────┐
-                │       Canonical TOML Registry (Source of Truth)         │
-                │   registry/models/*.toml  |  registry/index.toml        │
-                └───────────────┬─────────────────────────┬───────────────┘
-                                │ Deterministic Export    │ Shared Contract
-                                ▼                         ▼
-  ┌────────────────────────────────────────┐   ┌───────────────────────────┐
-  │   Next.js Application (src/data/...)   │   │  M31A Autonomous Agent    │
-  │   - Next.js 16 App Router (React 19)   │   │  ~/.config/m31a/          │
-  │   - Public API (/api/v1/...)           │   │  models_cache.json        │
-  │   - Ingestion API (/api/v1/ingest)     │   └───────────────────────────┘
-  └───────────────────▲────────────────────┘
-                      │ Authenticated Ingest (timing-safe)
-  ┌───────────────────┴────────────────────┐
-  │  Scheduled Synthetic Probe Worker      │
-  │  - Low token canaries (max_tokens=4)   │
-  │  - Rotating subsets & rate limiting    │
-  │  - Exponential backoff & jitter        │
-  └───────────────────┬────────────────────┘
-                      ▼
-  ┌────────────────────────────────────────┐
-  │  PostgreSQL / Supabase Storage         │
-  │  (Observations, Cycles, Transitions)   │
-  │  * Graceful fallback when unconfigured │
-  └────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ 1. What models are currently active, supported, or previewed in NVIDIA Build?          │
+│    ➜ Full capability matrices, modalities, publishers, architectures, context windows. │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│ 2. Which model endpoints are truly operational vs degraded or failing right now?       │
+│    ➜ Active synthetic canary telemetry with transparent status categorization.        │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│ 3. How have response latency, TTFT, and reliability evolved over historical cycles?    │
+│    ➜ Controlled, low-token canaries with rolling averages, jitter, and backoff audits. │
+└────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 3. Directory Layout
+## ✨ Key Capabilities & Architectural Pillars
 
-```
-.
-├── .github/workflows/
-│   ├── daily-catalog-sync.yml      # Scheduled daily discovery & TOML sync
-│   ├── probe-endpoints.yml         # Scheduled synthetic monitoring worker
-│   └── ci.yml                      # CI typecheck, test, schema validation, build
-├── drizzle/
-│   └── migrations/                 # Versioned SQL migrations (PostgreSQL/Supabase)
-├── registry/
-│   ├── index.toml                  # Master catalog index
-│   └── models/                     # Canonical per-model TOML files
-├── scripts/
-│   ├── sync_registry.ts            # Discovers & normalizes models to TOML
-│   ├── validate_registry.ts        # Validates TOML against strict Zod schema
-│   ├── export_catalog.ts           # Exports TOML to JSON & M31A contract
-│   ├── probe_worker.ts             # Safe synthetic monitoring worker
-│   └── migrate.ts                  # Database migration runner
-├── src/
-│   ├── app/                        # Next.js App Router pages & APIs
-│   │   ├── api/v1/models/          # Model search & detail API
-│   │   ├── api/v1/status/          # System status summary API
-│   │   ├── api/v1/catalog/         # Catalog export API
-│   │   ├── api/v1/health/          # Health check API
-│   │   ├── api/v1/ingest/          # Protected internal ingestion API
-│   │   ├── api/v1/openapi.json/    # OpenAPI 3.1 specification
-│   │   ├── changelog/              # Changelog & sync health view
-│   │   ├── docs/api/               # Interactive API documentation
-│   │   ├── models/                 # Model Explorer & comparison drawer
-│   │   └── page.tsx                # Homepage dashboard
-│   ├── components/                 # UI components (Radix, Lucide, Recharts)
-│   ├── lib/
-│   │   ├── catalog.ts              # Server-side catalog queries & filters
-│   │   ├── db/                     # Drizzle ORM schema & repository
-│   │   ├── status/                 # Public status classification engine
-│   │   └── validation/             # Strict Zod schemas
-└── tests/                          # Automated unit & integration tests
+| Pillar | Description |
+| :--- | :--- |
+| **📁 Canonical TOML Registry** | Pure human-and-machine-readable TOML files in `registry/models/*.toml`. Strict Zod runtime validation guarantees data integrity before any compilation or export. |
+| **🔭 Transparent Observability** | Synthetic workers probe live endpoints using minimal token footprints (`max_tokens: 4`). No fabricated GPU queue loads or speculative utilization percentages. |
+| **🤖 Native M31A Agent Contract** | Generates an optimized, deterministic cache specification (`/data/m31a-models.json`) enabling autonomous agents to route tasks without web scraping. |
+| **🛡️ Zero-Trust Ingestion** | Ingestion endpoints enforce constant-time cryptographic verification (`crypto.timingSafeEqual`), payload size limits, model ID whitelisting, and timestamp clock-skew validation. |
+| **💾 Dual Persistence Mode** | Connects to PostgreSQL / Supabase for full historical telemetry, but gracefully operates in static mode if no database is provided, reporting honest status states. |
+| **⚡ Cutting-Edge Stack** | Built with Next.js 16 (App Router), React 19, TypeScript 6, Tailwind CSS v4, Lucide Icons, and Recharts with fluid dark/light themes. |
+
+---
+
+## 🏗️ Architecture & Topology
+
+### End-to-End Discovery, Monitoring & Serving Pipeline
+
+```mermaid
+flowchart TD
+    subgraph NVIDIA["Official NVIDIA Sources"]
+        N1["build.nvidia.com Catalog"]
+        N2["assets.ngc.nvidia.com Registry"]
+        N3["integrate.api.nvidia.com Endpoints"]
+    end
+
+    subgraph Pipeline["Automated Pipelines (GitHub Actions)"]
+        W1["Daily Catalog Sync Workflow\n(02:00 UTC)"]
+        W2["Synthetic Probe Worker\n(Every 30m)"]
+    end
+
+    subgraph Registry["Canonical Source of Truth"]
+        R1["registry/index.toml"]
+        R2["registry/models/*.toml"]
+        V1["Strict Zod Schema Validator"]
+        E1["Deterministic Exporter"]
+    end
+
+    subgraph Persistence["Storage & Database"]
+        DB[("PostgreSQL / Supabase\nObservations & Transitions")]
+    end
+
+    subgraph Service["Next.js 16 Web & API Application"]
+        A1["Public API (/api/v1/models, /api/v1/status)"]
+        A2["Timing-Safe Ingest (/api/v1/ingest)"]
+        A3["Interactive UI (Dashboard, Explorer, Changelog)"]
+        A4["Interactive API Docs & OpenAPI 3.1"]
+    end
+
+    subgraph Clients["Consumers"]
+        C1["M31A Autonomous Agent\n(~/.config/m31a/models_cache.json)"]
+        C2["Engineers & AI Systems"]
+    end
+
+    N1 & N2 -->|Discover & Diff| W1
+    W1 -->|Write Records| R1 & R2
+    R1 & R2 --> V1 --> E1
+    E1 -->|Generate static catalog| Service
+    E1 -->|Export JSON cache| C1
+
+    W2 -->|Canary ping max_tokens=4| N3
+    N3 -->|TTFT & Latency| W2
+    W2 -->|Authenticated POST| A2
+    A2 -->|Persist metrics| DB
+    DB -->|Query telemetry| A1 & A3
+    Service -->|View & query| C2
 ```
 
 ---
 
-## 4. Getting Started
+## 📊 Honest Observability & Status Engine
+
+Unlike tools that blindly report binary "Up/Down" states, our engine rigorously separates infrastructural outages from quota and authentication issues:
+
+```
+                              ┌────────────────────────┐
+                              │ Synthetic Canary Probe │
+                              └───────────┬────────────┘
+                                          │
+                   ┌──────────────────────┴──────────────────────┐
+                   │                                             │
+            HTTP 200 (Success)                          Non-200 Response
+                   │                                             │
+      ┌────────────┴────────────┐                  ┌─────────────┴─────────────┐
+      ▼                         ▼                  ▼             ▼             ▼
+Latency < 4000ms        Latency >= 4000ms     HTTP 401/403   HTTP 429      HTTP 5xx/Timeout
+ 🟢 OPERATIONAL           🟡 DEGRADED           ⚙️ UNKNOWN    🟡 DEGRADED    🔴 UNAVAILABLE
+                                              (Auth Alert)   (Rate Limit)    (3+ failures)
+```
+
+### Classification Reference
+
+| Status | Condition | Operator & Agent Impact |
+| :--- | :--- | :--- |
+| <kbd>**operational**</kbd> | Canary probes succeed with avg latency `< 4000ms` and `< 25%` error rate. | Healthy; safe for production agent routing. |
+| <kbd>**degraded**</kbd> | Avg latency `>= 4000ms`, failure rate `>= 25%`, or upstream returns HTTP 429. | Model under heavy upstream pressure; apply fallback. |
+| <kbd>**unavailable**</kbd> | `>= 3` consecutive upstream 5xx errors, connection timeouts, or socket failures. | Endpoint offline; agent immediately bypasses model. |
+| <kbd>**unknown**</kbd> | Upstream returns HTTP 401/403 (invalid key / permission required). | Does **not** falsely mark model down; triggers operator key check. |
+| <kbd>**stale**</kbd> | Most recent verified observation is `> 24 hours` old. | Historical record exists but lacks recent canary confirmation. |
+| <kbd>**catalog_only**</kbd> | Model is listed in NVIDIA Build as a guardrail, NIM-only, or lacks inference API. | Discovered in catalog; no direct hosted endpoint available. |
+| <kbd>**downloadable_only**</kbd> | Model weights available on NGC for self-hosted container deployment. | NGC downloadable container only. |
+
+---
+
+## 🚀 Live API Reference & Quick Examples
+
+The platform provides a fast, cached REST API conforming to OpenAPI 3.1:
+
+### 1. List / Search Models (`GET /api/v1/models`)
+
+```bash
+# Query operational models supporting function calling
+curl -s "https://models.m31a.tonmoyinfrastructure.org/api/v1/models?status=operational&supports_tools=true" | jq .
+```
+
+<details>
+<summary>Sample JSON Response</summary>
+
+```json
+{
+  "total": 35,
+  "page": 1,
+  "limit": 50,
+  "models": [
+    {
+      "id": "meta/llama-3.3-70b-instruct",
+      "name": "Llama 3.3 70B Instruct",
+      "publisher": "meta",
+      "architecture": "Transformer",
+      "context_window": 131072,
+      "max_output_tokens": 4096,
+      "supports_tools": true,
+      "supports_vision": false,
+      "status": "operational",
+      "latency_p50_ms": 782,
+      "ttft_ms": 310,
+      "tokens_per_sec": 42.5
+    }
+  ]
+}
+```
+</details>
+
+### 2. Global System Status (`GET /api/v1/status`)
+
+```bash
+# Fetch global infrastructure health & canary probe summary
+curl -s "https://models.m31a.tonmoyinfrastructure.org/api/v1/status" | jq .
+```
+
+### 3. Full Catalog Export (`GET /api/v1/catalog`)
+
+```bash
+# Deterministic snapshot of all models in the canonical registry
+curl -s "https://models.m31a.tonmoyinfrastructure.org/api/v1/catalog" | jq .
+```
+
+### 4. Interactive OpenAPI 3.1 Spec
+
+- Specification URL: [`/api/v1/openapi.json`](https://models.m31a.tonmoyinfrastructure.org/api/v1/openapi.json)
+- Interactive Documentation UI: [`/docs/api`](https://models.m31a.tonmoyinfrastructure.org/docs/api)
+
+---
+
+## 🤖 M31A Autonomous Agent Integration
+
+The **M31A autonomous coding agent** relies on verified model availability and capability parameters for automated reasoning and subagent dispatch.
+
+### Synchronize Local Agent Cache
+
+Run this one-liner to refresh your agent's local model cache with the verified NVIDIA catalog:
+
+```bash
+mkdir -p "$HOME/.config/m31a"
+curl -s -f "https://models.m31a.tonmoyinfrastructure.org/data/m31a-models.json" \
+  -o "$HOME/.config/m31a/models_cache.json"
+```
+
+### Data Contract Guarantee
+
+Every record in `m31a-models.json` conforms to [`DATA_CONTRACT.md`](DATA_CONTRACT.md):
+- Strictly sorted and normalized.
+- Directly maps `slug`, `context_window`, `supports_tools`, `supports_thinking`, `service_tier`, and `truncation_policy`.
+- Eliminates runtime agent failures caused by attempting unsupported tool-calls or exceeding context limits.
+
+---
+
+## 🛠️ Canonical Registry & Adding New Models
+
+The source of truth lives in `registry/models/<publisher>.<model-name>.toml`.
+
+### Example TOML Entry
+
+```toml
+id = "meta/llama-3.3-70b-instruct"
+name = "Llama 3.3 70B Instruct"
+publisher = "meta"
+architecture = "Transformer"
+version = "3.3"
+description = "State-of-the-art 70B instruction-tuned model with 128k context support."
+endpoint_url = "https://integrate.api.nvidia.com/v1/chat/completions"
+model_type = "chat"
+context_window = 131072
+max_output_tokens = 4096
+
+[capabilities]
+tools = true
+vision = false
+audio = false
+reasoning = false
+structured_output = true
+
+[pricing]
+published = true
+input_per_million = 0.70
+output_per_million = 0.80
+
+[provenance]
+discovered_at = "2026-10-30T00:00:00Z"
+verified_by = "m31a-sync-worker"
+```
+
+### Validation Workflow
+
+```bash
+# Validate all TOML models against the strict Zod schema
+npm run registry:validate
+
+# Export validated catalog to JSON artifacts and M31A contract
+npm run registry:export
+```
+
+---
+
+## 💻 Local Development & Setup
 
 ### Prerequisites
-- Node.js >= 22 (tested with Node 26.12)
-- npm >= 10
+
+- **Node.js**: `>= 22.0.0` (Tested on Node 22 & 26)
+- **npm**: `>= 10.0.0`
+- **PostgreSQL**: (Optional) Supabase or local PostgreSQL instance.
 
 ### Installation
+
 ```bash
+# Clone the repository
 git clone https://github.com/eshanized/models.m31a.tonmoyinfrastructure.org.git
 cd models.m31a.tonmoyinfrastructure.org
-npm install
-```
 
-### Environment Configuration
-Copy `.env.example` to `.env`:
-```bash
+# Install dependencies
+npm install
+
+# Setup environment variables
 cp .env.example .env
 ```
 
-### Validate Canonical Registry
-```bash
-npm run registry:validate
+### Environment Configuration (`.env`)
+
+```env
+# Public domain URL
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+
+# Optional: PostgreSQL Database (omitting activates graceful static mode)
+DATABASE_URL="postgresql://postgres:password@localhost:5432/m31a_models"
+
+# Secret token for synthetic probe ingestion (generate with `openssl rand -hex 32`)
+INGESTION_SECRET="your-high-entropy-ingestion-secret"
+
+# NVIDIA Build API Key for canary probes
+NVIDIA_API_KEY="nvapi-..."
 ```
 
-### Build & Run
-```bash
-# Export distribution artifacts & compile production build
-npm run build
+### Development Scripts
 
-# Start local production server
-npm run start
+| Command | Description |
+| :--- | :--- |
+| `npm run dev` | Starts local Next.js development server on `localhost:3000` |
+| `npm run build` | Validates, exports catalog, and compiles production build |
+| `npm run start` | Runs the production Next.js server |
+| `npm run typecheck` | Executes TypeScript type checking (`tsc --noEmit`) |
+| `npm run lint` | Runs ESLint checks |
+| `npm test` | Runs the automated Vitest test suite |
+| `npm run registry:sync` | Discovers & synchronizes models from NVIDIA Build APIs |
+| `npm run registry:validate`| Validates all canonical TOML records against Zod schemas |
+| `npm run registry:export`  | Exports TOML to JSON artifacts and M31A agent contract |
+| `npm run probe:run` | Executes a synthetic canary monitoring cycle |
+| `npm run db:migrate` | Runs versioned Drizzle ORM migrations |
+
+---
+
+## 🔄 Automated CI/CD & Cron Workflows
+
+The repository uses GitHub Actions for continuous testing, catalog freshness, and monitoring:
+
 ```
-
-### Run Tests
-```bash
-npm run test
+.github/workflows/
+├── ci.yml                 # Runs on PR & Push: typecheck, tests, schema validation & build
+├── daily-catalog-sync.yml # Daily 02:00 UTC cron: queries NVIDIA, opens PR for new models
+├── probe-endpoints.yml    # Runs every 30m: executes low-token canaries & ingests telemetry
+└── deploy.yml             # Deploys production bundle upon merge to master
 ```
 
 ---
 
-## 5. M31A Autonomous Agent Integration
+## 📂 Project Structure
 
-The M31A agent consumes the identical canonical catalog without relying on web rendering. The export script deterministically produces:
-- `public/data/m31a-models.json` (mirrors `~/.config/m31a/models_cache.json`)
-
-To sync your local M31A agent with the latest verified catalog:
-```bash
-curl -s https://models.m31a.tonmoyinfrastructure.org/data/m31a-models.json > ~/.config/m31a/models_cache.json
+```
+.
+├── .github/
+│   ├── ISSUE_TEMPLATE/            # Form templates for Model Addition, Bugs & Features
+│   ├── PULL_REQUEST_TEMPLATE.md   # Standardized checklist for pull requests
+│   └── workflows/                 # CI, Daily Sync, Synthetic Probes, and Deploy
+├── drizzle/
+│   └── migrations/                # Versioned SQL migrations for PostgreSQL
+├── public/
+│   └── data/
+│       ├── catalog.json           # Deterministic public catalog export
+│       └── m31a-models.json       # Canonical M31A Agent Contract
+├── registry/
+│   ├── index.toml                 # Master model index
+│   └── models/                    # Individual canonical model TOML definitions
+├── scripts/
+│   ├── build_static.ts            # Static build orchestrator
+│   ├── export_catalog.ts          # Deterministic export pipeline
+│   ├── migrate.ts                 # Drizzle migration executor
+│   ├── probe_worker.ts            # Controlled synthetic canary worker
+│   ├── sync_registry.ts           # Discovery crawler for NVIDIA Build
+│   └── validate_registry.ts       # Strict Zod schema validator
+├── src/
+│   ├── app/
+│   │   ├── api/v1/                # High-performance Next.js API Route Handlers
+│   │   │   ├── catalog/           # Complete catalog JSON endpoint
+│   │   │   ├── health/            # Liveness & readiness probes
+│   │   │   ├── ingest/            # Timing-safe canary telemetry ingestion
+│   │   │   ├── models/            # Filtered & paginated model search
+│   │   │   ├── openapi.json/      # Dynamic OpenAPI 3.1 schema
+│   │   │   └── status/            # Global platform status summary
+│   │   ├── changelog/             # Model catalog addition & sync history view
+│   │   ├── docs/api/              # Interactive API documentation UI
+│   │   ├── models/                # Model explorer & side-by-side comparison drawer
+│   │   └── page.tsx               # Homepage dashboard with real-time stats & charts
+│   ├── components/                # Modular UI components (Radix, Lucide, Recharts)
+│   └── lib/
+│       ├── catalog.ts             # Server-side catalog loader & filters
+│       ├── db/                    # Drizzle ORM schema, client & query repository
+│       ├── status/                # Observability status engine & health rules
+│       └── validation/            # Zod schemas for models and ingestion payloads
+└── tests/                         # Vitest unit and integration test suites
 ```
 
 ---
 
-## 6. Deployment Target
+## 🔒 Security & Safe Ingestion
 
-The application is fully compatible with:
-- Serverless Next.js deployment (Vercel, Cloudflare, Netlify)
-- Standard Node.js Docker / Container deployment
-- Supabase / Managed PostgreSQL persistence
-- Completely functional in static mode if the database is not configured (honest status displays).
+Security is built into every layer of the platform:
+- **Constant-Time Verification**: Bearer tokens are validated using `crypto.timingSafeEqual` with length guards to prevent timing side-channel attacks.
+- **SSRF & Injection Prevention**: Ingested model IDs are strictly validated via regular expressions and cross-checked against canonical registry entries.
+- **Clock-Skew Defense**: Incoming telemetry payloads outside a `±15 minute` window are rejected.
+- **Zero Secret Leakage**: No server secrets (`NVIDIA_API_KEY`, `DATABASE_URL`, `INGESTION_SECRET`) are ever exposed in client bundles, HTML outputs, or logs.
+
+See [`SECURITY.md`](SECURITY.md) for full threat modeling and our vulnerability disclosure process.
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please follow these steps:
+
+1. **Fork & Branch**: Create a feature branch (`git checkout -b feat/add-deepseek-v3`).
+2. **Add / Edit Model TOML**: Add new models under `registry/models/`.
+3. **Validate**: Run `npm run registry:validate` and `npm test`.
+4. **Submit PR**: Open a Pull Request using our [PR Template](.github/PULL_REQUEST_TEMPLATE.md).
+
+For bugs, enhancements, or new model suggestions, check out our [Issue Templates](https://github.com/eshanized/models.m31a.tonmoyinfrastructure.org/issues/new/choose).
+
+---
+
+## 📜 Documentation Index
+
+- [Architecture & Data Flow](ARCHITECTURE.md)
+- [M31A Agent Integration Contract](DATA_CONTRACT.md)
+- [Operational & Deployment Guide](OPERATIONS.md)
+- [Security & Vulnerability Policy](SECURITY.md)
+- [Known Upstream Limitations](KNOWN_LIMITATIONS.md)
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+<div align="center">
+Built with ⚡ for the <strong>M31A Autonomous Agent</strong> and the global AI engineering community.
+</div>

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: M31A Documentation & Architecture
+    url: https://models.m31a.tonmoyinfrastructure.org/docs/api
+    about: Read API documentation, integration contract, and architecture overview.
+  - name: Security Disclosures
+    url: https://github.com/eshanized/models.m31a.tonmoyinfrastructure.org/security/policy
+    about: Privately disclose sensitive security vulnerabilities.

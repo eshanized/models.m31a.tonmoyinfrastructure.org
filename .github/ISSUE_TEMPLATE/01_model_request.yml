@@ -1,0 +1,64 @@
+name: "📦 Model Addition / Update Request"
+description: "Request tracking or updating an NVIDIA Build / NIM foundation model in the canonical registry."
+title: "[Model]: <publisher/model_name>"
+labels: ["kind:model", "area:registry"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping expand the canonical NVIDIA Build model registry!
+        Please supply the official details from [build.nvidia.com](https://build.nvidia.com) or [assets.ngc.nvidia.com](https://assets.ngc.nvidia.com).
+
+  - type: input
+    id: model_id
+    attributes:
+      label: Canonical Model ID
+      description: Format: publisher/model-identifier (e.g., `meta/llama-3.3-70b-instruct`)
+      placeholder: "publisher/model-name"
+    validations:
+      required: true
+
+  - type: input
+    id: nvidia_url
+    attributes:
+      label: NVIDIA Build / NGC Documentation URL
+      description: Link to the official model page on build.nvidia.com
+      placeholder: "https://build.nvidia.com/..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: architecture
+    attributes:
+      label: Architecture / Family
+      options:
+        - "Transformer (Autoregressive)"
+        - "Mixture of Experts (MoE)"
+        - "Vision Transformer / Multimodal"
+        - "Diffusion / Audio / Speech"
+        - "Embedding / Reranker"
+        - "Reward / Guardrail / Reasoning"
+        - "Other"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: modalities
+    attributes:
+      label: Supported Modalities
+      options:
+        - label: Text / Chat Completion
+        - label: Code Generation
+        - label: Vision / Image Understanding
+        - label: Function Calling / Tool Use
+        - label: Structured Outputs (JSON)
+        - label: Audio / Speech-to-Text
+
+  - type: textarea
+    id: context_and_notes
+    attributes:
+      label: Additional Notes & Context Window
+      description: Context length (e.g. 128k), precision (FP8, FP16), token pricing, or canary endpoint availability.
+      placeholder: "Context length: 131,072 tokens. Endpoint is active on build.nvidia.com with streaming enabled..."
+    validations:
+      required: false
