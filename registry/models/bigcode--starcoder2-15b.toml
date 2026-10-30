@@ -1,0 +1,52 @@
+id = "bigcode/starcoder2-15b"
+name = "Starcoder2 15b"
+publisher = "bigcode"
+architecture = "Dense Auto-regressive Transformer"
+official_detail_url = "https://build.nvidia.com/bigcode/starcoder2-15b"
+documentation_urls = [ "https://docs.nvidia.com/nim/", "https://build.nvidia.com/bigcode/starcoder2-15b" ]
+description = "Remote discovered model on NIM (bigcode)"
+catalog_status = "active"
+first_seen_at = "2026-01-01T00:00:00.000Z"
+last_seen_at = "2026-10-30T11:34:26.810Z"
+endpoint_type = "chat"
+protocol = "openai-chat"
+access_classification = "free_endpoint"
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+context_window = 65536
+max_output_tokens = 4096
+license = "Custom NVIDIA AI Foundation Models License or Author License"
+usage_restrictions = "Subject to NVIDIA API Terms of Service and Publisher License Restrictions"
+verified_at = "2026-10-30T11:34:26.810Z"
+
+[capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No authoritative public pricing rate exposed by NVIDIA Build for this endpoint"
+
+[provenance]
+source_url = "https://build.nvidia.com/bigcode/starcoder2-15b"
+source_type = "official_directory"
+observed_at = "2026-10-30T11:34:26.810Z"
+confidence = 0.98
+
+[eligibility]
+probe_eligible = true
+probe_endpoint = "/v1/chat/completions"
+max_probe_tokens = 4
+
+[[eligibility.test_messages]]
+role = "user"
+content = "Ping"

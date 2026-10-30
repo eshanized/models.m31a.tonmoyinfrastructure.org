@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #09090b;
+    --card: #ffffff;
+    --card-foreground: #09090b;
+    --popover: #ffffff;
+    --popover-foreground: #09090b;
+    --primary: #10b981;
+    --primary-foreground: #ffffff;
+    --secondary: #f4f4f5;
+    --secondary-foreground: #18181b;
+    --muted: #f4f4f5;
+    --muted-foreground: #71717a;
+    --accent: #f4f4f5;
+    --accent-foreground: #18181b;
+    --destructive: #ef4444;
+    --destructive-foreground: #fafafa;
+    --border: #e4e4e7;
+    --input: #e4e4e7;
+    --ring: #10b981;
+    --radius: 0.5rem;
+
+    /* Semantic Status Tokens */
+    --status-operational: #10b981;
+    --status-operational-bg: rgba(16, 185, 129, 0.1);
+    --status-degraded: #f59e0b;
+    --status-degraded-bg: rgba(245, 158, 11, 0.1);
+    --status-unavailable: #ef4444;
+    --status-unavailable-bg: rgba(239, 68, 68, 0.1);
+    --status-stale: #8b5cf6;
+    --status-stale-bg: rgba(139, 92, 246, 0.1);
+    --status-unknown: #71717a;
+    --status-unknown-bg: rgba(113, 113, 122, 0.1);
+    --status-catalog: #3b82f6;
+    --status-catalog-bg: rgba(59, 130, 246, 0.1);
+  }
+
+  .dark {
+    --background: #09090b;
+    --foreground: #f4f4f5;
+    --card: #111114;
+    --card-foreground: #f4f4f5;
+    --popover: #111114;
+    --popover-foreground: #f4f4f5;
+    --primary: #10b981;
+    --primary-foreground: #ffffff;
+    --secondary: #1e1e24;
+    --secondary-foreground: #f4f4f5;
+    --muted: #1e1e24;
+    --muted-foreground: #a1a1aa;
+    --accent: #1e1e24;
+    --accent-foreground: #f4f4f5;
+    --destructive: #7f1d1d;
+    --destructive-foreground: #fafafa;
+    --border: #27272a;
+    --input: #27272a;
+    --ring: #10b981;
+
+    /* Semantic Status Tokens Dark */
+    --status-operational: #34d399;
+    --status-operational-bg: rgba(52, 211, 153, 0.12);
+    --status-degraded: #fbbf24;
+    --status-degraded-bg: rgba(251, 191, 36, 0.12);
+    --status-unavailable: #f87171;
+    --status-unavailable-bg: rgba(248, 113, 113, 0.12);
+    --status-stale: #a78bfa;
+    --status-stale-bg: rgba(167, 139, 250, 0.12);
+    --status-unknown: #a1a1aa;
+    --status-unknown-bg: rgba(161, 161, 170, 0.12);
+    --status-catalog: #60a5fa;
+    --status-catalog-bg: rgba(96, 165, 250, 0.12);
+  }
+
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+}
+
+/* Precision Grid Background */
+.bg-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(120, 120, 120, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(120, 120, 120, 0.05) 1px, transparent 1px);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}

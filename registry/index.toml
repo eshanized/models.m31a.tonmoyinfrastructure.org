@@ -1,0 +1,1961 @@
+schema_version = "1.0.0"
+generated_at = "2026-10-30T11:34:26.810Z"
+last_synced_at = "2026-10-30T11:34:26.810Z"
+total_models = 85
+publishers = [ "01-ai", "adept", "ai21labs", "aisingapore", "bigcode", "databricks", "deepseek-ai", "google", "ibm", "meta", "microsoft", "minimaxai", "mistralai", "moonshotai", "nv-mistralai", "nvidia", "openai", "poolside", "snowflake", "stepfun-ai", "writer", "z-ai", "zyphra" ]
+modalities = [ "text", "image", "audio", "embedding" ]
+
+[[models]]
+id = "01-ai/yi-large"
+name = "Yi Large"
+publisher = "01-ai"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "adept/fuyu-8b"
+name = "Fuyu 8b"
+publisher = "adept"
+access_classification = "free_endpoint"
+endpoint_type = "visual_language"
+context_window = 65536
+probe_eligible = false
+input_modalities = [ "text", "image" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = false
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "ai21labs/jamba-1.5-large-instruct"
+name = "Jamba 1.5 Large Instruct"
+publisher = "ai21labs"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "aisingapore/sea-lion-7b-instruct"
+name = "Sea Lion 7b Instruct"
+publisher = "aisingapore"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "bigcode/starcoder2-15b"
+name = "Starcoder2 15b"
+publisher = "bigcode"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "databricks/dbrx-instruct"
+name = "Dbrx Instruct"
+publisher = "databricks"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "deepseek-ai/deepseek-coder-6.7b-instruct"
+name = "Deepseek Coder 6.7b Instruct"
+publisher = "deepseek-ai"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = true
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "deepseek-ai/deepseek-v4.1-flash"
+name = "Deepseek V4.1 Flash"
+publisher = "deepseek-ai"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 1048576
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = true
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "google/codegemma-1.1-7b"
+name = "Codegemma 1.1 7b"
+publisher = "google"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "google/codegemma-7b"
+name = "Codegemma 7b"
+publisher = "google"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "google/deplot"
+name = "Deplot"
+publisher = "google"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "google/diffusiongemma-26b-a4b-it"
+name = "Diffusiongemma 26b A4b It"
+publisher = "google"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "google/gemma-2b"
+name = "Gemma 2b"
+publisher = "google"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "google/gemma-3-12b-it"
+name = "Gemma 3 12b It"
+publisher = "google"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "google/gemma-3-4b-it"
+name = "Gemma 3 4b It"
+publisher = "google"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "google/gemma-4-31b-it"
+name = "Gemma 4 31b It"
+publisher = "google"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "google/recurrentgemma-2b"
+name = "Recurrentgemma 2b"
+publisher = "google"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "ibm/granite-3.0-3b-a800m-instruct"
+name = "Granite 3.0 3b A800m Instruct"
+publisher = "ibm"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "ibm/granite-3.0-8b-instruct"
+name = "Granite 3.0 8b Instruct"
+publisher = "ibm"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "ibm/granite-34b-code-instruct"
+name = "Granite 34b Code Instruct"
+publisher = "ibm"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "ibm/granite-8b-code-instruct"
+name = "Granite 8b Code Instruct"
+publisher = "ibm"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "meta/codellama-70b"
+name = "Codellama 70b"
+publisher = "meta"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 131072
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "meta/llama-3.2-11b-vision-instruct"
+name = "Llama 3.2 11b Vision Instruct"
+publisher = "meta"
+access_classification = "free_endpoint"
+endpoint_type = "visual_language"
+context_window = 65536
+probe_eligible = false
+input_modalities = [ "text", "image" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = false
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "meta/llama-3.2-90b-vision-instruct"
+name = "Llama 3.2 90b Vision Instruct"
+publisher = "meta"
+access_classification = "free_endpoint"
+endpoint_type = "visual_language"
+context_window = 65536
+probe_eligible = false
+input_modalities = [ "text", "image" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = false
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "meta/llama-guard-4-12b"
+name = "Llama Guard 4 12b"
+publisher = "meta"
+access_classification = "free_endpoint"
+endpoint_type = "guardrail"
+context_window = 65536
+probe_eligible = false
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = false
+completion = false
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "meta/llama2-70b"
+name = "Llama2 70b"
+publisher = "meta"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 131072
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "meta/muse-glimmer-30b"
+name = "Muse Glimmer 30b"
+publisher = "meta"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "microsoft/kosmos-2"
+name = "Kosmos 2"
+publisher = "microsoft"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "microsoft/phi-3-vision-128k-instruct"
+name = "Phi 3 Vision 128k Instruct"
+publisher = "microsoft"
+access_classification = "free_endpoint"
+endpoint_type = "visual_language"
+context_window = 131072
+probe_eligible = false
+input_modalities = [ "text", "image" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = false
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "microsoft/phi-3.5-moe-instruct"
+name = "Phi 3.5 Moe Instruct"
+publisher = "microsoft"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "minimaxai/minimax-m3.1-flash"
+name = "Minimax M3.1 Flash"
+publisher = "minimaxai"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "mistralai/codestral-22b-instruct-v0.1"
+name = "Codestral 22b Instruct V0.1"
+publisher = "mistralai"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "mistralai/mistral-7b-instruct-v0.3"
+name = "Mistral 7b Instruct V0.3"
+publisher = "mistralai"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "mistralai/mistral-large"
+name = "Mistral Large"
+publisher = "mistralai"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "mistralai/mistral-large-2-instruct"
+name = "Mistral Large 2 Instruct"
+publisher = "mistralai"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "mistralai/mistral-large-4-1t-a52b"
+name = "Mistral Large 4 1t A52b"
+publisher = "mistralai"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "mistralai/mixtral-8x22b-v0.1"
+name = "Mixtral 8x22b V0.1"
+publisher = "mistralai"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "moonshotai/kimi-k2.6"
+name = "Kimi K2.6"
+publisher = "moonshotai"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nv-mistralai/mistral-nemo-12b-instruct"
+name = "Mistral Nemo 12b Instruct"
+publisher = "nv-mistralai"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/ai-synthetic-video-detector"
+name = "Ai Synthetic Video Detector"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/cosmos-reason2-8b"
+name = "Cosmos Reason2 8b"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = true
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/embed-qa-4"
+name = "Embed Qa 4"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "embedding"
+context_window = 65536
+probe_eligible = false
+input_modalities = [ "text" ]
+output_modalities = [ "embedding" ]
+
+[models.capabilities]
+chat = false
+completion = false
+vision = false
+audio = false
+video = false
+embedding = true
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/ising-calibration-1.5-31b"
+name = "Ising Calibration 1.5 31b"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/llama-3.1-nemoguard-8b-content-safety"
+name = "Llama 3.1 Nemoguard 8b Content Safety"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "guardrail"
+context_window = 65536
+probe_eligible = false
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = false
+completion = false
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/llama-3.1-nemoguard-8b-topic-control"
+name = "Llama 3.1 Nemoguard 8b Topic Control"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "guardrail"
+context_window = 65536
+probe_eligible = false
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = false
+completion = false
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/llama-3.1-nemotron-51b-instruct"
+name = "Llama 3.1 Nemotron 51b Instruct"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 131072
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/llama-3.1-nemotron-70b-instruct"
+name = "Llama 3.1 Nemotron 70b Instruct"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 131072
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/llama-3.1-nemotron-safety-guard-8b-v3"
+name = "Llama 3.1 Nemotron Safety Guard 8b V3"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "guardrail"
+context_window = 131072
+probe_eligible = false
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = false
+completion = false
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/llama-3.1-nemotron-ultra-253b-v1"
+name = "Llama 3.1 Nemotron Ultra 253b V1"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 131072
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/llama-3.2-nemoretriever-1b-vlm-embed-v1"
+name = "Llama 3.2 Nemoretriever 1b Vlm Embed V1"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "embedding"
+context_window = 65536
+probe_eligible = false
+input_modalities = [ "text", "image" ]
+output_modalities = [ "embedding" ]
+
+[models.capabilities]
+chat = false
+completion = false
+vision = true
+audio = false
+video = false
+embedding = true
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/llama-3.2-nv-embedqa-1b-v1"
+name = "Llama 3.2 Nv Embedqa 1b V1"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "embedding"
+context_window = 65536
+probe_eligible = false
+input_modalities = [ "text" ]
+output_modalities = [ "embedding" ]
+
+[models.capabilities]
+chat = false
+completion = false
+vision = false
+audio = false
+video = false
+embedding = true
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/llama-nemotron-embed-vl-1b-v2"
+name = "Llama Nemotron Embed Vl 1b V2"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "embedding"
+context_window = 131072
+probe_eligible = false
+input_modalities = [ "text", "image" ]
+output_modalities = [ "embedding" ]
+
+[models.capabilities]
+chat = false
+completion = false
+vision = true
+audio = false
+video = false
+embedding = true
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/llama3-chatqa-1.5-70b"
+name = "Llama3 Chatqa 1.5 70b"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 131072
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/mistral-nemo-minitron-8b-8k-instruct"
+name = "Mistral Nemo Minitron 8b 8k Instruct"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/nemotron-3-embed-1b"
+name = "Nemotron 3 Embed 1b"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "embedding"
+context_window = 131072
+probe_eligible = false
+input_modalities = [ "text" ]
+output_modalities = [ "embedding" ]
+
+[models.capabilities]
+chat = false
+completion = false
+vision = false
+audio = false
+video = false
+embedding = true
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning"
+name = "Nemotron 3 Nano Omni 30b A3b Reasoning"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "visual_language"
+context_window = 131072
+probe_eligible = false
+input_modalities = [ "text", "image" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = false
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = true
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/nemotron-3-super-120b-a12b"
+name = "Nemotron 3 Super 120b A12b"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 131072
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/nemotron-3-ultra-550b-a55b"
+name = "Nemotron 3 Ultra 550b A55b"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 1048576
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/nemotron-3.5-bolt-e4b"
+name = "Nemotron 3.5 Bolt E4b"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 131072
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/nemotron-3.5-content-safety"
+name = "Nemotron 3.5 Content Safety"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "guardrail"
+context_window = 131072
+probe_eligible = false
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = false
+completion = false
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/nemotron-3.5-embed-1b"
+name = "Nemotron 3.5 Embed 1b"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "embedding"
+context_window = 131072
+probe_eligible = false
+input_modalities = [ "text" ]
+output_modalities = [ "embedding" ]
+
+[models.capabilities]
+chat = false
+completion = false
+vision = false
+audio = false
+video = false
+embedding = true
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/nemotron-3.5-embed-8b"
+name = "Nemotron 3.5 Embed 8b"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "embedding"
+context_window = 131072
+probe_eligible = false
+input_modalities = [ "text" ]
+output_modalities = [ "embedding" ]
+
+[models.capabilities]
+chat = false
+completion = false
+vision = false
+audio = false
+video = false
+embedding = true
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/nemotron-3.5-lightning-30b-a3b"
+name = "Nemotron 3.5 Lightning 30b A3b"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 131072
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/nemotron-3.5-super-vl-120b-a12b"
+name = "Nemotron 3.5 Super Vl 120b A12b"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "visual_language"
+context_window = 1048576
+probe_eligible = false
+input_modalities = [ "text", "image" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = false
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/nemotron-4-340b-instruct"
+name = "Nemotron 4 340b Instruct"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 131072
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/nemotron-4-340b-reward"
+name = "Nemotron 4 340b Reward"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 131072
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/nemotron-nano-3-30b-a3b"
+name = "Nemotron Nano 3 30b A3b"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 131072
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/nemotron-parse"
+name = "Nemotron Parse"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 131072
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/nemotron-parse-2.0"
+name = "Nemotron Parse 2.0"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 131072
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/neva-22b"
+name = "Neva 22b"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "visual_language"
+context_window = 65536
+probe_eligible = false
+input_modalities = [ "text", "image" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = false
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/nv-embedqa-mistral-7b-v2"
+name = "Nv Embedqa Mistral 7b V2"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "embedding"
+context_window = 65536
+probe_eligible = false
+input_modalities = [ "text" ]
+output_modalities = [ "embedding" ]
+
+[models.capabilities]
+chat = false
+completion = false
+vision = false
+audio = false
+video = false
+embedding = true
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/nvclip"
+name = "Nvclip"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/riva-translate-4b-instruct"
+name = "Riva Translate 4b Instruct"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/riva-translate-4b-instruct-v2"
+name = "Riva Translate 4b Instruct V2"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "nvidia/vila"
+name = "Vila"
+publisher = "nvidia"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "openai/gpt-oss-20b"
+name = "Gpt Oss 20b"
+publisher = "openai"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "poolside/laguna-xs-2.1"
+name = "Laguna Xs 2.1"
+publisher = "poolside"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "snowflake/arctic-embed-l"
+name = "Arctic Embed L"
+publisher = "snowflake"
+access_classification = "free_endpoint"
+endpoint_type = "embedding"
+context_window = 65536
+probe_eligible = false
+input_modalities = [ "text" ]
+output_modalities = [ "embedding" ]
+
+[models.capabilities]
+chat = false
+completion = false
+vision = false
+audio = false
+video = false
+embedding = true
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "stepfun-ai/step-5-preview"
+name = "Step 5 Preview"
+publisher = "stepfun-ai"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "writer/palmyra-creative-122b"
+name = "Palmyra Creative 122b"
+publisher = "writer"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "writer/palmyra-fin-70b-32k"
+name = "Palmyra Fin 70b 32k"
+publisher = "writer"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 131072
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "writer/palmyra-med-70b"
+name = "Palmyra Med 70b"
+publisher = "writer"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 131072
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "writer/palmyra-med-70b-32k"
+name = "Palmyra Med 70b 32k"
+publisher = "writer"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 131072
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "z-ai/glm-5.3-flash"
+name = "Glm 5.3 Flash"
+publisher = "z-ai"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[[models]]
+id = "zyphra/zamba2-7b-instruct"
+name = "Zamba2 7b Instruct"
+publisher = "zyphra"
+access_classification = "free_endpoint"
+endpoint_type = "chat"
+context_window = 65536
+probe_eligible = true
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+
+[models.capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true

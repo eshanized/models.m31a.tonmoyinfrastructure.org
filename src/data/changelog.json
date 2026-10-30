@@ -1,0 +1,11 @@
+[
+  {
+    "id": "cl-init-001",
+    "timestamp": "2026-10-30T11:34:28.203Z",
+    "type": "initial_catalog_baseline",
+    "title": "Initial Canonical Registry Ingestion",
+    "description": "Imported 85 foundation and instruct models across 23 publishers from official NVIDIA Build API catalog.",
+    "affected_models_count": 85,
+    "author": "NVIDIA Build Registry Synchronizer"
+  }
+]

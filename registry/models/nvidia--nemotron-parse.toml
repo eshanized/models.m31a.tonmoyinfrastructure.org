@@ -1,0 +1,56 @@
+id = "nvidia/nemotron-parse"
+name = "Nemotron Parse"
+publisher = "nvidia"
+family = "Nemotron"
+architecture = "Dense Auto-regressive Transformer"
+official_detail_url = "https://build.nvidia.com/nvidia/nemotron-parse"
+documentation_urls = [ "https://docs.nvidia.com/nim/", "https://build.nvidia.com/nvidia/nemotron-parse" ]
+description = "Remote discovered model on NIM (nvidia)"
+catalog_status = "active"
+first_seen_at = "2026-01-01T00:00:00.000Z"
+last_seen_at = "2026-10-30T11:34:26.810Z"
+endpoint_type = "chat"
+protocol = "openai-chat"
+access_classification = "free_endpoint"
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+context_window = 131072
+max_output_tokens = 4096
+license = "Custom NVIDIA AI Foundation Models License or Author License"
+usage_restrictions = "Subject to NVIDIA API Terms of Service and Publisher License Restrictions"
+verified_at = "2026-10-30T11:34:26.810Z"
+
+[capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[pricing]
+currency = "USD"
+input_per_million = 4
+output_per_million = 4
+status = "published"
+source = "https://build.nvidia.com/pricing"
+provenance_note = "NVIDIA Nemotron foundation tier ($4.00/1M tokens)"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/nemotron-parse"
+source_type = "official_directory"
+observed_at = "2026-10-30T11:34:26.810Z"
+confidence = 0.98
+
+[eligibility]
+probe_eligible = true
+probe_endpoint = "/v1/chat/completions"
+max_probe_tokens = 4
+
+[[eligibility.test_messages]]
+role = "user"
+content = "Ping"

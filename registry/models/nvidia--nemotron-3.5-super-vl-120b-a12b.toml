@@ -1,0 +1,51 @@
+id = "nvidia/nemotron-3.5-super-vl-120b-a12b"
+name = "Nemotron 3.5 Super Vl 120b A12b"
+publisher = "nvidia"
+family = "Nemotron"
+architecture = "Mixture of Experts (MoE) Transformer"
+official_detail_url = "https://build.nvidia.com/nvidia/nemotron-3.5-super-vl-120b-a12b"
+documentation_urls = [ "https://docs.nvidia.com/nim/", "https://build.nvidia.com/nvidia/nemotron-3.5-super-vl-120b-a12b" ]
+description = "Remote discovered model on NIM (nvidia)"
+catalog_status = "active"
+first_seen_at = "2026-01-01T00:00:00.000Z"
+last_seen_at = "2026-10-30T11:34:26.810Z"
+endpoint_type = "visual_language"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image" ]
+output_modalities = [ "text" ]
+context_window = 1048576
+max_output_tokens = 8192
+license = "Custom NVIDIA AI Foundation Models License or Author License"
+usage_restrictions = "Subject to NVIDIA API Terms of Service and Publisher License Restrictions"
+verified_at = "2026-10-30T11:34:26.810Z"
+
+[capabilities]
+chat = true
+completion = false
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[pricing]
+currency = "USD"
+input_per_million = 0.18
+output_per_million = 0.18
+status = "published"
+source = "https://build.nvidia.com/pricing"
+provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M tokens)"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/nemotron-3.5-super-vl-120b-a12b"
+source_type = "official_directory"
+observed_at = "2026-10-30T11:34:26.810Z"
+confidence = 0.98
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4
