@@ -1,0 +1,45 @@
+id = "mit/diffdock"
+name = "diffdock"
+publisher = "mit"
+architecture = "Score-Based Diffusion Model (SBDM)  <br> (Graph Convolution Neural Network <br>)"
+official_detail_url = "https://build.nvidia.com/mit/diffdock"
+documentation_urls = [ "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/", "https://github.com/gcorso/DiffDock/blob/main/LICENSE", "https://github.com/gcorso/DiffDock", "https://huggingface.co/spaces/simonduerr/diffdock", "https://catalog.ngc.nvidia.com/orgs/nim/teams/mit/models/diffdock" ]
+description = "Predicts the 3D structure of how a molecule interacts with a protein."
+catalog_status = "active"
+first_seen_at = "2025-07-15T04:14:52.882Z"
+last_seen_at = "2026-10-30T12:13:43.043Z"
+endpoint_type = "completion"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image" ]
+output_modalities = [ "image", "embedding" ]
+license = "Use of this model is governed by the [NVIDIA Open Model License](https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/). Additional Information: [MIT](https://github.com/gcorso/DiffDock/blob/main/LICENSE)."
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.043Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/mit/diffdock"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.043Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

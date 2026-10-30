@@ -1,0 +1,49 @@
+id = "nvidia/nemotron-3_5-embed-8b"
+name = "nemotron-3.5-embed-8b"
+publisher = "nvidia"
+family = "Nemotron"
+architecture = "Transformer <br> (`Nemotron-3.5-Embed-8B-BF16` architecture with the Vision Encoder initialized from [mistralai/Ministral-3-8B-Instruct-2512-BF16](https://huggingface.co/mistralai/Ministral-3-8B-Instruct-2512-BF16) and the LLM component initialized from [nvidia/Nemotron-3-Embed-8B-BF16](https://huggingface.co/nvidia/Nemotron-3-Embed-8B-BF16). <br>)"
+official_detail_url = "https://build.nvidia.com/nvidia/nemotron-3_5-embed-8b"
+documentation_urls = [ "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://github.com/OpenMDW/OpenMDW/blob/main/1.1/LICENSE.OpenMDW-1.1", "https://www.apache.org/licenses/LICENSE-2.0", "https://huggingface.co/nvidia/Nemotron-3.5-Embed-8B-BF16", "https://huggingface.co/mistralai/Ministral-3-8B-Instruct-2512-BF16" ]
+description = "8B multimodal embedding model for text and document-image retrieval in RAG applications."
+catalog_status = "active"
+first_seen_at = "2026-10-20T23:06:32.594Z"
+last_seen_at = "2026-10-30T12:13:43.119Z"
+endpoint_type = "embedding"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image", "video" ]
+output_modalities = [ "embedding" ]
+license = "**Governing Hosted-Service Terms:** Use of this trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of the model is governed by the [OpenMDW License Agreement, version 1.1]"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.119Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = false
+video = true
+embedding = true
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+input_per_million = 0.18
+output_per_million = 0.18
+status = "published"
+source = "https://build.nvidia.com/pricing"
+provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M tokens)"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/nemotron-3_5-embed-8b"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.119Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

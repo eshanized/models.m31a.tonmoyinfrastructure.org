@@ -1,0 +1,45 @@
+id = "nvidia/streampetr"
+name = "streampetr"
+publisher = "nvidia"
+architecture = "CNN backbone + Sparse Query-Based Transformer (streamPetr utilizes a standard image backbone (ResNet50 or Vision Transformer in varying configurations) to extract multi-view features from input camera images. These features are then processed by a Transformer-based detection head, which follows a sparse query design inherited from the PETR series. The architecture innovates with several modules:)"
+official_detail_url = "https://build.nvidia.com/nvidia/streampetr"
+documentation_urls = [ "https://github.com/exiawsh/StreamPETR", "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/", "https://www.apache.org/licenses/LICENSE-2.0", "https://github.com/NVIDIA/DL4AGX/tree/master/AV-Solutions/streampetr-trt" ]
+description = "StreamPETR offers efficient 3D object detection for autonomous driving by propagating sparse object queries temporally."
+catalog_status = "active"
+first_seen_at = "2025-11-13T05:51:34.923Z"
+last_seen_at = "2026-10-30T12:13:43.173Z"
+endpoint_type = "completion"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image", "video" ]
+output_modalities = [ "embedding" ]
+license = "**Governing Terms:** The trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of this model is governed by the [NVIDIA Open Model License Agreement](https://www.nvidia.com/e"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.173Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = false
+video = true
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/streampetr"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.173Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

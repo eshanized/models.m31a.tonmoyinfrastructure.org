@@ -1,0 +1,53 @@
+id = "stepfun-ai/step-5-preview"
+name = "Step 5 Preview"
+publisher = "stepfun-ai"
+family = "Step"
+architecture = "Transformer (Mixture-of-Experts)"
+official_detail_url = "https://build.nvidia.com/stepfun-ai/step-5-preview"
+documentation_urls = [ "https://huggingface.co/stepfun-ai/Step-5-Preview/", "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-agreement/", "https://huggingface.co/stepfun-ai/Step-5-Preview/blob/main/LICENSE.txt", "https://huggingface.co/stepfun-ai/Step-5-Preview-BF16" ]
+description = "Preview of StepFun's Step 5: ~600B-total / 27B-active multimodal MoE (text and image in, text out) with 1M context, reasoning and tool calling, served in NVFP4."
+catalog_status = "preview"
+first_seen_at = "2026-10-15T01:44:30.728Z"
+last_seen_at = "2026-10-30T12:13:43.172Z"
+endpoint_type = "chat"
+protocol = "openai-chat"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image" ]
+output_modalities = [ "text" ]
+context_window = 1048576
+max_output_tokens = 4096
+license = "**GOVERNING TERMS:** The trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf); and the use of this model is governed by the [NVIDIA Open Model Agreement](https://www.nvidia.com/e"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.172Z"
+
+[capabilities]
+chat = true
+completion = true
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/stepfun-ai/step-5-preview"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.172Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = true
+probe_endpoint = "https://integrate.api.nvidia.com/v1/chat/completions"
+max_probe_tokens = 4
+
+[[eligibility.test_messages]]
+role = "user"
+content = "Respond with PONG"

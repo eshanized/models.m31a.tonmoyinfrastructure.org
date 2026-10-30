@@ -1,0 +1,48 @@
+id = "google/google-paligemma"
+name = "paligemma"
+publisher = "google"
+family = "Gemma"
+architecture = "Transformer <br> (SigLIP + Gemma <br>)"
+official_detail_url = "https://build.nvidia.com/google/google-paligemma"
+documentation_urls = [ "https://ai.google.dev/gemma/docs/paligemma/model-card", "https://github.com/google-research/google-research/blob/master/LICENSE", "https://policies.google.com/terms", "https://policies.google.com/privacy", "https://arxiv.org/pdf/2303.15343" ]
+description = "Vision language model adept at comprehending text and visual inputs to produce informative responses"
+catalog_status = "active"
+first_seen_at = "2024-08-26T16:47:12.134Z"
+last_seen_at = "2026-10-30T12:13:43.144Z"
+endpoint_type = "visual_language"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image" ]
+output_modalities = [ "text" ]
+context_window = 8192
+max_output_tokens = 4096
+license = "NVIDIA API Trial Terms of Service"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.144Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/google/google-paligemma"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.144Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

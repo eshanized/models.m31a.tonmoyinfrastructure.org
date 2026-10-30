@@ -1,0 +1,51 @@
+id = "nvidia/llama-3_1-nemoguard-8b-topic-control"
+name = "llama-3.1-nemoguard-8b-topic-control"
+publisher = "nvidia"
+family = "Llama 3.1"
+architecture = "Transformer  <br> (The base model architecture is based on the Llama-3.1-8B-Instruct model from Meta ([Model Card](https://www.llama.com/docs/model-cards-and-prompt-formats/llama3_1/)).)"
+official_detail_url = "https://build.nvidia.com/nvidia/llama-3_1-nemoguard-8b-topic-control"
+documentation_urls = [ "https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct", "https://huggingface.co/mistralai/Mixtral-8x7B-Instruct-v0.1", "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-community-models-license/", "https://www.llama.com/llama3_1/license/" ]
+description = "Topic control model to keep conversations focused on approved topics, avoiding inappropriate content."
+catalog_status = "active"
+first_seen_at = "2025-03-25T01:16:40.059Z"
+last_seen_at = "2026-10-30T12:13:43.077Z"
+endpoint_type = "guardrail"
+protocol = "openai-chat"
+access_classification = "free_endpoint"
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+context_window = 131072
+max_output_tokens = 4096
+license = "Governing NVIDIA Model Hosting Terms (Cloud API) GOVERNING TERMS: This trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of this model is governed by the [NVIDIA Communit"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.077Z"
+
+[capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = false
+
+[pricing]
+currency = "USD"
+input_per_million = 0.18
+output_per_million = 0.18
+status = "published"
+source = "https://build.nvidia.com/pricing"
+provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M tokens)"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/llama-3_1-nemoguard-8b-topic-control"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.077Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

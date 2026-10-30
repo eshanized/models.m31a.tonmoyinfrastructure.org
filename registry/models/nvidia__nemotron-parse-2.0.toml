@@ -1,0 +1,48 @@
+id = "nvidia/nemotron-parse-2.0"
+name = "nemotron-parse-2.0"
+publisher = "nvidia"
+family = "Nemotron"
+architecture = "Transformer (Vision Encoder (ViT-H based on NVIDIA C-RADIO) + Adapter (1D convolutions and normalization layers) + Decoder (mBART with 10 blocks))"
+official_detail_url = "https://build.nvidia.com/nvidia/nemotron-parse-2.0"
+documentation_urls = [ "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://github.com/OpenMDW/OpenMDW/blob/main/1.1/LICENSE.OpenMDW-1.1", "https://huggingface.co/nvidia/NVIDIA-Nemotron-Parse-2.0", "https://huggingface.co/docs/transformers/en/model_doc/mbart", "https://huggingface.co/nvidia/C-RADIO" ]
+description = "Cutting-edge vision-language model excelling in retrieving text and metadata from images."
+catalog_status = "active"
+first_seen_at = "2026-09-11T21:29:41.274Z"
+last_seen_at = "2026-10-30T12:13:43.138Z"
+endpoint_type = "visual_language"
+protocol = "openai-chat"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image", "video" ]
+output_modalities = [ "text" ]
+context_window = 9000
+max_output_tokens = 4096
+license = "**GOVERNING TERMS:** Use of this trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of the model is governed by the [OpenMDW License Agreement, version 1.1](https://github"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.138Z"
+
+[capabilities]
+chat = true
+completion = true
+vision = true
+audio = false
+video = true
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/nemotron-parse-2.0"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.138Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

@@ -1,0 +1,46 @@
+id = "nvidia/synthetic-video-detector"
+name = "synthetic-video-detector"
+publisher = "nvidia"
+family = "Cosmos"
+architecture = "Vision Transformer (ViT)  <br> (Ensemble of [DINOv2](https://dinov2.metademolab.com) and [DINOv3](https://ai.meta.com/dinov3/) architecture <br>)"
+official_detail_url = "https://build.nvidia.com/nvidia/synthetic-video-detector"
+documentation_urls = [ "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-software-and-model-evaluation-license/", "https://github.com/facebookresearch/dinov3/blob/main/LICENSE.md", "https://github.com/facebookresearch/dinov2/blob/main/LICENSE", "https://openreview.net/pdf/72a37f839a6014646cbf8b8d667a051f66fb46b9.pdf", "https://huggingface.co/spaces/safe-challenge/VideoChallengeTask1" ]
+description = "NVIDIA Synthetic Video Detector is an AI-powered micro-service for detecting AI‑generated (synthetic) videos."
+catalog_status = "active"
+first_seen_at = "2026-04-16T21:22:39.226Z"
+last_seen_at = "2026-10-30T12:13:43.175Z"
+endpoint_type = "completion"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image", "video" ]
+output_modalities = [ "image", "video" ]
+license = "GOVERNING TERMS: Use of this model is governed by the [NVIDIA Software and Model Evaluation License](https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-software-and-model-evaluation-license/) and the [DINOv3 License](https://github.com/facebookresearch/dinov3/blob/main/LICENSE.md). A"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.175Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = false
+video = true
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/synthetic-video-detector"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.175Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

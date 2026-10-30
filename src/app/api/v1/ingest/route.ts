@@ -5,6 +5,18 @@ import { getAllModels } from '@/lib/catalog';
 import { StatusRepository } from '@/lib/db/repository';
 import { NewModelObservation } from '@/lib/db/schema';
 
+export const dynamic = 'force-static';
+
+export async function GET() {
+  return NextResponse.json({
+    status: 'active',
+    endpoint: '/api/v1/ingest',
+    method: 'POST',
+    description: 'Internal protected ingestion endpoint for synthetic monitoring workers',
+    auth: 'Authorization: Bearer <INGESTION_SECRET>',
+  });
+}
+
 function safeCompare(a: string, b: string): boolean {
   const bufA = Buffer.from(a, 'utf-8');
   const bufB = Buffer.from(b, 'utf-8');

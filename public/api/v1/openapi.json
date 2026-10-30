@@ -1,0 +1,324 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "NVIDIA Build Model Intelligence API",
+    "version": "1.0.0",
+    "description": "Authoritative model discovery, specification metadata, and synthetic endpoint observability for NVIDIA Build NIM models. Integrated with the M31A autonomous coding agent.",
+    "contact": {
+      "name": "Tonmoy Infrastructure & Vision (TIV)",
+      "url": "https://tonmoyinfrastructure.org"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://models.m31a.tonmoyinfrastructure.org",
+      "description": "Production API Gateway"
+    },
+    {
+      "url": "http://localhost:3000",
+      "description": "Local Development Server"
+    }
+  ],
+  "paths": {
+    "/api/v1/health": {
+      "get": {
+        "summary": "Service Health Check",
+        "description": "Returns health status of the catalog and database persistence layer.",
+        "responses": {
+          "200": {
+            "description": "Service is operational",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "healthy"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "version": {
+                      "type": "string",
+                      "example": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/catalog": {
+      "get": {
+        "summary": "Full Model Catalog",
+        "description": "Returns the entire validated canonical catalog, including all models, publishers, and schema version.",
+        "responses": {
+          "200": {
+            "description": "Complete catalog data"
+          }
+        }
+      }
+    },
+    "/api/v1/models": {
+      "get": {
+        "summary": "Query Models Directory",
+        "description": "Search, filter, sort, and paginate through canonical NVIDIA models.",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Search term across ID, name, publisher, family",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "publisher",
+            "in": "query",
+            "description": "Filter by publisher",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "modality",
+            "in": "query",
+            "description": "Filter by input modality",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "text",
+                "image",
+                "audio",
+                "embedding"
+              ]
+            }
+          },
+          {
+            "name": "access",
+            "in": "query",
+            "description": "Filter by access type",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "free_endpoint",
+                "downloadable",
+                "commercial"
+              ]
+            }
+          },
+          {
+            "name": "capability",
+            "in": "query",
+            "description": "Filter by capability (e.g. reasoning, tool_calling, vision)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "priceOnly",
+            "in": "query",
+            "description": "Only show models with published pricing",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "probeEligibleOnly",
+            "in": "query",
+            "description": "Only show models verified for synthetic probing",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort field",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "name",
+                "publisher",
+                "context",
+                "pricing"
+              ]
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Sort direction",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number (default: 1)",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Items per page (default: 20)",
+            "schema": {
+              "type": "integer",
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated model results"
+          }
+        }
+      }
+    },
+    "/api/v1/models/{id}": {
+      "get": {
+        "summary": "Get Model Details",
+        "description": "Returns complete canonical specifications, pricing, documentation URLs, and current observed health for a specific model ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Canonical model ID (e.g. nvidia/nemotron-4-340b-instruct)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Model detail payload"
+          },
+          "404": {
+            "description": "Model not found in canonical registry"
+          }
+        }
+      }
+    },
+    "/api/v1/models/{id}/status": {
+      "get": {
+        "summary": "Get Model Status & Health",
+        "description": "Returns derived public status, probe success rate, average latency, and freshness for a specific model.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Canonical model ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status payload"
+          },
+          "404": {
+            "description": "Model not found"
+          }
+        }
+      }
+    },
+    "/api/v1/models/{id}/history": {
+      "get": {
+        "summary": "Get Model Probe History",
+        "description": "Returns time-series observation data for latency, TTFT, throughput, and error categories.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Canonical model ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum history records (default: 50)",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Time-series observations"
+          },
+          "404": {
+            "description": "Model not found"
+          }
+        }
+      }
+    },
+    "/api/v1/status": {
+      "get": {
+        "summary": "System & Catalog Status Summary",
+        "description": "Returns aggregate operational status distribution, publisher breakdown, and recent probe cycles.",
+        "responses": {
+          "200": {
+            "description": "System health summary"
+          }
+        }
+      }
+    },
+    "/api/v1/ingest": {
+      "post": {
+        "summary": "Ingest Probe Observations",
+        "description": "Internal protected endpoint for synthetic monitoring workers to submit batch observations.",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Observations accepted"
+          },
+          "400": {
+            "description": "Schema or timestamp validation failed"
+          },
+          "401": {
+            "description": "Missing authentication"
+          },
+          "403": {
+            "description": "Invalid ingestion token"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Shared server-side ingestion token"
+      }
+    }
+  }
+}

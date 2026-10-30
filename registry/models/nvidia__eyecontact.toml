@@ -1,0 +1,45 @@
+id = "nvidia/eyecontact"
+name = "eyecontact"
+publisher = "nvidia"
+architecture = "Convolution Neural Network (CNN)  <br> (Encoder-Decoder <br>)"
+official_detail_url = "https://build.nvidia.com/nvidia/eyecontact"
+documentation_urls = [ "https://developer.nvidia.com/blog/improve-human-connection-in-video-conferences-with-nvidia-maxine-eye-contact/", "https://developer.download.nvidia.com/maxine/nvidia-maxine-evaluation-license-24oct2023.pdf", "https://developer.nvidia.com/tensorrt", "https://developer.nvidia.com/triton-inference-server", "https://www.nvidia.com/en-us/support/submit-security-vulnerability/" ]
+description = "Estimate gaze angles of a person in a video and redirect to make it frontal."
+catalog_status = "active"
+first_seen_at = "2025-03-21T13:58:01.201Z"
+last_seen_at = "2026-10-30T12:13:43.049Z"
+endpoint_type = "visual_language"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "image", "video" ]
+output_modalities = [ "text" ]
+license = "NVIDIA API Trial Terms of Service"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.049Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = false
+video = true
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/eyecontact"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.049Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

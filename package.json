@@ -5,7 +5,9 @@
   "description": "Production-grade NVIDIA Build Model Intelligence Dashboard integrated with M31A autonomous coding agent",
   "scripts": {
     "dev": "next dev",
-    "build": "npm run registry:export && next build",
+    "build": "tsx scripts/build_static.ts",
+    "build:server": "npm run registry:export && next build",
+    "build:export": "tsx scripts/build_static.ts",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",

@@ -1,0 +1,45 @@
+id = "nvidia/fourcastnet"
+name = "fourcastnet"
+publisher = "nvidia"
+architecture = "Neural Operator <br> (FourCastNet SFNO <br>)"
+official_detail_url = "https://build.nvidia.com/nvidia/fourcastnet"
+documentation_urls = [ "https://arxiv.org/abs/2306.03838", "https://arxiv.org/abs/2202.11214", "https://github.com/NVIDIA/modulus", "https://doi.org/10.1002/qj.3803", "https://cds.climate.copernicus.eu/" ]
+description = "FourCastNet predicts global atmospheric dynamics of various weather / climate variables."
+catalog_status = "active"
+first_seen_at = "2025-03-22T01:59:48.383Z"
+last_seen_at = "2026-10-30T12:13:43.061Z"
+endpoint_type = "completion"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+license = "This model is licensed under the [NVIDIA AI Product Agreement](https://www.nvidia.com/en-us/agreements/enterprise-software/product-specific-terms-for-ai-products/). By pulling and using this model, you accept the terms and conditions of this license.\n\n**You are responsible for ensuring that your use"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.061Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/fourcastnet"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.061Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

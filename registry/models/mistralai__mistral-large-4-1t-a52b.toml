@@ -1,0 +1,56 @@
+id = "mistralai/mistral-large-4-1t-a52b"
+name = "Mistral Large 4"
+publisher = "mistralai"
+family = "Mistral"
+architecture = "Transformer (Mixture-of-Experts)"
+official_detail_url = "https://build.nvidia.com/mistralai/mistral-large-4-1t-a52b"
+documentation_urls = [ "https://docs.mistral.ai/models/mistral-large-4-0", "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://mistral.ai/contact/", "https://mistral.ai/news/mistral-large-4/", "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B" ]
+description = "Mistral Large 4 from Mistral AI, a 1T-total / 52B-active granular MoE for text and image input with reasoning, function calling and structured outputs, served in NVFP4 with DSpark speculative decoding."
+catalog_status = "active"
+first_seen_at = "2026-10-29T14:10:58.920Z"
+last_seen_at = "2026-10-30T12:13:43.097Z"
+endpoint_type = "chat"
+protocol = "openai-chat"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image" ]
+output_modalities = [ "embedding" ]
+context_window = 262144
+max_output_tokens = 4096
+license = "**GOVERNING TERMS:** The trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). To deploy and customize the model in your environment, please [contact Mistral](https://mistral.ai/"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.097Z"
+
+[capabilities]
+chat = true
+completion = true
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = false
+
+[pricing]
+currency = "USD"
+input_per_million = 0.18
+output_per_million = 0.18
+status = "published"
+source = "https://build.nvidia.com/pricing"
+provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M tokens)"
+
+[provenance]
+source_url = "https://build.nvidia.com/mistralai/mistral-large-4-1t-a52b"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.097Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = true
+probe_endpoint = "https://integrate.api.nvidia.com/v1/chat/completions"
+max_probe_tokens = 4
+
+[[eligibility.test_messages]]
+role = "user"
+content = "Respond with PONG"

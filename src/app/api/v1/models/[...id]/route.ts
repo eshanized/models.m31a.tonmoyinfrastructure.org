@@ -1,10 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getModelById } from '@/lib/catalog';
+import { getModelById, getAllModels } from '@/lib/catalog';
 import { StatusRepository } from '@/lib/db/repository';
 import { deriveModelStatus } from '@/lib/status/classifier';
 
+export const dynamic = 'force-static';
+
+export async function generateStaticParams() {
+  const models = getAllModels();
+  const params: Array<{ id: string[] }> = [];
+  for (const m of models) {
+    const parts = m.id.split('/');
+    params.push({ id: parts });
+    params.push({ id: [...parts, 'status'] });
+    params.push({ id: [...parts, 'history'] });
+  }
+  return params;
+}
+
 export async function GET(
-  req: NextRequest,
+  _req: NextRequest,
   { params }: { params: Promise<{ id: string[] }> }
 ) {
   const resolvedParams = await params;
@@ -68,9 +82,7 @@ export async function GET(
 
   // Sub-action: /history
   if (subAction === 'history') {
-    const { searchParams } = new URL(req.url);
-    const limit = Math.min(100, Math.max(1, parseInt(searchParams.get('limit') || '50', 10)));
-    const observations = await StatusRepository.getObservationsForModel(model.id, limit);
+    const observations = await StatusRepository.getObservationsForModel(model.id, 50);
 
     return NextResponse.json(
       {

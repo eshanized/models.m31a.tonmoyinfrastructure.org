@@ -1,0 +1,46 @@
+id = "stabilityai/stable-diffusion-3_5-large"
+name = "stable-diffusion-3.5-large"
+publisher = "stabilityai"
+family = "Cosmos"
+architecture = "Diffusion Transformer (DiT)"
+official_detail_url = "https://build.nvidia.com/stabilityai/stable-diffusion-3_5-large"
+documentation_urls = [ "https://huggingface.co/stabilityai/stable-diffusion-3.5-large", "https://huggingface.co/stabilityai/stable-diffusion-3.5-large-controlnet-canny", "https://huggingface.co/stabilityai/stable-diffusion-3.5-large-controlnet-depth", "https://huggingface.co/LiheYoung/depth-anything-large-hf", "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf" ]
+description = "Stable Diffusion 3.5 is a popular text-to-image generation model"
+catalog_status = "active"
+first_seen_at = "2025-08-12T18:56:17.501Z"
+last_seen_at = "2026-10-30T12:13:43.171Z"
+endpoint_type = "image_generation"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image" ]
+output_modalities = [ "image" ]
+license = "GOVERNING TERMS: The trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf), and use of the Cosmos model is governed by the [NVIDIA Community Model License Agreement](https://www.n"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.171Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/stabilityai/stable-diffusion-3_5-large"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.171Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

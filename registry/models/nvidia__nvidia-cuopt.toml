@@ -1,0 +1,45 @@
+id = "nvidia/nvidia-cuopt"
+name = "cuopt"
+publisher = "nvidia"
+architecture = "x86/aarch64 <br> (Not Applicable (N/A) <br>)"
+official_detail_url = "https://build.nvidia.com/nvidia/nvidia-cuopt"
+documentation_urls = [ "https://www.nvidia.com/en-us/data-center/products/nvidia-ai-enterprise/eula/", "https://docs.nvidia.com/cuopt/", "https://github.com/NVIDIA/cuopt-examples", "https://www.nvidia.com/en-us/training/", "https://docs.nvidia.com/cuopt/user-guide/latest/open-api.html" ]
+description = "World-record accuracy and performance for complex route optimization."
+catalog_status = "active"
+first_seen_at = "2025-05-21T21:16:32.788Z"
+last_seen_at = "2026-10-30T12:13:43.040Z"
+endpoint_type = "completion"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+license = "NVIDIA API Trial Terms of Service"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.040Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/nvidia-cuopt"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.040Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

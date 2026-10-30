@@ -1,0 +1,45 @@
+id = "nvidia/conformer-ctc-asr"
+name = "conformer-ctc-asr"
+publisher = "nvidia"
+architecture = "Convolutional Neural Network + Transformer <br> (Conformer Encoder with CTC Decoder <br>)"
+official_detail_url = "https://build.nvidia.com/nvidia/conformer-ctc-asr"
+documentation_urls = [ "https://docs.nvidia.com/nemo-framework/user-guide/latest/nemotoolkit/asr/models.html#conformer-ctc", "https://arxiv.org/abs/2005.08100", "https://docs.nvidia.com/nemo-framework/user-guide/latest/nemotoolkit/asr/models.html#conformer", "https://www.nvidia.com/en-us/support/submit-security-vulnerability/", "https://calcivilrights.ca.gov/disputeresolution/protected-characteristics/" ]
+description = "Automatic speech recognition model that transcribes speech in lower case Spanish with record-setting accuracy and performance"
+catalog_status = "active"
+first_seen_at = "2025-04-10T15:19:39.201Z"
+last_seen_at = "2026-10-30T12:13:43.032Z"
+endpoint_type = "audio_speech"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "audio", "image", "video" ]
+output_modalities = [ "text" ]
+license = "GOVERNING TERMS: The use of this model is governed by the NVIDIA Community Model License (found at https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-community-models-license/).\n\n# Disclaimer\nAI models generate responses and outputs based on complex algorithms and machine learning te"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.032Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = true
+video = true
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/conformer-ctc-asr"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.032Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

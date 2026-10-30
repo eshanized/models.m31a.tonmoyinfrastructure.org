@@ -1,0 +1,46 @@
+id = "nvidia/kumo-relational"
+name = "Kumo Relational"
+publisher = "nvidia"
+family = "Kumo"
+architecture = "Transformer (NVIDIA Kumo Relational 1.0.0 uses a table-invariant row encoder and exchanges information across connected tables and context labels with a Relational Graph Transformer.)"
+official_detail_url = "https://build.nvidia.com/nvidia/kumo-relational"
+documentation_urls = [ "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-software-license-agreement/", "https://www.nvidia.com/en-us/agreements/enterprise-software/product-specific-terms-for-ai-products/", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/", "https://catalog.ngc.nvidia.com/orgs/nim/nvidia/containers/kumo-relational/-", "https://arxiv.org/abs/2604.12596" ]
+description = "A relational foundation model for prediction over structured, multi-table data."
+catalog_status = "active"
+first_seen_at = "2026-09-15T21:56:35.043Z"
+last_seen_at = "2026-10-30T12:13:43.071Z"
+endpoint_type = "completion"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text" ]
+output_modalities = [ "embedding" ]
+license = "**GOVERNING TERMS:** The NIM container is governed by the [NVIDIA Software License Agreement](https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-software-license-agreement/) and the [Product-Specific Terms for NVIDIA AI Products](https://www.nvidia.com/en-us/agreements/enterprise-sof"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.071Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/kumo-relational"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.071Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

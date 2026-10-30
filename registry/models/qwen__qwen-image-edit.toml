@@ -1,0 +1,46 @@
+id = "qwen/qwen-image-edit"
+name = "qwen-image-edit"
+publisher = "qwen"
+family = "Cosmos"
+architecture = "Diffusion Transformer (DiT)"
+official_detail_url = "https://build.nvidia.com/qwen/qwen-image-edit"
+documentation_urls = [ "https://huggingface.co/Qwen/Qwen-Image-Edit", "https://huggingface.co/Qwen/Qwen-Image-Edit-2509", "https://huggingface.co/Qwen/Qwen-Image-Edit-2511", "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/" ]
+description = "Qwen-Image-Edit is an image editing model with multilingual text editing and strong subject consistency."
+catalog_status = "active"
+first_seen_at = "2026-05-01T19:55:32.704Z"
+last_seen_at = "2026-10-30T12:13:43.160Z"
+endpoint_type = "image_generation"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image", "video" ]
+output_modalities = [ "image" ]
+license = "GOVERNING TERMS: The trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf); and use of this model is governed by the [NVIDIA Open Model License](https://www.nvidia.com/en-us/agree"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.160Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = false
+video = true
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/qwen/qwen-image-edit"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.160Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

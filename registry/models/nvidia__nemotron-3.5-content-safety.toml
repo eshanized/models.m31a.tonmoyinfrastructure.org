@@ -1,0 +1,48 @@
+id = "nvidia/nemotron-3.5-content-safety"
+name = "nemotron-3.5-content-safety"
+publisher = "nvidia"
+family = "Nemotron"
+architecture = "Transformer (Decoder-only)"
+official_detail_url = "https://build.nvidia.com/nvidia/nemotron-3.5-content-safety"
+documentation_urls = [ "https://huggingface.co/datasets/nvidia/Aegis-AI-Content-Safety-Dataset-2.0", "https://huggingface.co/nvidia/Nemotron-3.5-Content-Safety", "https://raw.githubusercontent.com/OpenMDW/OpenMDW/refs/heads/main/1.1/LICENSE.OpenMDW-1.1", "https://ai.google.dev/gemma/terms", "https://ai.google.dev/gemma/prohibited_use_policy" ]
+description = "Multilingual, multimodal model for detecting unsafe and toxic content."
+catalog_status = "active"
+first_seen_at = "2026-06-02T16:37:26.248Z"
+last_seen_at = "2026-10-30T12:13:43.116Z"
+endpoint_type = "guardrail"
+protocol = "openai-chat"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image" ]
+output_modalities = [ "text" ]
+context_window = 131072
+max_output_tokens = 4096
+license = "**Governing Terms:** Use of the model is governed by the [OpenMDW License Agreement, version 1.1 (OpenMDW-1.1)](https://raw.githubusercontent.com/OpenMDW/OpenMDW/refs/heads/main/1.1/LICENSE.OpenMDW-1.1), [Gemma Terms of Use](https://ai.google.dev/gemma/terms) and [Gemma Prohibited Use Policy](https:"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.116Z"
+
+[capabilities]
+chat = true
+completion = true
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/nemotron-3.5-content-safety"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.116Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

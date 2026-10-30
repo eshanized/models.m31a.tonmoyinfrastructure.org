@@ -1,0 +1,45 @@
+id = "nvidia/lipsync"
+name = "LipSync"
+publisher = "nvidia"
+architecture = "Convolutional Neural Networks (CNNs), Generative Adversarial Networks (GANs)   <br> (Encoder-Decoder   <br>)"
+official_detail_url = "https://build.nvidia.com/nvidia/lipsync"
+documentation_urls = [ "https://developer.nvidia.com/topics/ai/generative-ai/ai-for-media/private-access", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/", "https://developer.nvidia.com/ai-for-media", "https://developer.nvidia.com/tensorrt", "https://developer.nvidia.com/triton-inference-server" ]
+description = "Generative lip dubbing that syncs lips in a video to input audio."
+catalog_status = "active"
+first_seen_at = "2026-04-16T18:31:52.434Z"
+last_seen_at = "2026-10-30T12:13:43.074Z"
+endpoint_type = "audio_speech"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "audio", "image", "video" ]
+output_modalities = [ "text" ]
+license = "Use of the NVIDIA LipSync models is governed by the [NVIDIA Open Model License](https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/)."
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.074Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = true
+video = true
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/lipsync"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.074Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

@@ -1,0 +1,49 @@
+id = "nvidia/parakeet-ctc-1_1b-asr"
+name = "parakeet-ctc-1.1b-asr"
+publisher = "nvidia"
+family = "Parakeet"
+architecture = "Convolutional Neural Network + Transformer <br> (Fast Conformer Encoder with CTC Decoder <br>)"
+official_detail_url = "https://build.nvidia.com/nvidia/parakeet-ctc-1_1b-asr"
+documentation_urls = [ "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-community-models-license/", "https://docs.nvidia.com/deeplearning/nemo/user-guide/docs/en/main/asr/models.html#fast-conformer", "https://www.nvidia.com/en-us/support/submit-security-vulnerability/", "https://calcivilrights.ca.gov/disputeresolution/protected-characteristics/", "https://developer.nvidia.com/riva/ga/license" ]
+description = "Record-setting accuracy and performance for English transcription."
+catalog_status = "active"
+first_seen_at = "2025-06-26T20:47:19.082Z"
+last_seen_at = "2026-10-30T12:13:43.153Z"
+endpoint_type = "audio_speech"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "audio", "image", "video" ]
+output_modalities = [ "text" ]
+license = "NVIDIA API Trial Terms of Service"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.153Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = true
+video = true
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+input_per_million = 0.18
+output_per_million = 0.18
+status = "published"
+source = "https://build.nvidia.com/pricing"
+provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M tokens)"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/parakeet-ctc-1_1b-asr"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.153Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

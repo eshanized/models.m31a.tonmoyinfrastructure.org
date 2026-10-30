@@ -1,0 +1,53 @@
+id = "poolside/laguna-xs-2.1"
+name = "laguna-xs-2.1"
+publisher = "poolside"
+family = "Qwen"
+architecture = "Transformer (Mixture-of-Experts)"
+official_detail_url = "https://build.nvidia.com/poolside/laguna-xs-2.1"
+documentation_urls = [ "https://huggingface.co/poolside/Laguna-XS-2.1", "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://openmdw.ai/license/1-1/", "https://www.nvidia.com/en-us/support/submit-security-vulnerability/" ]
+description = "Efficient 33B MoE for local, long-horizon agentic coding and terminal tasks"
+catalog_status = "active"
+first_seen_at = "2026-07-15T23:10:20.283Z"
+last_seen_at = "2026-10-30T12:13:43.073Z"
+endpoint_type = "chat"
+protocol = "openai-chat"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image" ]
+output_modalities = [ "text" ]
+context_window = 262144
+max_output_tokens = 4096
+license = "**GOVERNING TERMS:** The trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of the model is governed by the [OpenMDW License Agreement, version 1.1](https://openmdw.ai/lic"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.073Z"
+
+[capabilities]
+chat = true
+completion = true
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/poolside/laguna-xs-2.1"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.073Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = true
+probe_endpoint = "https://integrate.api.nvidia.com/v1/chat/completions"
+max_probe_tokens = 4
+
+[[eligibility.test_messages]]
+role = "user"
+content = "Respond with PONG"

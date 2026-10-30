@@ -1,0 +1,49 @@
+id = "nvidia/parakeet-1_1b-rnnt-multilingual-asr"
+name = "parakeet-1.1b-rnnt-multilingual-asr"
+publisher = "nvidia"
+family = "Parakeet"
+architecture = "Parakeet-RNNT (also known as FastConformer-RNNT) [1], [2] which is an optimized version of Conformer model [3] with 8x depthwise-separable convolutional downsampling with Hybrid loss <br> (Parakeet-RNNT-XXL-1.1B <br>)"
+official_detail_url = "https://build.nvidia.com/nvidia/parakeet-1_1b-rnnt-multilingual-asr"
+documentation_urls = [ "https://arxiv.org/abs/2305.05084", "https://docs.nvidia.com/nemo-framework/user-guide/latest/nemotoolkit/asr/models.html", "https://arxiv.org/abs/2005.08100", "https://www.nvidia.com/en-us/support/submit-security-vulnerability/", "https://calcivilrights.ca.gov/disputeresolution/protected-characteristics/" ]
+description = "High accuracy and optimized performance for transcription in 25 languages"
+catalog_status = "active"
+first_seen_at = "2025-04-30T17:29:30.445Z"
+last_seen_at = "2026-10-30T12:13:43.145Z"
+endpoint_type = "audio_speech"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "audio" ]
+output_modalities = [ "text" ]
+license = "GOVERNING TERMS: The use of this model is governed by the NVIDIA Community Model License (found at https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-community-models-license/)."
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.145Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = false
+audio = true
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+input_per_million = 0.18
+output_per_million = 0.18
+status = "published"
+source = "https://build.nvidia.com/pricing"
+provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M tokens)"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/parakeet-1_1b-rnnt-multilingual-asr"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.145Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

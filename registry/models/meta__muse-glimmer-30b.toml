@@ -1,0 +1,53 @@
+id = "meta/muse-glimmer-30b"
+name = "muse-glimmer-30b"
+publisher = "meta"
+family = "Gemma"
+architecture = "Transformer (Dense causal Transformer + ViT-G/14 perception encoder)"
+official_detail_url = "https://build.nvidia.com/meta/muse-glimmer-30b"
+documentation_urls = [ "https://huggingface.co/meta-models/Muse-Glimmer-30B", "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-agreement/", "https://www.apache.org/licenses/LICENSE-2.0", "https://www.nvidia.com/en-us/support/submit-security-vulnerability/" ]
+description = "Muse Glimmer 30B is a multimodal reasoning model accepting text and images, with native tool-calling and separate reasoning output."
+catalog_status = "active"
+first_seen_at = "2026-08-10T12:58:58.470Z"
+last_seen_at = "2026-10-30T12:13:43.101Z"
+endpoint_type = "chat"
+protocol = "openai-chat"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image" ]
+output_modalities = [ "text" ]
+context_window = 131072
+max_output_tokens = 4096
+license = "**GOVERNING TERMS:** Use of this trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf) and use of the model is governed by the [NVIDIA Open Model Agreement](https://www.nvidia.com"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.101Z"
+
+[capabilities]
+chat = true
+completion = true
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = true
+structured_output = true
+tool_calling = true
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/meta/muse-glimmer-30b"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.101Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = true
+probe_endpoint = "https://integrate.api.nvidia.com/v1/chat/completions"
+max_probe_tokens = 4
+
+[[eligibility.test_messages]]
+role = "user"
+content = "Respond with PONG"

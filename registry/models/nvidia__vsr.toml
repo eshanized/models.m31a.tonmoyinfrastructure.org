@@ -1,0 +1,45 @@
+id = "nvidia/vsr"
+name = "Video Super Resolution NIM"
+publisher = "nvidia"
+architecture = "Transformer"
+official_detail_url = "https://build.nvidia.com/nvidia/vsr"
+documentation_urls = [ "https://catalog.ngc.nvidia.com/orgs/nvidia/teams/maxine/models/nvvfxvideosuperres?version=1.2.0.0_lib_linux", "https://docs.nvidia.com/nim/maxine/vsr/latest/index.html" ]
+description = "Upscale encoded or ST 2110 video to higher resolutions with NVIDIA Video Super Resolution."
+catalog_status = "active"
+first_seen_at = "2026-07-22T21:24:15.027Z"
+last_seen_at = "2026-10-30T12:13:43.177Z"
+endpoint_type = "completion"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "image", "video" ]
+output_modalities = [ "text" ]
+license = "NVIDIA API Trial Terms of Service"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.177Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = false
+video = true
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/vsr"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.177Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

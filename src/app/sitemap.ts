@@ -1,6 +1,8 @@
 import { MetadataRoute } from 'next';
 import { getAllModels } from '@/lib/catalog';
 
+export const dynamic = 'force-static';
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://models.m31a.tonmoyinfrastructure.org';
   const models = getAllModels();

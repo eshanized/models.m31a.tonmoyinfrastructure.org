@@ -1,0 +1,45 @@
+id = "nvidia/riva-translate-1_6b"
+name = "riva-translate-1.6b"
+publisher = "nvidia"
+architecture = "Diffusion Transformer (DiT)"
+official_detail_url = "https://build.nvidia.com/nvidia/riva-translate-1_6b"
+documentation_urls = [ "https://www.nvidia.com/en-us/support/submit-security-vulnerability/", "https://calcivilrights.ca.gov/disputeresolution/protected-characteristics/" ]
+description = "Enable smooth global interactions in 36 languages."
+catalog_status = "active"
+first_seen_at = "2025-06-26T19:40:20.620Z"
+last_seen_at = "2026-10-30T12:13:43.167Z"
+endpoint_type = "audio_speech"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+license = "NVIDIA API Trial Terms of Service"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.167Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/riva-translate-1_6b"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.167Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

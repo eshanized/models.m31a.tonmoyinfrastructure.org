@@ -1,0 +1,49 @@
+id = "nvidia/riva-translate-4b-instruct-v2"
+name = "riva-translate-4b-instruct-v2"
+publisher = "nvidia"
+family = "Mistral"
+architecture = "Transformer (Decoder-only)"
+official_detail_url = "https://build.nvidia.com/nvidia/riva-translate-4b-instruct-v2"
+documentation_urls = [ "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/", "https://arxiv.org/abs/1706.03762", "https://github.com/NVIDIA/NeMo", "https://huggingface.co/datasets/gsarti/flores_101" ]
+description = "Translation model in 37 languages with few-shots example prompts capability."
+catalog_status = "active"
+first_seen_at = "2026-07-27T17:35:59.075Z"
+last_seen_at = "2026-10-30T12:13:43.168Z"
+endpoint_type = "audio_speech"
+protocol = "openai-chat"
+access_classification = "free_endpoint"
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+license = "GOVERNING TERMS: This trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of this model is governed by the [NVIDIA Open Model License Agreement](https://www.nvidia.com/en-u"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.168Z"
+
+[capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = false
+
+[pricing]
+currency = "USD"
+input_per_million = 0.18
+output_per_million = 0.18
+status = "published"
+source = "https://build.nvidia.com/pricing"
+provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M tokens)"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/riva-translate-4b-instruct-v2"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.168Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

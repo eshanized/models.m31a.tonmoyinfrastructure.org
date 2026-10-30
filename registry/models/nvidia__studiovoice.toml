@@ -1,0 +1,45 @@
+id = "nvidia/studiovoice"
+name = "Studio Voice"
+publisher = "nvidia"
+architecture = "Convolution Neural Networks (CNNs), Transformers, Generative Adversarial Networks (GANs) (Encoder-Decoder)"
+official_detail_url = "https://build.nvidia.com/nvidia/studiovoice"
+documentation_urls = [ "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/", "https://catalog.ngc.nvidia.com/orgs/nvidia/teams/maxine/models/afx_studio_voice", "https://ccrma.stanford.edu/~gautham/Site/daps.html", "https://www.openslr.org/60/", "https://datashare.ed.ac.uk/handle/10283/3443" ]
+description = "Enhance input speech recorded with low-quality microphones in noisy or reverberant environments, producing studio-quality speech."
+catalog_status = "active"
+first_seen_at = "2025-06-13T14:12:57.045Z"
+last_seen_at = "2026-10-30T12:13:43.174Z"
+endpoint_type = "audio_speech"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "audio", "video" ]
+output_modalities = [ "audio" ]
+license = "Use of this model is governed by the [NVIDIA Open Model License](https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/)."
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.174Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = false
+audio = true
+video = true
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/studiovoice"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.174Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

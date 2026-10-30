@@ -9,6 +9,13 @@ interface PageProps {
   params: Promise<{ id: string[] }>;
 }
 
+export async function generateStaticParams() {
+  const models = getAllModels();
+  return models.map((m) => ({
+    id: m.id.split('/'),
+  }));
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolved = await params;
   const rawId = (resolved.id || []).join('/');

@@ -1,0 +1,52 @@
+id = "openai/gpt-oss-20b"
+name = "gpt-oss-20b"
+publisher = "openai"
+architecture = "Transformer <br> (Mixture-of-Experts (MoE) <br>)"
+official_detail_url = "https://build.nvidia.com/openai/gpt-oss-20b"
+documentation_urls = [ "https://huggingface.co/openai/gpt-oss-20b", "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-community-models-license/", "https://www.apache.org/licenses/LICENSE-2.0", "https://cookbook.openai.com/" ]
+description = "Smaller Mixture of Experts (MoE) text-only LLM for efficient AI reasoning and math"
+catalog_status = "active"
+first_seen_at = "2025-08-05T16:46:10.339Z"
+last_seen_at = "2026-10-30T12:13:43.067Z"
+endpoint_type = "chat"
+protocol = "openai-chat"
+access_classification = "free_endpoint"
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+context_window = 131072
+max_output_tokens = 4096
+license = "NVIDIA API Trial Terms of Service"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.067Z"
+
+[capabilities]
+chat = true
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = true
+structured_output = true
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/openai/gpt-oss-20b"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.067Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = true
+probe_endpoint = "https://integrate.api.nvidia.com/v1/chat/completions"
+max_probe_tokens = 4
+
+[[eligibility.test_messages]]
+role = "user"
+content = "Respond with PONG"

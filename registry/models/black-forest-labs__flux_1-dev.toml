@@ -1,0 +1,46 @@
+id = "black-forest-labs/flux_1-dev"
+name = "FLUX.1-dev"
+publisher = "black-forest-labs"
+family = "FLUX"
+architecture = "Diffusion Transformer (DiT)"
+official_detail_url = "https://build.nvidia.com/black-forest-labs/flux_1-dev"
+documentation_urls = [ "https://huggingface.co/black-forest-labs/FLUX.1-dev", "https://huggingface.co/black-forest-labs/FLUX.1-Canny-dev", "https://huggingface.co/black-forest-labs/FLUX.1-Depth-dev", "https://huggingface.co/LiheYoung/depth-anything-large-hf", "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf" ]
+description = "FLUX.1 is a state-of-the-art suite of image generation models"
+catalog_status = "active"
+first_seen_at = "2025-06-13T13:43:58.635Z"
+last_seen_at = "2026-10-30T12:13:43.053Z"
+endpoint_type = "image_generation"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image" ]
+output_modalities = [ "image" ]
+license = "NVIDIA API Trial Terms of Service"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.053Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/black-forest-labs/flux_1-dev"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.053Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

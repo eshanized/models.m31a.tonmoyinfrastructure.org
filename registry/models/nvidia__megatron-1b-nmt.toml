@@ -1,0 +1,48 @@
+id = "nvidia/megatron-1b-nmt"
+name = "megatron-1b-nmt"
+publisher = "nvidia"
+architecture = "Transformer"
+official_detail_url = "https://build.nvidia.com/nvidia/megatron-1b-nmt"
+documentation_urls = [ "https://www.nvidia.com/en-us/support/submit-security-vulnerability/", "https://www.senate.ca.gov/content/protected-classes" ]
+description = "Enable smooth global interactions in 36 languages."
+catalog_status = "active"
+first_seen_at = "2025-04-10T15:20:30.992Z"
+last_seen_at = "2026-10-30T12:13:43.095Z"
+endpoint_type = "completion"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+license = "NVIDIA API Trial Terms of Service"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.095Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+input_per_million = 0.18
+output_per_million = 0.18
+status = "published"
+source = "https://build.nvidia.com/pricing"
+provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M tokens)"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/megatron-1b-nmt"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.095Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

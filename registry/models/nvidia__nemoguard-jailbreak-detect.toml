@@ -1,0 +1,46 @@
+id = "nvidia/nemoguard-jailbreak-detect"
+name = "nemoguard-jailbreak-detect"
+publisher = "nvidia"
+family = "Nemotron"
+architecture = "Random Forest <br> (N/A <br>)"
+official_detail_url = "https://build.nvidia.com/nvidia/nemoguard-jailbreak-detect"
+documentation_urls = [ "https://developer.download.nvidia.com/licenses/nvidia-open-model-license-agreement-june-2024.pdf", "https://arxiv.org/abs/2412.01547", "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-long", "https://github.com/NVIDIA/garak", "https://huggingface.co/datasets/walledai/JailbreakHub" ]
+description = "Industry leading jailbreak classification model for protection from adversarial attempts"
+catalog_status = "active"
+first_seen_at = "2025-07-02T15:21:58.541Z"
+last_seen_at = "2026-10-30T12:13:43.102Z"
+endpoint_type = "guardrail"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text" ]
+output_modalities = [ "embedding" ]
+license = "[NVIDIA Open Model License](https://developer.download.nvidia.com/licenses/nvidia-open-model-license-agreement-june-2024.pdf)"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.102Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/nemoguard-jailbreak-detect"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.102Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

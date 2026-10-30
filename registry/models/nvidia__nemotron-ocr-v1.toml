@@ -1,0 +1,46 @@
+id = "nvidia/nemotron-ocr-v1"
+name = "nemotron-ocr-v1"
+publisher = "nvidia"
+family = "Nemotron"
+architecture = "Hybrid detector–recognizer with document-level relational modeling <br>"
+official_detail_url = "https://build.nvidia.com/nvidia/nemotron-ocr-v1"
+documentation_urls = [ "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/", "https://docs.nvidia.com/nim/", "https://www.nvidia.com/en-us/support/submit-security-vulnerability/", "https://calcivilrights.ca.gov/disputeresolution/protected-characteristics/" ]
+description = "Powerful OCR model for fast, accurate real-world image text extraction, layout, and structure analysis."
+catalog_status = "active"
+first_seen_at = "2026-03-12T18:07:08.119Z"
+last_seen_at = "2026-10-30T12:13:43.133Z"
+endpoint_type = "visual_language"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image" ]
+output_modalities = [ "text" ]
+license = "NVIDIA API Trial Terms of Service"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.133Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/nemotron-ocr-v1"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.133Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

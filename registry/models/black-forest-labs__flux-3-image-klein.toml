@@ -1,0 +1,46 @@
+id = "black-forest-labs/flux-3-image-klein"
+name = "flux-3-image-klein"
+publisher = "black-forest-labs"
+family = "Cosmos"
+architecture = "Transformer (Transformer)"
+official_detail_url = "https://build.nvidia.com/black-forest-labs/flux-3-image-klein"
+documentation_urls = [ "https://huggingface.co/black-forest-labs/flux-3-image-klein-base", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-software-license-agreement/", "https://www.nvidia.com/en-us/agreements/enterprise-software/product-specific-terms-for-ai-products/", "https://huggingface.co/black-forest-labs/flux-3-image-klein", "https://docs.bfl.ai/flux_3/flux3_image_bounding_boxes" ]
+description = "FLUX 3 Image Klein is a state-of-the-art open-weight image generation and editing model"
+catalog_status = "active"
+first_seen_at = "2026-10-15T18:26:40.926Z"
+last_seen_at = "2026-10-30T12:13:43.052Z"
+endpoint_type = "image_generation"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image" ]
+output_modalities = [ "image" ]
+license = "**GOVERNING TERMS:** Use of this container is governed by the [NVIDIA Software License Agreement](https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-software-license-agreement/) and [Product-Specific Terms for NVIDIA AI Products](https://www.nvidia.com/en-us/agreements/enterprise-sof"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.052Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/black-forest-labs/flux-3-image-klein"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.052Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

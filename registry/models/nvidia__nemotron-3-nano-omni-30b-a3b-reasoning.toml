@@ -1,0 +1,53 @@
+id = "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning"
+name = "nemotron-3-nano-omni-30b-a3b-reasoning"
+publisher = "nvidia"
+family = "Nemotron"
+architecture = "Mamba2-Transformer Hybrid Mixture of Experts (MoE) <br> (- [Nemotron 3 Nano LLM (30B A3B)](https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16))"
+official_detail_url = "https://build.nvidia.com/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning"
+documentation_urls = [ "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-agreement/", "https://huggingface.co/nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16", "https://huggingface.co/nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-FP8", "https://huggingface.co/nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-NVFP4" ]
+description = "Nemotron 3 Nano Omni is an omni-modal reasoning model that understands images, video, speech, text."
+catalog_status = "active"
+first_seen_at = "2026-04-28T15:37:00.315Z"
+last_seen_at = "2026-10-30T12:13:43.110Z"
+endpoint_type = "chat"
+protocol = "openai-chat"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "audio", "image", "video" ]
+output_modalities = [ "audio" ]
+context_window = 262144
+max_output_tokens = 4096
+license = "Governing Terms: This trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of this model is governed by the [NVIDIA Open Model Agreement](https://www.nvidia.com/en-us/agreem"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.110Z"
+
+[capabilities]
+chat = true
+completion = true
+vision = true
+audio = true
+video = true
+embedding = false
+reranking = false
+reasoning = true
+structured_output = true
+tool_calling = true
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.110Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = true
+probe_endpoint = "https://integrate.api.nvidia.com/v1/chat/completions"
+max_probe_tokens = 4
+
+[[eligibility.test_messages]]
+role = "user"
+content = "Respond with PONG"

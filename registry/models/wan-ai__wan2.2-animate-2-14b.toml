@@ -1,0 +1,49 @@
+id = "wan-ai/wan2.2-animate-2-14b"
+name = "wan2.2-animate-2-14b"
+publisher = "wan-ai"
+family = "Cosmos"
+architecture = "Transformer (Mixture of Experts (MoE))"
+official_detail_url = "https://build.nvidia.com/wan-ai/wan2.2-animate-2-14b"
+documentation_urls = [ "https://huggingface.co/Wan-AI/Wan2.2-Animate-2-14B-Diffusers", "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/", "https://huggingface.co/datasets/choosealicense/licenses/blob/main/markdown/apache-2.0.md", "https://huggingface.co/nvidia/Cosmos-1.0-Guardrail" ]
+description = "Wan2.2-Animate-2 is a novel end-to-end character animation framework"
+catalog_status = "active"
+first_seen_at = "2026-08-19T15:49:22.813Z"
+last_seen_at = "2026-10-30T12:13:43.177Z"
+endpoint_type = "completion"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "audio", "image", "video" ]
+output_modalities = [ "image" ]
+license = "GOVERNING TERMS: The trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf); and use of this model is governed by the [NVIDIA Open Model License](https://www.nvidia.com/en-us/agree"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.177Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = true
+video = true
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+input_per_million = 0.18
+output_per_million = 0.18
+status = "published"
+source = "https://build.nvidia.com/pricing"
+provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M tokens)"
+
+[provenance]
+source_url = "https://build.nvidia.com/wan-ai/wan2.2-animate-2-14b"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.177Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

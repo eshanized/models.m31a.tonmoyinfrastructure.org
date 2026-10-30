@@ -1,0 +1,45 @@
+id = "siemens/star-ccm"
+name = "simcenter-star-ccm+"
+publisher = "siemens"
+architecture = "Transformer"
+official_detail_url = "https://build.nvidia.com/siemens/star-ccm"
+documentation_urls = [ "https://plm.sw.siemens.com/en-US/simcenter/fluids-thermal-simulation/star-ccm/?srsltid=AfmBOooucc24eJ7QOEFpb6KHwIbhjhqBedggYJ6A3hMWSFcpBH2AgM3c", "https://assets.ngc.nvidia.com/products/api-catalog/star-ccm/screenshot.jpg" ]
+description = "Run computational-fluid dynamics (CFD) simulations"
+catalog_status = "active"
+first_seen_at = "2025-03-25T14:57:43.480Z"
+last_seen_at = "2026-10-30T12:13:43.169Z"
+endpoint_type = "completion"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+license = "NVIDIA API Trial Terms of Service"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.169Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/siemens/star-ccm"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.169Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

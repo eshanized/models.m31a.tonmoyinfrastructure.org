@@ -1,0 +1,890 @@
+{
+  "generated_at": "2026-10-30T12:16:22.842Z",
+  "summary": {
+    "total_models": 109,
+    "operational": 0,
+    "degraded": 0,
+    "unavailable": 0,
+    "unknown": 0,
+    "stale": 0,
+    "catalog_only": 91,
+    "downloadable_only": 0,
+    "probe_eligible_total": 18,
+    "last_probe_cycle_at": null,
+    "uptime_percentage": 100
+  },
+  "models": [
+    {
+      "id": "ansys/fluent",
+      "name": "fluent",
+      "publisher": "ansys",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "arc/evo2-40b",
+      "name": "evo2-40b",
+      "publisher": "arc",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "arc/evo2-40b-forward",
+      "name": "evo2-40b-forward",
+      "publisher": "arc",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "arc/evo2-7b-forward",
+      "name": "evo2-7b-forward",
+      "publisher": "arc",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "baidu/paddleocr",
+      "name": "paddleocr",
+      "publisher": "baidu",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "black-forest-labs/flux_1-dev",
+      "name": "FLUX.1-dev",
+      "publisher": "black-forest-labs",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "black-forest-labs/flux_1-kontext-dev",
+      "name": "FLUX.1-Kontext-dev",
+      "publisher": "black-forest-labs",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "black-forest-labs/flux_1-schnell",
+      "name": "FLUX.1-schnell",
+      "publisher": "black-forest-labs",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "black-forest-labs/flux_2-klein-4b",
+      "name": "flux.2-klein-4b",
+      "publisher": "black-forest-labs",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "black-forest-labs/flux-3-image-klein",
+      "name": "flux-3-image-klein",
+      "publisher": "black-forest-labs",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "cadence/fidelity",
+      "name": "fidelity",
+      "publisher": "cadence",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "cadence/spectre-x",
+      "name": "spectre-x",
+      "publisher": "cadence",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "colabfold/msa-search",
+      "name": "msa-search",
+      "publisher": "colabfold",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "deepseek-ai/deepseek-v4.1-flash",
+      "name": "deepseek-v4.1-flash",
+      "publisher": "deepseek-ai",
+      "status": "unknown",
+      "last_observed": null,
+      "probe_eligible": true
+    },
+    {
+      "id": "google/diffusiongemma-26b-a4b-it",
+      "name": "diffusiongemma-26b-a4b-it",
+      "publisher": "google",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "google/gemma-4-31b-it",
+      "name": "gemma-4-31b-it",
+      "publisher": "google",
+      "status": "unknown",
+      "last_observed": null,
+      "probe_eligible": true
+    },
+    {
+      "id": "google/google-paligemma",
+      "name": "paligemma",
+      "publisher": "google",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "ipd/proteinmpnn",
+      "name": "proteinmpnn",
+      "publisher": "ipd",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "ipd/rfd4-proteina",
+      "name": "rfd4-proteina",
+      "publisher": "ipd",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "ipd/rfdiffusion",
+      "name": "rfdiffusion",
+      "publisher": "ipd",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "meta/llama-3.2-11b-vision-instruct",
+      "name": "llama-3.2-11b-vision-instruct",
+      "publisher": "meta",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "meta/llama-3.2-90b-vision-instruct",
+      "name": "llama-3.2-90b-vision-instruct",
+      "publisher": "meta",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "meta/llama-guard-4-12b",
+      "name": "llama-guard-4-12b",
+      "publisher": "meta",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "meta/muse-glimmer-30b",
+      "name": "muse-glimmer-30b",
+      "publisher": "meta",
+      "status": "unknown",
+      "last_observed": null,
+      "probe_eligible": true
+    },
+    {
+      "id": "microsoft/trellis",
+      "name": "TRELLIS",
+      "publisher": "microsoft",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "minimaxai/minimax-m3.1-flash",
+      "name": "minimax-m3.1-flash",
+      "publisher": "minimaxai",
+      "status": "unknown",
+      "last_observed": null,
+      "probe_eligible": true
+    },
+    {
+      "id": "mistralai/mistral-large-4-1t-a52b",
+      "name": "Mistral Large 4",
+      "publisher": "mistralai",
+      "status": "unknown",
+      "last_observed": null,
+      "probe_eligible": true
+    },
+    {
+      "id": "mit/boltz2",
+      "name": "Boltz-2",
+      "publisher": "mit",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "mit/diffdock",
+      "name": "diffdock",
+      "publisher": "mit",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/active-speaker-detection",
+      "name": "Active Speaker Detection",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/bevformer",
+      "name": "bevformer",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/bnr",
+      "name": "Background Noise Removal",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/body-pose",
+      "name": "3D Body Pose",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/canary-1b-asr",
+      "name": "canary-1b-asr",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/conformer-ctc-asr",
+      "name": "conformer-ctc-asr",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/cosmos-transfer2_5-2b",
+      "name": "cosmos-transfer2.5-2b",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/cosmos3-nano",
+      "name": "cosmos3-nano",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/cosmos3-nano-reasoner",
+      "name": "cosmos3-nano-reasoner",
+      "publisher": "nvidia",
+      "status": "unknown",
+      "last_observed": null,
+      "probe_eligible": true
+    },
+    {
+      "id": "nvidia/eyecontact",
+      "name": "eyecontact",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/fourcastnet",
+      "name": "fourcastnet",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/genmol-generate",
+      "name": "genmol",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/ising-calibration-1-35b-a3b",
+      "name": "ising-calibration-1-35b-a3b",
+      "publisher": "nvidia",
+      "status": "unknown",
+      "last_observed": null,
+      "probe_eligible": true
+    },
+    {
+      "id": "nvidia/ising-calibration-1.5-31b",
+      "name": "ising-calibration-1.5-31b",
+      "publisher": "nvidia",
+      "status": "unknown",
+      "last_observed": null,
+      "probe_eligible": true
+    },
+    {
+      "id": "nvidia/kumo-relational",
+      "name": "Kumo Relational",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/kumo-tabular",
+      "name": "Kumo Tabular",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/lipsync",
+      "name": "LipSync",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/llama-3_1-nemoguard-8b-content-safety",
+      "name": "llama-3.1-nemoguard-8b-content-safety",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/llama-3_1-nemoguard-8b-topic-control",
+      "name": "llama-3.1-nemoguard-8b-topic-control",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/llama-3_1-nemotron-safety-guard-8b-v3",
+      "name": "llama-3.1-nemotron-safety-guard-8b-v3",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/llama-nemotron-embed-vl-1b-v2",
+      "name": "llama-nemotron-embed-vl-1b-v2",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/llama-nemotron-rerank-vl-1b-v2",
+      "name": "llama-nemotron-rerank-vl-1b-v2",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/magpie-tts-multilingual",
+      "name": "magpie-tts-multilingual",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/magpie-tts-zeroshot",
+      "name": "magpie-tts-zeroshot",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/megatron-1b-nmt",
+      "name": "megatron-1b-nmt",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/molmim-generate",
+      "name": "molmim",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/nemoguard-jailbreak-detect",
+      "name": "nemoguard-jailbreak-detect",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/nemoretriever-ocr",
+      "name": "nemoretriever-ocr",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/nemotron-3_5-embed-1b",
+      "name": "nemotron-3.5-embed-1b",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/nemotron-3_5-embed-8b",
+      "name": "nemotron-3.5-embed-8b",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/nemotron-3_5-rerank-8b",
+      "name": "nemotron-3.5-rerank-8b",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/nemotron-3-embed-1b",
+      "name": "nemotron-3-embed-1b",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+      "name": "nemotron-3-nano-omni-30b-a3b-reasoning",
+      "publisher": "nvidia",
+      "status": "unknown",
+      "last_observed": null,
+      "probe_eligible": true
+    },
+    {
+      "id": "nvidia/nemotron-3-ultra-550b-a55b",
+      "name": "nemotron-3-ultra-550b-a55b",
+      "publisher": "nvidia",
+      "status": "unknown",
+      "last_observed": null,
+      "probe_eligible": true
+    },
+    {
+      "id": "nvidia/nemotron-3.5-bolt-e4b",
+      "name": "Nemotron 3.5 Bolt E4B",
+      "publisher": "nvidia",
+      "status": "unknown",
+      "last_observed": null,
+      "probe_eligible": true
+    },
+    {
+      "id": "nvidia/nemotron-3.5-content-safety",
+      "name": "nemotron-3.5-content-safety",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "name": "nemotron-3.5-lightning-30b-a3b",
+      "publisher": "nvidia",
+      "status": "unknown",
+      "last_observed": null,
+      "probe_eligible": true
+    },
+    {
+      "id": "nvidia/nemotron-3.5-parse",
+      "name": "nemotron-3.5-parse",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "name": "nemotron-3.5-super-vl-120b-a12b",
+      "publisher": "nvidia",
+      "status": "unknown",
+      "last_observed": null,
+      "probe_eligible": true
+    },
+    {
+      "id": "nvidia/nemotron-asr-streaming",
+      "name": "nemotron-asr-streaming",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/nemotron-graphic-elements-v1",
+      "name": "nemotron-graphic-elements-v1",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/nemotron-ocr-v1",
+      "name": "nemotron-ocr-v1",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/nemotron-ocr-v2",
+      "name": "nemotron-ocr-v2",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/nemotron-page-elements-v3",
+      "name": "nemotron-page-elements-v3",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/nemotron-parse",
+      "name": "nemotron-parse",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/nemotron-parse-2.0",
+      "name": "nemotron-parse-2.0",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/nemotron-table-structure-v1",
+      "name": "nemotron-table-structure-v1",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/nemotron-voicechat",
+      "name": "nemotron-voicechat",
+      "publisher": "nvidia",
+      "status": "unknown",
+      "last_observed": null,
+      "probe_eligible": true
+    },
+    {
+      "id": "nvidia/nvidia-cuopt",
+      "name": "cuopt",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/parakeet-1_1b-rnnt-multilingual-asr",
+      "name": "parakeet-1.1b-rnnt-multilingual-asr",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/parakeet-ctc-0_6b-asr",
+      "name": "parakeet-ctc-0.6b-asr",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/parakeet-ctc-0_6b-es",
+      "name": "parakeet-ctc-0.6b-es",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/parakeet-ctc-0_6b-vi",
+      "name": "parakeet-ctc-0.6b-vi",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/parakeet-ctc-0_6b-zh-cn",
+      "name": "parakeet-ctc-0.6b-zh-cn",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/parakeet-ctc-0_6b-zh-tw",
+      "name": "parakeet-ctc-0.6b-zh-tw",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/parakeet-ctc-1_1b-asr",
+      "name": "parakeet-ctc-1.1b-asr",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/parakeet-tdt-0_6b",
+      "name": "parakeet-tdt-0.6b",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/parakeet-tdt-0_6b-v2",
+      "name": "parakeet-tdt-0.6b-v2",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/qwen-image-edit-nvpcb-ovsl2sl",
+      "name": "qwen-image-edit-nvpcb-ovsl2sl",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/relighting",
+      "name": "Relighting",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/riva-translate-1_6b",
+      "name": "riva-translate-1.6b",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/riva-translate-4b-instruct-v2",
+      "name": "riva-translate-4b-instruct-v2",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/sparsedrive",
+      "name": "sparsedrive",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/streampetr",
+      "name": "streampetr",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/studiovoice",
+      "name": "Studio Voice",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/synthetic-video-detector",
+      "name": "synthetic-video-detector",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "nvidia/vsr",
+      "name": "Video Super Resolution NIM",
+      "publisher": "nvidia",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "openai/gpt-oss-20b",
+      "name": "gpt-oss-20b",
+      "publisher": "openai",
+      "status": "unknown",
+      "last_observed": null,
+      "probe_eligible": true
+    },
+    {
+      "id": "openai/whisper-large-v3",
+      "name": "whisper-large-v3",
+      "publisher": "openai",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "openfold/openfold2",
+      "name": "openfold2",
+      "publisher": "openfold",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "openfold/openfold3",
+      "name": "openfold3",
+      "publisher": "openfold",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "poolside/laguna-xs-2.1",
+      "name": "laguna-xs-2.1",
+      "publisher": "poolside",
+      "status": "unknown",
+      "last_observed": null,
+      "probe_eligible": true
+    },
+    {
+      "id": "qwen/qwen-image",
+      "name": "qwen-image",
+      "publisher": "qwen",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "qwen/qwen-image-edit",
+      "name": "qwen-image-edit",
+      "publisher": "qwen",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "resembleai/chatterbox-multilingual-tts",
+      "name": "chatterbox-multilingual-tts",
+      "publisher": "resembleai",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "siemens/star-ccm",
+      "name": "simcenter-star-ccm+",
+      "publisher": "siemens",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "stabilityai/stable-diffusion-3_5-large",
+      "name": "stable-diffusion-3.5-large",
+      "publisher": "stabilityai",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "stepfun-ai/step-5-preview",
+      "name": "Step 5 Preview",
+      "publisher": "stepfun-ai",
+      "status": "unknown",
+      "last_observed": null,
+      "probe_eligible": true
+    },
+    {
+      "id": "wan-ai/wan2.2-animate-2-14b",
+      "name": "wan2.2-animate-2-14b",
+      "publisher": "wan-ai",
+      "status": "catalog_only",
+      "last_observed": null,
+      "probe_eligible": false
+    },
+    {
+      "id": "z-ai/glm-5-3-flash",
+      "name": "glm-5-3-flash",
+      "publisher": "z-ai",
+      "status": "unknown",
+      "last_observed": null,
+      "probe_eligible": true
+    }
+  ]
+}

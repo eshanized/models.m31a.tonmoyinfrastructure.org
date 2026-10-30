@@ -1,0 +1,45 @@
+id = "nvidia/molmim-generate"
+name = "molmim"
+publisher = "nvidia"
+architecture = "Encoder-Decoder (Perceiver <br>)"
+official_detail_url = "https://build.nvidia.com/nvidia/molmim-generate"
+documentation_urls = [ "https://arxiv.org/abs/2208.09016", "https://arxiv.org/abs/1910.03175", "https://link.springer.com/chapter/10.1007/3-540-32494-1_4", "https://zinc15.docking.org", "https://deepchem.io/tutorials/an-introduction-to-moleculenet" ]
+description = "MolMIM performs controlled generation, finding molecules with the right properties."
+catalog_status = "active"
+first_seen_at = "2025-07-18T21:05:23.707Z"
+last_seen_at = "2026-10-30T12:13:43.099Z"
+endpoint_type = "completion"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text" ]
+output_modalities = [ "embedding" ]
+license = "NVIDIA API Trial Terms of Service"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.099Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/molmim-generate"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.099Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

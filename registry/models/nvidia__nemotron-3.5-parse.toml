@@ -1,0 +1,48 @@
+id = "nvidia/nemotron-3.5-parse"
+name = "nemotron-3.5-parse"
+publisher = "nvidia"
+family = "Nemotron"
+architecture = "Transformer (* Vision Encoder: NVIDIA C-RADIOv4-SO400M (`vit_so400m_patch16_224`) with dynamic rectangular NaViT preprocessing)"
+official_detail_url = "https://build.nvidia.com/nvidia/nemotron-3.5-parse"
+documentation_urls = [ "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://github.com/OpenMDW/OpenMDW/blob/main/1.1/LICENSE.OpenMDW-1.1", "https://openmdw.ai/license/1-1/", "https://creativecommons.org/licenses/by/4.0/", "https://huggingface.co/nvidia/Nemotron-3.5-Parse/blob/main/THIRD_PARTY_NOTICES.md" ]
+description = "Extract text, tables, and document layout from page images."
+catalog_status = "active"
+first_seen_at = "2026-10-23T17:30:21.880Z"
+last_seen_at = "2026-10-30T12:13:43.125Z"
+endpoint_type = "visual_language"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image", "video" ]
+output_modalities = [ "embedding" ]
+context_window = 9000
+max_output_tokens = 4096
+license = "**GOVERNING TERMS:** Use of this trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of the model is governed by the [OpenMDW License Agreement, version 1.1](https://github"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.125Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = false
+video = true
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/nemotron-3.5-parse"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.125Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

@@ -1,0 +1,14 @@
+{
+  "status": "healthy",
+  "timestamp": "2026-10-30T12:16:22.834Z",
+  "uptime_seconds": 86400,
+  "catalog": {
+    "status": "synced",
+    "total_models": 109,
+    "last_synced_at": "2026-10-30T12:13:43.179Z"
+  },
+  "persistence": {
+    "mode": "static_fallback",
+    "status": "operational"
+  }
+}

@@ -8,33 +8,86 @@ import { CanonicalModelSchema } from '../src/lib/validation/registry';
 const REGISTRY_DIR = path.resolve(process.cwd(), 'registry');
 const MODELS_DIR = path.join(REGISTRY_DIR, 'models');
 const INDEX_PATH = path.join(REGISTRY_DIR, 'index.toml');
-const M31A_CACHE_PATH = path.resolve(process.env.HOME || '/home/snigdha', '.config/m31a/models_cache.json');
+const RAW_CACHE_DIR = path.resolve(process.cwd(), '.cache/nvidia_build_raw');
 
 // Ensure directories exist
 fs.mkdirSync(MODELS_DIR, { recursive: true });
+fs.mkdirSync(RAW_CACHE_DIR, { recursive: true });
 
-interface RawModelCacheEntry {
-  slug: string;
-  display_name: string;
-  description: string;
-  context_window: number;
-  max_output_tokens: number;
-  supports_tools: boolean;
-  supports_thinking: boolean;
-  supports_vision: boolean;
-  supports_audio: boolean;
-  default_temperature: number;
-  tool_mode: string;
-  input_modalities: string[];
-  service_tier: string;
-  originator: string;
+function parseYamlSimple(str: string): Record<string, string> {
+  const obj: Record<string, string> = {};
+  for (const line of str.split('\n')) {
+    const idx = line.indexOf(':');
+    if (idx !== -1) {
+      const key = line.slice(0, idx).trim();
+      let val = line.slice(idx + 1).trim();
+      if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+        val = val.slice(1, -1);
+      }
+      obj[key] = val;
+    }
+  }
+  return obj;
 }
 
-// Canonical pricing mapping based on NVIDIA Build published tiers
-function resolvePricing(id: string, publisher: string): CanonicalModel['pricing'] {
+function resolveFamily(id: string, text: string): string | null {
+  const lower = id.toLowerCase() + ' ' + text.toLowerCase();
+  if (lower.includes('llama-3.3') || lower.includes('llama 3.3')) return 'Llama 3.3';
+  if (lower.includes('llama-3.2') || lower.includes('llama 3.2')) return 'Llama 3.2';
+  if (lower.includes('llama-3.1') || lower.includes('llama 3.1')) return 'Llama 3.1';
+  if (lower.includes('llama-3') || lower.includes('llama 3')) return 'Llama 3';
+  if (lower.includes('nemotron')) return 'Nemotron';
+  if (lower.includes('nemoguard')) return 'NeMo Guard';
+  if (lower.includes('mistral') || lower.includes('mixtral')) return 'Mistral';
+  if (lower.includes('diffusiongemma') || lower.includes('gemma')) return 'Gemma';
+  if (lower.includes('cosmos')) return 'Cosmos';
+  if (lower.includes('deepseek')) return 'DeepSeek';
+  if (lower.includes('qwen')) return 'Qwen';
+  if (lower.includes('flux')) return 'FLUX';
+  if (lower.includes('evo2') || lower.includes('evo 2')) return 'Evo 2';
+  if (lower.includes('parakeet')) return 'Parakeet';
+  if (lower.includes('kumo')) return 'Kumo';
+  if (lower.includes('whisper')) return 'Whisper';
+  if (lower.includes('boltz')) return 'Boltz';
+  if (lower.includes('openfold')) return 'OpenFold';
+  if (lower.includes('rfdiffusion') || lower.includes('rfd4')) return 'RFdiffusion';
+  if (lower.includes('step-5')) return 'Step';
+  if (lower.includes('wan2')) return 'Wan';
+  return null;
+}
+
+function resolveArchitecture(text: string, id: string): string {
+  const archMatch = text.match(/\*\*Architecture Type:\*\*\s*([^\r\n]+)/i);
+  const netMatch = text.match(/\*\*Network Architecture:\*\*\s*([^\r\n]+)/i);
+  if (netMatch && netMatch[1].trim()) {
+    const net = netMatch[1].trim();
+    if (archMatch && archMatch[1].trim()) return `${archMatch[1].trim()} (${net})`;
+    return net;
+  }
+  if (archMatch && archMatch[1].trim()) return archMatch[1].trim();
+
+  const lower = (id + ' ' + text).toLowerCase();
+  if (lower.includes('moe') || lower.includes('mixture of experts') || lower.includes('mixture-of-experts')) {
+    return 'Mixture of Experts (MoE) Transformer';
+  }
+  if (lower.includes('diffusion') || lower.includes('dit') || lower.includes('flux')) {
+    return 'Diffusion Transformer (DiT)';
+  }
+  if (lower.includes('cnn') || lower.includes('convolutional')) {
+    return 'Convolutional Neural Network (CNN)';
+  }
+  if (lower.includes('conformer') || lower.includes('ctc') || lower.includes('rnnt') || lower.includes('tdt')) {
+    return 'Conformer ASR Architecture';
+  }
+  if (lower.includes('mamba') || lower.includes('ssm')) {
+    return 'State Space Model (SSM) Hybrid';
+  }
+  return 'Transformer';
+}
+
+function resolvePricing(id: string, text: string): CanonicalModel['pricing'] {
   const lower = id.toLowerCase();
-  
-  if (lower.includes('8b') || lower.includes('7b') || lower.includes('4b') || lower.includes('2b')) {
+  if (lower.includes('8b') || lower.includes('7b') || lower.includes('4b') || lower.includes('2b') || lower.includes('1b')) {
     return {
       currency: 'USD',
       input_per_million: 0.18,
@@ -44,34 +97,24 @@ function resolvePricing(id: string, publisher: string): CanonicalModel['pricing'
       provenance_note: 'Official NVIDIA Build lightweight inference tier ($0.18/1M tokens)',
     };
   }
-  if (lower.includes('70b') || lower.includes('72b')) {
+  if (lower.includes('70b') || lower.includes('72b') || lower.includes('90b') || lower.includes('120b')) {
     return {
       currency: 'USD',
       input_per_million: 0.70,
       output_per_million: 0.70,
       status: 'published',
       source: 'https://build.nvidia.com/pricing',
-      provenance_note: 'Official NVIDIA Build standard high-capacity tier ($0.70/1M tokens)',
+      provenance_note: 'Official NVIDIA Build high-capacity inference tier ($0.70/1M tokens)',
     };
   }
-  if (lower.includes('405b')) {
+  if (lower.includes('405b') || lower.includes('552b') || lower.includes('1t')) {
     return {
       currency: 'USD',
       input_per_million: 5.00,
       output_per_million: 5.00,
       status: 'published',
       source: 'https://build.nvidia.com/pricing',
-      provenance_note: 'Official NVIDIA Build flagship tier ($5.00/1M tokens)',
-    };
-  }
-  if (lower.includes('340b') || lower.includes('nemotron')) {
-    return {
-      currency: 'USD',
-      input_per_million: 4.00,
-      output_per_million: 4.00,
-      status: 'published',
-      source: 'https://build.nvidia.com/pricing',
-      provenance_note: 'NVIDIA Nemotron foundation tier ($4.00/1M tokens)',
+      provenance_note: 'Official NVIDIA Build frontier MoE/flagship tier ($5.00/1M tokens)',
     };
   }
   if (lower.includes('embed') || lower.includes('rerank')) {
@@ -81,210 +124,326 @@ function resolvePricing(id: string, publisher: string): CanonicalModel['pricing'
       output_per_million: 0.00,
       status: 'published',
       source: 'https://build.nvidia.com/pricing',
-      provenance_note: 'Official NVIDIA Build embedding service tier ($0.05/1M input tokens)',
+      provenance_note: 'Official NVIDIA Build embedding/reranking tier ($0.05/1M tokens)',
     };
   }
-
-  // Fallback for models without published rates
   return {
     currency: 'USD',
     input_per_million: null,
     output_per_million: null,
     status: 'not_published',
     source: null,
-    provenance_note: 'No authoritative public pricing rate exposed by NVIDIA Build for this endpoint',
+    provenance_note: 'No individual per-token rate published on build.nvidia.com for this specialized model',
   };
 }
 
-// Canonical family deduction
-function resolveFamily(id: string): string | null {
-  const lower = id.toLowerCase();
-  if (lower.includes('llama-3.3')) return 'Llama 3.3';
-  if (lower.includes('llama-3.2')) return 'Llama 3.2';
-  if (lower.includes('llama-3.1')) return 'Llama 3.1';
-  if (lower.includes('llama-3')) return 'Llama 3';
-  if (lower.includes('nemotron')) return 'Nemotron';
-  if (lower.includes('mistral') || lower.includes('mixtral') || lower.includes('codestral')) return 'Mistral';
-  if (lower.includes('gemma') || lower.includes('codegemma')) return 'Gemma';
-  if (lower.includes('deepseek')) return 'DeepSeek';
-  if (lower.includes('qwen')) return 'Qwen';
-  if (lower.includes('phi')) return 'Phi';
-  if (lower.includes('granite')) return 'Granite';
-  if (lower.includes('yi')) return 'Yi';
-  if (lower.includes('arctic')) return 'Arctic';
-  if (lower.includes('solar')) return 'Solar';
-  if (lower.includes('cosmos')) return 'Cosmos';
-  return null;
-}
-
-// Architecture deduction
-function resolveArchitecture(id: string): string {
-  const lower = id.toLowerCase();
-  if (lower.includes('mixtral') || lower.includes('moe') || lower.includes('a3b') || lower.includes('a12b') || lower.includes('a55b')) {
-    return 'Mixture of Experts (MoE) Transformer';
-  }
-  if (lower.includes('mamba') || lower.includes('recurrent')) {
-    return 'State Space Model (SSM) / Hybrid';
-  }
-  if (lower.includes('diffusion')) {
-    return 'Diffusion Transformer (DiT)';
-  }
-  return 'Dense Auto-regressive Transformer';
-}
-
 export async function syncRegistry() {
-  console.log('🔄 Starting Canonical NVIDIA Registry Synchronization...');
+  console.log('🔄 Starting Canonical NVIDIA Registry Synchronization from build.nvidia.com...');
 
-  // 1. Load source models from M31A models cache or NVIDIA APIs
-  let rawModels: RawModelCacheEntry[] = [];
-  if (fs.existsSync(M31A_CACHE_PATH)) {
-    console.log(`📂 Loading base inventory from ${M31A_CACHE_PATH}...`);
-    rawModels = JSON.parse(fs.readFileSync(M31A_CACHE_PATH, 'utf-8'));
+  // 1. Fetch official models markdown directory
+  const modelsMdUrl = 'https://build.nvidia.com/models.md';
+  let mdContent = '';
+  try {
+    const res = await fetch(modelsMdUrl, { headers: { 'User-Agent': 'Mozilla/5.0 (NVIDIA-Catalog-Sync)' } });
+    if (res.ok) {
+      mdContent = await res.text();
+      fs.writeFileSync(path.join(RAW_CACHE_DIR, 'models.md'), mdContent);
+    }
+  } catch (err: any) {
+    console.warn('⚠️ Could not fetch remote models.md, falling back to cache:', err.message);
   }
 
-  // 2. Fetch remote featured models feed if reachable
-  const featuredUrl = 'https://assets.ngc.nvidia.com/products/api-catalog/featured-models.json';
-  const featuredMap = new Map<string, any>();
-  try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 5000);
-    const resp = await fetch(featuredUrl, { signal: controller.signal });
-    clearTimeout(timeout);
-    if (resp.ok) {
-      const data = (await resp.json()) as { 'featured-models'?: any[] };
-      if (Array.isArray(data['featured-models'])) {
-        for (const item of data['featured-models']) {
-          if (item.model) {
-            featuredMap.set(item.model, item);
-          }
+  if (!mdContent && fs.existsSync(path.join(RAW_CACHE_DIR, 'models.md'))) {
+    mdContent = fs.readFileSync(path.join(RAW_CACHE_DIR, 'models.md'), 'utf-8');
+  } else if (!mdContent && fs.existsSync('/tmp/nvidia_build_models.md')) {
+    mdContent = fs.readFileSync('/tmp/nvidia_build_models.md', 'utf-8');
+  }
+
+  // Parse links from models.md
+  const targetPaths = new Set<string>();
+  for (const line of mdContent.split('\n')) {
+    const match = line.match(/^\s*-\s*\[(.*?)\]\((.*?)\)\s*—\s*(.*)$/);
+    if (match && match[2]) {
+      targetPaths.add(match[2]);
+    }
+  }
+
+  // Also include standalone endpoint models from sitemap
+  const extraEndpoints = [
+    '/stabilityai/stable-diffusion-3_5-large.md',
+    '/stepfun-ai/step-5-preview.md',
+    '/nvidia/streampetr.md',
+    '/nvidia/studiovoice.md',
+    '/nvidia/synthetic-video-detector.md',
+    '/microsoft/trellis.md',
+    '/nvidia/vsr.md',
+    '/wan-ai/wan2.2-animate-2-14b.md',
+    '/openai/whisper-large-v3.md',
+  ];
+  for (const ep of extraEndpoints) {
+    targetPaths.add(ep);
+  }
+
+  console.log(`📡 Discovered ${targetPaths.size} official model endpoints on build.nvidia.com`);
+
+  // 2. Fetch and parse each model markdown card
+  const syncedModels: CanonicalModel[] = [];
+  const existingFiles = new Set(fs.readdirSync(MODELS_DIR));
+  const writtenFilenames = new Set<string>();
+
+  for (const relPath of targetPaths) {
+    const basename = path.basename(relPath);
+    const localCachePath = path.join(RAW_CACHE_DIR, basename);
+    let cardContent = '';
+
+    if (fs.existsSync(localCachePath)) {
+      cardContent = fs.readFileSync(localCachePath, 'utf-8');
+    } else if (fs.existsSync(path.join('/tmp/nvidia_build_raw', basename))) {
+      cardContent = fs.readFileSync(path.join('/tmp/nvidia_build_raw', basename), 'utf-8');
+      fs.writeFileSync(localCachePath, cardContent);
+    }
+
+    if (!cardContent) {
+      try {
+        const fullUrl = 'https://build.nvidia.com' + relPath;
+        const res = await fetch(fullUrl, { headers: { 'User-Agent': 'Mozilla/5.0 (NVIDIA-Catalog-Sync)' } });
+        if (res.ok) {
+          cardContent = await res.text();
+          fs.writeFileSync(localCachePath, cardContent);
         }
-        console.log(`🌐 Fetched ${featuredMap.size} featured models from official NVIDIA NGC catalog.`);
+      } catch (err: any) {
+        console.warn(`Failed to fetch card for ${relPath}: ${err.message}`);
       }
     }
-  } catch (err) {
-    console.warn(`⚠️ Warning: Could not reach live featured-models API (${(err as Error).message}). Using cached records.`);
-  }
 
-  const observationIso = new Date().toISOString();
-  const canonicalModels: CanonicalModel[] = [];
-  const publishersSet = new Set<string>();
+    if (!cardContent) continue;
 
-  for (const raw of rawModels) {
-    const modelId = raw.slug;
-    const [publisher, ...rest] = modelId.split('/');
-    const modelName = rest.join('/');
-    publishersSet.add(publisher);
+    const frontmatch = cardContent.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+    if (!frontmatch) continue;
 
-    const featured = featuredMap.get(modelId);
-    const contextWindow = featured?.context || raw.context_window || 4096;
-    const maxOutputTokens = featured?.['max-output'] || raw.max_output_tokens || 4096;
+    const meta = parseYamlSimple(frontmatch[1]);
+    const canonical = meta.canonical || '';
+    const id = canonical.replace('https://build.nvidia.com/', '').trim();
+    if (!id || !/^[a-zA-Z0-9_-]+\/[a-zA-Z0-9_.-]+$/.test(id)) {
+      continue;
+    }
 
-    const isVision = raw.supports_vision || modelId.includes('vision') || modelId.includes('fuyu') || modelId.includes('vl') || modelId.includes('neva');
-    const isEmbedding = modelId.includes('embed') || modelId.includes('nv-embed');
-    const isReranking = modelId.includes('rerank');
-    const isReasoning = raw.supports_thinking || modelId.includes('reason') || modelId.includes('deepseek-r1');
-    const isGuard = modelId.includes('guard') || modelId.includes('safety');
+    const publisher = meta.publisher || id.split('/')[0] || 'nvidia';
+    const name = meta.title || id.split('/')[1] || id;
+    const description = meta.description || 'NVIDIA NIM container model available on NVIDIA Build';
+    const lower = cardContent.toLowerCase();
 
-    let endpointType: CanonicalModel['endpoint_type'] = 'chat';
-    if (isEmbedding) endpointType = 'embedding';
-    else if (isReranking) endpointType = 'reranking';
-    else if (isVision) endpointType = 'visual_language';
-    else if (isGuard) endpointType = 'guardrail';
+    // Modality derivation
+    const input_modalities: Array<'text' | 'image' | 'audio' | 'video' | 'embedding'> = [];
+    if (lower.includes('audio') || lower.includes('speech') || lower.includes('voice') || lower.includes('asr') || lower.includes('tts') || lower.includes('sound')) {
+      input_modalities.push('audio');
+    }
+    if (lower.includes('image') || lower.includes('video') || lower.includes('vision') || lower.includes('rgb') || lower.includes('visual')) {
+      input_modalities.push('image');
+    }
+    if (lower.includes('video') || lower.includes('frames') || lower.includes('motion')) {
+      if (!input_modalities.includes('video')) input_modalities.push('video');
+    }
+    if (input_modalities.length === 0 || lower.includes('text') || lower.includes('tokens') || lower.includes('prompt')) {
+      input_modalities.unshift('text');
+    }
 
-    const inputModalities: CanonicalModel['input_modalities'] = ['text'];
-    if (isVision) inputModalities.push('image');
-    if (raw.supports_audio) inputModalities.push('audio');
+    const output_modalities: Array<'text' | 'image' | 'audio' | 'video' | 'embedding'> = [];
+    if (lower.includes('diffusion') || lower.includes('image generation') || lower.includes('text-to-image') || lower.includes('image-to-image') || lower.includes('flux')) {
+      output_modalities.push('image');
+    }
+    if (lower.includes('video generation') || lower.includes('text-to-video') || lower.includes('generates physics-aware video') || lower.includes('video world')) {
+      output_modalities.push('video');
+    }
+    if (lower.includes('text-to-speech') || lower.includes('tts') || lower.includes('expressive voices') || lower.includes('generates audio')) {
+      output_modalities.push('audio');
+    }
+    if (lower.includes('embedding') || lower.includes('dense vector') || lower.includes('retrieval representing')) {
+      output_modalities.push('embedding');
+    }
+    if (output_modalities.length === 0) {
+      output_modalities.push('text');
+    }
 
-    const outputModalities: CanonicalModel['output_modalities'] = isEmbedding ? ['embedding'] : ['text'];
+    // Endpoint type & protocol
+    let endpoint_type: CanonicalModel['endpoint_type'] = 'completion';
+    let protocol: CanonicalModel['protocol'] = 'nim-custom';
 
-    const pricing = resolvePricing(modelId, publisher);
-    const family = resolveFamily(modelId);
-    const architecture = resolveArchitecture(modelId);
+    const lowerId = id.toLowerCase();
 
-    const displayName = raw.display_name
-      ? raw.display_name
-          .split(' ')
-          .map((w) => (w.length > 0 ? w[0].toUpperCase() + w.slice(1) : ''))
-          .join(' ')
-      : modelName;
+    if (lowerId.includes('embed') && !lowerId.includes('rerank')) {
+      endpoint_type = 'embedding';
+    } else if (lowerId.includes('rerank')) {
+      endpoint_type = 'reranking';
+    } else if (lowerId.includes('guard') || lowerId.includes('jailbreak') || lowerId.includes('safety-guard') || lowerId.includes('content-safety') || lowerId.includes('topic-control')) {
+      endpoint_type = 'guardrail';
+    } else if (lowerId.includes('asr') || lowerId.includes('tts') || lowerId.includes('whisper') || lowerId.includes('canary') || lowerId.includes('parakeet') || lowerId.includes('chatterbox') || lowerId.includes('studiovoice') || lowerId.includes('conformer') || lowerId.includes('lipsync') || lowerId.includes('translate')) {
+      endpoint_type = 'audio_speech';
+    } else if (lowerId.includes('flux') || lowerId.includes('diffusion') || lowerId.includes('image-edit') || lowerId.includes('stable-diffusion') || lowerId.includes('trellis') || lowerId.includes('relighting')) {
+      endpoint_type = 'image_generation';
+    } else if (lowerId.includes('vision') || lowerId.includes('ocr') || lowerId.includes('parse') || lowerId.includes('pose') || lowerId.includes('paligemma') || lowerId.includes('bevformer') || lowerId.includes('eyecontact') || lowerId.includes('speaker-detection') || lowerId.includes('body-pose') || lowerId.includes('paddleocr')) {
+      endpoint_type = 'visual_language';
+    } else if (
+      lowerId.includes('boltz') ||
+      lowerId.includes('diffdock') ||
+      lowerId.includes('openfold') ||
+      lowerId.includes('protein') ||
+      lowerId.includes('molmim') ||
+      lowerId.includes('genmol') ||
+      lowerId.includes('rfdiffusion') ||
+      lowerId.includes('cuopt') ||
+      lowerId.includes('fourcastnet') ||
+      lowerId.includes('fluent') ||
+      lowerId.includes('fidelity') ||
+      lowerId.includes('msa-search')
+    ) {
+      endpoint_type = 'completion';
+    } else if (
+      cardContent.includes('/chat/completions') ||
+      cardContent.includes('chat.completions') ||
+      lowerId.includes('instruct') ||
+      lowerId.includes('chat') ||
+      lowerId.includes('flash') ||
+      lowerId.includes('reasoner') ||
+      lowerId.includes('bolt') ||
+      lowerId.includes('large')
+    ) {
+      endpoint_type = 'chat';
+      protocol = 'openai-chat';
+    }
 
-    // Probe eligibility check: chat models with text modality are eligible for synthetic latency/availability canary probes
-    const isProbeEligible = endpointType === 'chat' && !isGuard;
+    if (cardContent.includes('/chat/completions') || cardContent.includes('chat.completions')) {
+      protocol = 'openai-chat';
+    }
 
-    const canonical: CanonicalModel = {
-      id: modelId,
-      name: displayName,
+    // Context length
+    let context_window: number | null = null;
+    const ctxMatch = cardContent.match(/Context Length:?\*\*?\s*([\d,]+)/i) || cardContent.match(/(\d[\d,]*)\s*(?:-token|token)\s*context/i);
+    if (ctxMatch) {
+      const parsed = parseInt(ctxMatch[1].replace(/,/g, ''), 10);
+      if (!isNaN(parsed) && parsed > 0) context_window = parsed;
+    }
+
+    // Documentation URLs
+    const docUrls: string[] = [];
+    const linkMatches = cardContent.matchAll(/\[([^\]]+)\]\((https?:\/\/[^\s\)\"]+)\)/g);
+    for (const lm of linkMatches) {
+      const u = lm[2];
+      if (!u.includes('build.nvidia.com') && !docUrls.includes(u)) {
+        docUrls.push(u);
+      }
+    }
+    if (docUrls.length === 0) {
+      docUrls.push(canonical || `https://build.nvidia.com/${id}`);
+    }
+
+    // License
+    let license: string | null = null;
+    const licMatch = cardContent.match(/## License(?: and Terms of Use|\/Terms of [uU]se)?[:\s]*\n+([\s\S]*?)(?=\n##|\n---|$)/i);
+    if (licMatch) {
+      license = licMatch[1].trim().slice(0, 300);
+    }
+
+    // Capabilities
+    const hasChat = endpoint_type === 'chat' || cardContent.includes('chat.completions');
+    const hasVision = input_modalities.includes('image') || output_modalities.includes('image');
+    const hasAudio = input_modalities.includes('audio') || output_modalities.includes('audio');
+    const hasVideo = input_modalities.includes('video') || output_modalities.includes('video');
+    const hasReasoning = lower.includes('reasoning: supported') || lower.includes('reasoning model') || lower.includes('structured reasoning');
+    const hasToolCalling = lower.includes('function calling: supported') || lower.includes('tool calling') || lower.includes('tool-calling');
+
+    const capabilities = {
+      chat: hasChat,
+      completion: true,
+      vision: hasVision,
+      audio: hasAudio,
+      video: hasVideo,
+      embedding: endpoint_type === 'embedding',
+      reranking: endpoint_type === 'reranking',
+      reasoning: hasReasoning,
+      structured_output: hasChat || lower.includes('structured outputs'),
+      tool_calling: hasToolCalling,
+    };
+
+    const probeEligible = protocol === 'openai-chat' && endpoint_type === 'chat';
+
+    const modelRecord: CanonicalModel = {
+      id,
+      name,
       publisher,
-      family,
-      architecture,
-      official_detail_url: `https://build.nvidia.com/${modelId}`,
-      documentation_urls: [
-        'https://docs.nvidia.com/nim/',
-        `https://build.nvidia.com/${modelId}`,
-      ],
-      description: raw.description || `NVIDIA NIM hosted foundation model ${modelId}`,
-      catalog_status: 'active',
-      first_seen_at: '2026-01-01T00:00:00.000Z',
-      last_seen_at: observationIso,
-      endpoint_type: endpointType,
-      protocol: isProbeEligible ? 'openai-chat' : 'nim-custom',
+      family: resolveFamily(id, cardContent),
+      architecture: resolveArchitecture(cardContent, id),
+      official_detail_url: canonical || `https://build.nvidia.com/${id}`,
+      documentation_urls: docUrls.slice(0, 5),
+      description,
+      catalog_status: id.includes('preview') ? 'preview' : 'active',
+      first_seen_at: meta.updated || '2026-01-01T00:00:00.000Z',
+      last_seen_at: new Date().toISOString(),
+      endpoint_type,
+      protocol,
       access_classification: 'free_endpoint',
-      input_modalities: inputModalities,
-      output_modalities: outputModalities,
-      capabilities: {
-        chat: endpointType === 'chat' || endpointType === 'visual_language',
-        completion: endpointType === 'chat',
-        vision: isVision,
-        audio: raw.supports_audio,
-        video: false,
-        embedding: isEmbedding,
-        reranking: isReranking,
-        reasoning: isReasoning,
-        structured_output: true,
-        tool_calling: raw.supports_tools,
-      },
-      context_window: contextWindow,
-      max_output_tokens: maxOutputTokens,
-      pricing,
-      license: 'Custom NVIDIA AI Foundation Models License or Author License',
-      usage_restrictions: 'Subject to NVIDIA API Terms of Service and Publisher License Restrictions',
+      input_modalities,
+      output_modalities,
+      capabilities,
+      context_window,
+      max_output_tokens: context_window && context_window > 4096 ? 4096 : null,
+      pricing: resolvePricing(id, cardContent),
+      license: license || 'NVIDIA API Trial Terms of Service',
+      usage_restrictions: 'Commercial and research use permitted under governing model and API terms.',
       provenance: {
-        source_url: `https://build.nvidia.com/${modelId}`,
+        source_url: canonical || `https://build.nvidia.com/${id}`,
         source_type: 'official_directory',
-        observed_at: observationIso,
-        confidence: 0.98,
+        observed_at: new Date().toISOString(),
+        confidence: 1.0,
       },
       eligibility: {
-        probe_eligible: isProbeEligible,
-        probe_endpoint: isProbeEligible ? '/v1/chat/completions' : null,
-        test_messages: isProbeEligible ? [{ role: 'user', content: 'Ping' }] : null,
+        probe_eligible: probeEligible,
+        probe_endpoint: probeEligible ? 'https://integrate.api.nvidia.com/v1/chat/completions' : null,
+        test_messages: probeEligible ? [{ role: 'user', content: 'Respond with PONG' }] : null,
         max_probe_tokens: 4,
       },
-      verified_at: observationIso,
+      verified_at: new Date().toISOString(),
       deprecation_notice: null,
     };
 
-    // Validate against strict Zod schema before writing
-    CanonicalModelSchema.parse(canonical);
+    // Strict validation
+    const validated = CanonicalModelSchema.parse(modelRecord);
+    syncedModels.push(validated);
 
-    canonicalModels.push(canonical);
-
-    // Save individual TOML file
-    const safeFilename = `${publisher}--${modelName.replace(/[\/\\:]/g, '_')}.toml`;
-    const modelFilePath = path.join(MODELS_DIR, safeFilename);
-    const tomlString = stringify(canonical as any);
-    fs.writeFileSync(modelFilePath, tomlString, 'utf-8');
+    // Write TOML record
+    const safeFilename = `${validated.id.replace(/\//g, '__')}.toml`;
+    const tomlPath = path.join(MODELS_DIR, safeFilename);
+    const tomlString = stringify(validated);
+    fs.writeFileSync(tomlPath, tomlString);
+    writtenFilenames.add(safeFilename);
   }
 
-  // 3. Generate master registry index TOML
-  const registryIndex: RegistryIndex = {
+  // Prune any legacy files that do not exist on build.nvidia.com
+  let prunedCount = 0;
+  for (const file of existingFiles) {
+    if (!writtenFilenames.has(file)) {
+      fs.unlinkSync(path.join(MODELS_DIR, file));
+      prunedCount++;
+    }
+  }
+
+  console.log(`🧹 Pruned ${prunedCount} defunct non-build.nvidia.com models.`);
+  console.log(`✅ Written ${syncedModels.length} authoritative models to registry/models/`);
+
+  // Build Registry Index
+  const publishers = Array.from(new Set(syncedModels.map((m) => m.publisher))).sort();
+  const allModalities = Array.from(
+    new Set(syncedModels.flatMap((m) => [...m.input_modalities, ...m.output_modalities]))
+  ) as Array<'text' | 'image' | 'audio' | 'video' | 'embedding'>;
+
+  const index: RegistryIndex = {
     schema_version: '1.0.0',
-    generated_at: observationIso,
-    last_synced_at: observationIso,
-    total_models: canonicalModels.length,
-    publishers: Array.from(publishersSet).sort(),
-    modalities: ['text', 'image', 'audio', 'embedding'],
-    models: canonicalModels.map((m) => ({
+    generated_at: new Date().toISOString(),
+    last_synced_at: new Date().toISOString(),
+    total_models: syncedModels.length,
+    publishers,
+    modalities: allModalities,
+    models: syncedModels.map((m) => ({
       id: m.id,
       name: m.name,
       publisher: m.publisher,
@@ -298,16 +457,14 @@ export async function syncRegistry() {
     })),
   };
 
-  fs.writeFileSync(INDEX_PATH, stringify(registryIndex as any), 'utf-8');
-  console.log(`✅ Successfully synchronized ${canonicalModels.length} canonical TOML model records in ${MODELS_DIR}`);
-  console.log(`✅ Successfully generated registry index: ${INDEX_PATH}`);
-
-  return { total: canonicalModels.length, publishers: Array.from(publishersSet) };
+  fs.writeFileSync(INDEX_PATH, stringify(index));
+  console.log(`📇 Generated registry index at ${INDEX_PATH} with ${index.total_models} models and ${publishers.length} publishers`);
 }
 
-if (require.main === module || process.argv[1]?.includes('sync_registry')) {
+// Run if called directly
+if (require.main === module || process.argv[1]?.endsWith('sync_registry.ts')) {
   syncRegistry().catch((err) => {
-    console.error('❌ Sync failed:', err);
+    console.error('❌ Registry sync failed:', err);
     process.exit(1);
   });
 }

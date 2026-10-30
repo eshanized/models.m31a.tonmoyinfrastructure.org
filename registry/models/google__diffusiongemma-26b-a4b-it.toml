@@ -1,0 +1,51 @@
+id = "google/diffusiongemma-26b-a4b-it"
+name = "diffusiongemma-26b-a4b-it"
+publisher = "google"
+family = "Gemma"
+architecture = "Transformer (Mixture-of-Experts)"
+official_detail_url = "https://build.nvidia.com/google/diffusiongemma-26b-a4b-it"
+documentation_urls = [ "https://huggingface.co/google/diffusiongemma-26B-A4B-it", "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-agreement/", "https://ai.google.dev/gemma/apache_2", "https://ai.google.dev/gemma/terms" ]
+description = "Diffusion-based 26B parameter LLM enabling parallel token generation for real-time text apps"
+catalog_status = "active"
+first_seen_at = "2026-06-10T18:07:50.386Z"
+last_seen_at = "2026-10-30T12:13:43.044Z"
+endpoint_type = "image_generation"
+protocol = "openai-chat"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image", "video" ]
+output_modalities = [ "image" ]
+context_window = 262144
+max_output_tokens = 4096
+license = "**GOVERNING TERMS:** The trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of the model is governed by the [NVIDIA Open Model Agreement](https://www.nvidia.com/en-us/agre"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.044Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = false
+video = true
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+input_per_million = 0.18
+output_per_million = 0.18
+status = "published"
+source = "https://build.nvidia.com/pricing"
+provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M tokens)"
+
+[provenance]
+source_url = "https://build.nvidia.com/google/diffusiongemma-26b-a4b-it"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.044Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

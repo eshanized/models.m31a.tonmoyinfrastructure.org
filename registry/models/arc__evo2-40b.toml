@@ -1,0 +1,46 @@
+id = "arc/evo2-40b"
+name = "evo2-40b"
+publisher = "arc"
+family = "Evo 2"
+architecture = "Generative Neural Network (StripedHyena)"
+official_detail_url = "https://build.nvidia.com/arc/evo2-40b"
+documentation_urls = [ "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/", "https://github.com/arcinstitute/evo2", "https://arcinstitute.org/manuscripts/Evo2", "https://arcinstitute.org/tools/evo/evo-designer", "https://arcinstitute.org/tools/evo/evo-mech-interp" ]
+description = "Evo 2 is a biological foundation model that is able to integrate information over long genomic sequences while retaining sensitivity to single-nucleotide changes."
+catalog_status = "active"
+first_seen_at = "2025-05-28T21:49:14.751Z"
+last_seen_at = "2026-10-30T12:13:43.045Z"
+endpoint_type = "completion"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image" ]
+output_modalities = [ "text" ]
+license = "GOVERNING TERMS: This trial service is governed by the <a href=\"https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf\">NVIDIA API Trial Terms of Service</a>. Use of this model is governed by the [NVIDIA Open Model License Agreement](https://www.nvid"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.045Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/arc/evo2-40b"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.045Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

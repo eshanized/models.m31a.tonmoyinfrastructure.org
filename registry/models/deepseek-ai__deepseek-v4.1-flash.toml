@@ -1,0 +1,53 @@
+id = "deepseek-ai/deepseek-v4.1-flash"
+name = "deepseek-v4.1-flash"
+publisher = "deepseek-ai"
+family = "DeepSeek"
+architecture = "Transformer (Mixture-of-Experts)"
+official_detail_url = "https://build.nvidia.com/deepseek-ai/deepseek-v4.1-flash"
+documentation_urls = [ "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash", "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-agreement/", "https://huggingface.co/datasets/choosealicense/licenses/blob/main/markdown/mit.md", "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/main/DeepSeek_V41_Tech_Report.pdf" ]
+description = "552B MoE, 8B active params with native multimodal support and lower API cost using smaller KV cache"
+catalog_status = "active"
+first_seen_at = "2026-09-18T18:55:17.986Z"
+last_seen_at = "2026-10-30T12:13:43.041Z"
+endpoint_type = "chat"
+protocol = "openai-chat"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image" ]
+output_modalities = [ "embedding" ]
+context_window = 1048576
+max_output_tokens = 4096
+license = "**GOVERNING TERMS**: This trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf); and the use of this model is governed by the [NVIDIA Open Model Agreement](https://www.nvidia.com/"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.041Z"
+
+[capabilities]
+chat = true
+completion = true
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/deepseek-ai/deepseek-v4.1-flash"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.041Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = true
+probe_endpoint = "https://integrate.api.nvidia.com/v1/chat/completions"
+max_probe_tokens = 4
+
+[[eligibility.test_messages]]
+role = "user"
+content = "Respond with PONG"

@@ -1,0 +1,46 @@
+id = "nvidia/nemotron-page-elements-v3"
+name = "nemotron-page-elements-v3"
+publisher = "nvidia"
+family = "Nemotron"
+architecture = "YOLOX <br> (DarkNet53 Backbone + FPN decoupled head (one 1x1 convolution + 2 parallel 3x3 convolutions: one for classification and one for bounding box prediction) <br>)"
+official_detail_url = "https://build.nvidia.com/nvidia/nemotron-page-elements-v3"
+documentation_urls = [ "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/", "https://arxiv.org/abs/2107.08430", "https://github.com/Megvii-BaseDetection/YOLOX", "https://developer.nvidia.com/blog/approaches-to-pdf-data-extraction-for-information-retrieval/" ]
+description = "Model for object detection, fine-tuned to detect charts, tables, and titles in documents."
+catalog_status = "active"
+first_seen_at = "2026-03-04T21:39:31.777Z"
+last_seen_at = "2026-10-30T12:13:43.135Z"
+endpoint_type = "completion"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image" ]
+output_modalities = [ "embedding" ]
+license = "NVIDIA API Trial Terms of Service"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.135Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/nemotron-page-elements-v3"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.135Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

@@ -1,0 +1,45 @@
+id = "colabfold/msa-search"
+name = "msa-search"
+publisher = "colabfold"
+architecture = "Not Applicable — MSA Search is not a neural network; it is a GPU-accelerated sequence search tool (MMseqs2). <br> (Not Applicable — see above. <br>)"
+official_detail_url = "https://build.nvidia.com/colabfold/msa-search"
+documentation_urls = [ "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://creativecommons.org/licenses/by/4.0/legalcode.en", "https://www.nvidia.com/en-us/support/submit-security-vulnerability/", "https://www.nvidia.com/en-us/data-center/products/ai-enterprise-suite/support/" ]
+description = "Generates a multiple sequence alignment from a query sequence and a protein sequence database search."
+catalog_status = "active"
+first_seen_at = "2025-06-16T15:53:34.676Z"
+last_seen_at = "2026-10-30T12:13:43.100Z"
+endpoint_type = "completion"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text" ]
+output_modalities = [ "text" ]
+license = "NVIDIA API Trial Terms of Service"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.100Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = false
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/colabfold/msa-search"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.100Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

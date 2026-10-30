@@ -1,0 +1,56 @@
+id = "google/gemma-4-31b-it"
+name = "gemma-4-31b-it"
+publisher = "google"
+family = "Gemma"
+architecture = "Transformer (Gemma 4)"
+official_detail_url = "https://build.nvidia.com/google/gemma-4-31b-it"
+documentation_urls = [ "https://huggingface.co/google/gemma-4-31B-it", "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/", "https://ai.google.dev/gemma/docs/gemma_4_license", "https://www.nvidia.com/en-us/support/submit-security-vulnerability/" ]
+description = "Dense 31B model delivering frontier reasoning for coding, agentic workflows, and fine-tuning."
+catalog_status = "active"
+first_seen_at = "2026-04-02T16:23:29.660Z"
+last_seen_at = "2026-10-30T12:13:43.062Z"
+endpoint_type = "chat"
+protocol = "openai-chat"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "audio", "image", "video" ]
+output_modalities = [ "text" ]
+context_window = 262144
+max_output_tokens = 4096
+license = "**GOVERNING TERMS:** This trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of this model is governed by the [NVIDIA Open Model License Agreement](https://www.nvidia.com/"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.062Z"
+
+[capabilities]
+chat = true
+completion = true
+vision = true
+audio = true
+video = true
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = false
+
+[pricing]
+currency = "USD"
+input_per_million = 0.18
+output_per_million = 0.18
+status = "published"
+source = "https://build.nvidia.com/pricing"
+provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M tokens)"
+
+[provenance]
+source_url = "https://build.nvidia.com/google/gemma-4-31b-it"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.062Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = true
+probe_endpoint = "https://integrate.api.nvidia.com/v1/chat/completions"
+max_probe_tokens = 4
+
+[[eligibility.test_messages]]
+role = "user"
+content = "Respond with PONG"

@@ -1,0 +1,46 @@
+id = "nvidia/nemotron-ocr-v2"
+name = "nemotron-ocr-v2"
+publisher = "nvidia"
+family = "Nemotron"
+architecture = "Hybrid detector-recognizer with document-level relational modeling <br> (RegNetX-8GF)"
+official_detail_url = "https://build.nvidia.com/nvidia/nemotron-ocr-v2"
+documentation_urls = [ "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/", "https://huggingface.co/nvidia/nemotron-ocr-v2", "https://catalog.ngc.nvidia.com/orgs/nim/teams/nvidia/containers/nemotron-ocr-v2?version=1.4", "https://docs.nvidia.com/nim/" ]
+description = "Nemotron OCR v2 is a state-of-the-art multilingual text recognition model designed for robust end-to-end optical character recognition (OCR) on complex real-world images."
+catalog_status = "active"
+first_seen_at = "2026-06-24T19:01:13.735Z"
+last_seen_at = "2026-10-30T12:13:43.134Z"
+endpoint_type = "visual_language"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image" ]
+output_modalities = [ "text" ]
+license = "NVIDIA API Trial Terms of Service"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.134Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/nemotron-ocr-v2"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.134Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

@@ -1,0 +1,46 @@
+id = "nvidia/parakeet-ctc-0_6b-vi"
+name = "parakeet-ctc-0.6b-vi"
+publisher = "nvidia"
+family = "Parakeet"
+architecture = "Parakeet-CTC (also known as FastConformer-CTC) which is an optimized version of Conformer model with 8x depthwise-separable convolutional downsampling with CTC loss. <br> (Parakeet-CTC-0.6B <br>)"
+official_detail_url = "https://build.nvidia.com/nvidia/parakeet-ctc-0_6b-vi"
+documentation_urls = [ "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-community-models-license/", "https://docs.nvidia.com/deeplearning/nemo/user-guide/docs/en/main/asr/models.html#fast-conformer", "https://www.nvidia.com/en-us/support/submit-security-vulnerability/", "https://calcivilrights.ca.gov/disputeresolution/protected-characteristics/", "https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Fassets.ngc.nvidia.com%2Fproducts%2Fapi-catalog%2Flegal%2FNVIDIA%2520API%2520Trial%2520Terms%2520of%2520Service.pdf&data=05%7C02%7Cjaydar%40nvidia.com%7C95bb810010dc4a66c6da08dde4f09e53%7C43083d15727340c1b7db39efd9ccc17a%7C0%7C0%7C638918444317044724%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=vvzmA%2Bo2tdifKPXG%2FGjgN4TPVdoUTsXD4%2BE%2B1M%2F7CWI%3D&reserved=0" ]
+description = "Accurate and optimized Vietnamese-English transcriptions with punctuation and word timestamps."
+catalog_status = "active"
+first_seen_at = "2025-09-08T15:59:08.704Z"
+last_seen_at = "2026-10-30T12:13:43.148Z"
+endpoint_type = "audio_speech"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "audio" ]
+output_modalities = [ "text" ]
+license = "NVIDIA API Trial Terms of Service"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.148Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = false
+audio = true
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/parakeet-ctc-0_6b-vi"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.148Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

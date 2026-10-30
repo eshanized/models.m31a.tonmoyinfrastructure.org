@@ -1,0 +1,49 @@
+id = "nvidia/cosmos-transfer2_5-2b"
+name = "cosmos-transfer2.5-2b"
+publisher = "nvidia"
+family = "Cosmos"
+architecture = "Diffusion Transformer (DiT)"
+official_detail_url = "https://build.nvidia.com/nvidia/cosmos-transfer2_5-2b"
+documentation_urls = [ "https://huggingface.co/nvidia/Cosmos-Transfer2.5-2B", "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license", "https://huggingface.co/Qwen/Qwen3Guard-Gen-0.6B/blob/main/LICENSE", "https://huggingface.co/nvidia/Cosmos-Predict2.5-2B" ]
+description = "Generates physics-aware video world states for physical AI development using text prompts and multiple spatial control inputs derived from real-world data or simulation."
+catalog_status = "active"
+first_seen_at = "2026-02-26T00:09:28.953Z"
+last_seen_at = "2026-10-30T12:13:43.034Z"
+endpoint_type = "completion"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "image", "video" ]
+output_modalities = [ "image", "video" ]
+license = "The trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf); and use of the model is governed by the  [NVIDIA Open Model License](https://www.nvidia.com/en-us/agreements/enterprise-"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.034Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = false
+video = true
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+input_per_million = 0.18
+output_per_million = 0.18
+status = "published"
+source = "https://build.nvidia.com/pricing"
+provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M tokens)"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/cosmos-transfer2_5-2b"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.034Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

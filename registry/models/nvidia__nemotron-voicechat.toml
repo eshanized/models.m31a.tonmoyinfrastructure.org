@@ -1,0 +1,51 @@
+id = "nvidia/nemotron-voicechat"
+name = "nemotron-voicechat"
+publisher = "nvidia"
+family = "Nemotron"
+architecture = "Hybrid Mamba/Transformer <br> (<br>)"
+official_detail_url = "https://build.nvidia.com/nvidia/nemotron-voicechat"
+documentation_urls = [ "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-software-and-model-evaluation-license/", "https://registry.ngc.nvidia.com/orgs/nim/teams/nvidia/models/nemotron-voicechat", "https://arxiv.org/abs/2505.15670", "https://arxiv.org/abs/2507.08128" ]
+description = "Nemotron 3 Voicechat"
+catalog_status = "active"
+first_seen_at = "2026-03-16T20:13:48.921Z"
+last_seen_at = "2026-10-30T12:13:43.140Z"
+endpoint_type = "chat"
+protocol = "openai-chat"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "audio", "video" ]
+output_modalities = [ "audio" ]
+license = "GOVERNING TERMS: Your use of this API is governed by the [NVIDIA API Trial Service Terms of Use](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf); use of NIM container and the use of this model is governed by the [NVIDIA Software and Model Eva"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.140Z"
+
+[capabilities]
+chat = true
+completion = true
+vision = false
+audio = true
+video = true
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/nemotron-voicechat"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.140Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = true
+probe_endpoint = "https://integrate.api.nvidia.com/v1/chat/completions"
+max_probe_tokens = 4
+
+[[eligibility.test_messages]]
+role = "user"
+content = "Respond with PONG"

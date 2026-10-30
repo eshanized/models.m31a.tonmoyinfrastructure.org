@@ -1,0 +1,45 @@
+id = "nvidia/bnr"
+name = "Background Noise Removal"
+publisher = "nvidia"
+architecture = "Residual Convolutional Recurrent Neural Network (CRNN) (SEASR)"
+official_detail_url = "https://build.nvidia.com/nvidia/bnr"
+documentation_urls = [ "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/", "https://research.google.com/audioset/", "https://www.kaggle.com/ejlok1/cremad", "https://www.openslr.org/83/", "https://catalog.ldc.upenn.edu/LDC93S6A" ]
+description = "Removes unwanted noises from audio improving speech intelligibility."
+catalog_status = "active"
+first_seen_at = "2025-06-13T17:42:41.479Z"
+last_seen_at = "2026-10-30T12:13:43.022Z"
+endpoint_type = "completion"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "audio", "image", "video" ]
+output_modalities = [ "audio" ]
+license = "Use of this model is governed by the [NVIDIA Open Model License](https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/)."
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.022Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = true
+video = true
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/bnr"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.022Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

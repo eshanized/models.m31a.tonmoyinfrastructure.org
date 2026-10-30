@@ -1,0 +1,46 @@
+id = "nvidia/parakeet-ctc-0_6b-es"
+name = "parakeet-ctc-0.6b-es"
+publisher = "nvidia"
+family = "Parakeet"
+architecture = "Parakeet-CTC (also known as FastConformer-CTC) [1], [2] which is an optimized version of Conformer model [3] with 8x depthwise-separable convolutional downsampling with CTC loss <br> (Parakeet-CTC-XXL-0.6B <br>)"
+official_detail_url = "https://build.nvidia.com/nvidia/parakeet-ctc-0_6b-es"
+documentation_urls = [ "https://arxiv.org/abs/2305.05084", "https://docs.nvidia.com/nemo-framework/user-guide/latest/nemotoolkit/asr/models.html", "https://arxiv.org/abs/2005.08100", "https://www.nvidia.com/en-us/support/submit-security-vulnerability/", "https://calcivilrights.ca.gov/disputeresolution/protected-characteristics/" ]
+description = "Accurate and optimized Spanish English transcriptions with punctuation and word timestamps."
+catalog_status = "active"
+first_seen_at = "2025-09-09T10:10:03.570Z"
+last_seen_at = "2026-10-30T12:13:43.147Z"
+endpoint_type = "audio_speech"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "audio" ]
+output_modalities = [ "text" ]
+license = "NVIDIA API Trial Terms of Service"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.147Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = false
+audio = true
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/parakeet-ctc-0_6b-es"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.147Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

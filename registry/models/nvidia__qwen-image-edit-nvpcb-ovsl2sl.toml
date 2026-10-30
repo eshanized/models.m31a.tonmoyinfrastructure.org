@@ -1,0 +1,46 @@
+id = "nvidia/qwen-image-edit-nvpcb-ovsl2sl"
+name = "qwen-image-edit-nvpcb-ovsl2sl"
+publisher = "nvidia"
+family = "Qwen"
+architecture = "Transformer (diffusion transformer with cross-modal conditioning)<br> (This release is a self-contained HuggingFace `diffusers` pipeline directory. All of the following components are redistributed as part of the release artifact:)"
+official_detail_url = "https://build.nvidia.com/nvidia/qwen-image-edit-nvpcb-ovsl2sl"
+documentation_urls = [ "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/", "https://huggingface.co/datasets/choosealicense/licenses/blob/main/markdown/apache-2.0.md", "https://www.nvidia.com/en-us/support/submit-security-vulnerability/", "https://docs.nvidia.com/nim/visual-genai/latest/overview.html", "https://www.nvidia.com/en-us/data-center/products/ai-enterprise-suite/support/" ]
+description = "An image edit model specialized for Omniverse synthetic to photographic solder-light style captured at NVIDIA PCB inspection stations"
+catalog_status = "active"
+first_seen_at = "2026-07-03T14:52:51.516Z"
+last_seen_at = "2026-10-30T12:13:43.162Z"
+endpoint_type = "image_generation"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "audio", "image", "video" ]
+output_modalities = [ "image", "embedding" ]
+license = "Governing Terms: Use of this model is governed by the [NVIDIA Open Model Agreement](https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/). Additional Information: [Apache License, Version 2.0](https://huggingface.co/datasets/choosealicense/licenses/blob/main/markdow"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.162Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = true
+video = true
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/qwen-image-edit-nvpcb-ovsl2sl"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.162Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

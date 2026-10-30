@@ -1,0 +1,45 @@
+id = "nvidia/magpie-tts-multilingual"
+name = "magpie-tts-multilingual"
+publisher = "nvidia"
+architecture = "Transformer Encoder, Transformer Decoder, Local Transformer, and feedforward layers <br> (1. Causal Transformer Encoder with 6 layers, learnable positional encoder of length 2048, and 1 Layer Normalization output layer.)"
+official_detail_url = "https://build.nvidia.com/nvidia/magpie-tts-multilingual"
+documentation_urls = [ "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-software-license-agreement/", "https://www.nvidia.com/en-us/agreements/enterprise-software/product-specific-terms-for-ai-products/", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/", "https://arxiv.org/abs/2502.05236", "https://arxiv.org/abs/2406.17957" ]
+description = "Natural and expressive voices in multiple languages. For voice agents and brand ambassadors."
+catalog_status = "active"
+first_seen_at = "2025-06-26T19:40:46.733Z"
+last_seen_at = "2026-10-30T12:13:43.092Z"
+endpoint_type = "audio_speech"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "audio", "image", "video" ]
+output_modalities = [ "audio", "embedding" ]
+license = "GOVERNING TERMS: The NIM container is governed by the [NVIDIA Software License Agreement](https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-software-license-agreement/) and the [Product-Specific Terms for NVIDIA AI Products](https://www.nvidia.com/en-us/agreements/enterprise-softwar"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.092Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = true
+video = true
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/magpie-tts-multilingual"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.092Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

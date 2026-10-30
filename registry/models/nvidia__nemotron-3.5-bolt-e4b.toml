@@ -1,0 +1,56 @@
+id = "nvidia/nemotron-3.5-bolt-e4b"
+name = "Nemotron 3.5 Bolt E4B"
+publisher = "nvidia"
+family = "Nemotron"
+architecture = "Gemma 4 (Gemma-4-E4B)"
+official_detail_url = "https://build.nvidia.com/nvidia/nemotron-3.5-bolt-e4b"
+documentation_urls = [ "https://huggingface.co/google/gemma-4-E4B-it", "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://github.com/OpenMDW/OpenMDW/blob/main/1.1/LICENSE.OpenMDW-1.1", "https://www.apache.org/licenses/LICENSE-2.0", "https://github.com/NVIDIA-NeMo/RL" ]
+description = "Compact text model for reasoning, tool calling, and agentic chat."
+catalog_status = "active"
+first_seen_at = "2026-10-22T21:51:25.171Z"
+last_seen_at = "2026-10-30T12:13:43.106Z"
+endpoint_type = "chat"
+protocol = "openai-chat"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "audio", "image", "video" ]
+output_modalities = [ "text" ]
+context_window = 65536
+max_output_tokens = 4096
+license = "**GOVERNING HOSTING TERMS:** Use of the API is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of the model is governed by the [OpenMDW License Agreement, version 1.1](https://github.co"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.106Z"
+
+[capabilities]
+chat = true
+completion = true
+vision = true
+audio = true
+video = true
+embedding = false
+reranking = false
+reasoning = false
+structured_output = true
+tool_calling = true
+
+[pricing]
+currency = "USD"
+input_per_million = 0.18
+output_per_million = 0.18
+status = "published"
+source = "https://build.nvidia.com/pricing"
+provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M tokens)"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/nemotron-3.5-bolt-e4b"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.106Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = true
+probe_endpoint = "https://integrate.api.nvidia.com/v1/chat/completions"
+max_probe_tokens = 4
+
+[[eligibility.test_messages]]
+role = "user"
+content = "Respond with PONG"

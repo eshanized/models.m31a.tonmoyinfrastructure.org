@@ -1,0 +1,46 @@
+id = "nvidia/parakeet-tdt-0_6b-v2"
+name = "parakeet-tdt-0.6b-v2"
+publisher = "nvidia"
+family = "Parakeet"
+architecture = "Diffusion Transformer (DiT)"
+official_detail_url = "https://build.nvidia.com/nvidia/parakeet-tdt-0_6b-v2"
+documentation_urls = [ "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-community-models-license/", "https://huggingface.co/spaces/nvidia/parakeet-tdt-0.6b-v3", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/", "https://assets.ngc.nvidia.com/products/api-catalog/parakeet-tdt-0_6b/asr.jpg", "https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3" ]
+description = "Accurate and optimized English transcriptions with punctuation and word timestamps"
+catalog_status = "active"
+first_seen_at = "2025-07-30T19:12:46.669Z"
+last_seen_at = "2026-10-30T12:13:43.157Z"
+endpoint_type = "audio_speech"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "audio" ]
+output_modalities = [ "embedding" ]
+license = "NVIDIA API Trial Terms of Service"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.157Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = false
+audio = true
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/parakeet-tdt-0_6b-v2"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.157Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

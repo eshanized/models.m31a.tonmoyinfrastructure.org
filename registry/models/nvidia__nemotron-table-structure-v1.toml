@@ -1,0 +1,46 @@
+id = "nvidia/nemotron-table-structure-v1"
+name = "nemotron-table-structure-v1"
+publisher = "nvidia"
+family = "Nemotron"
+architecture = "Transformer"
+official_detail_url = "https://build.nvidia.com/nvidia/nemotron-table-structure-v1"
+documentation_urls = [ "https://github.com/Megvii-BaseDetection/YOLOX", "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/", "https://huggingface.co/nvidia/nemotron-table-structure-v1", "https://cocodataset.org/#download" ]
+description = "Model for object detection, fine-tuned to detect charts, tables, and titles in documents."
+catalog_status = "active"
+first_seen_at = "2026-03-04T21:40:22.023Z"
+last_seen_at = "2026-10-30T12:13:43.139Z"
+endpoint_type = "completion"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "image" ]
+output_modalities = [ "text" ]
+license = "**GOVERNING TERMS:** The trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of this model is governed by the [NVIDIA Open Model License Agreement](https://www.nvidia.com/e"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.139Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = true
+audio = false
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/nemotron-table-structure-v1"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.139Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4

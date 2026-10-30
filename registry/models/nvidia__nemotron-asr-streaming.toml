@@ -1,0 +1,46 @@
+id = "nvidia/nemotron-asr-streaming"
+name = "nemotron-asr-streaming"
+publisher = "nvidia"
+family = "Nemotron"
+architecture = "Diffusion Transformer (DiT)"
+official_detail_url = "https://build.nvidia.com/nvidia/nemotron-asr-streaming"
+documentation_urls = [ "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf", "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-software-license-agreement/", "https://github.com/OpenMDW/OpenMDW/blob/main/1.1/LICENSE.OpenMDW-1.1", "https://huggingface.co/nvidia/nemotron-speech-streaming-en-0.6b", "https://huggingface.co/nvidia/nemotron-3.5-asr-streaming-0.6b" ]
+description = "Real-time speech recognition for English"
+catalog_status = "active"
+first_seen_at = "2026-03-14T12:33:34.989Z"
+last_seen_at = "2026-10-30T12:13:43.131Z"
+endpoint_type = "audio_speech"
+protocol = "nim-custom"
+access_classification = "free_endpoint"
+input_modalities = [ "text", "audio" ]
+output_modalities = [ "text" ]
+license = "**GOVERNING TERMS:** This trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). The NIM container is governed by the [NVIDIA Software License Agreement](https://www.nvidia.com/en"
+usage_restrictions = "Commercial and research use permitted under governing model and API terms."
+verified_at = "2026-10-30T12:13:43.131Z"
+
+[capabilities]
+chat = false
+completion = true
+vision = false
+audio = true
+video = false
+embedding = false
+reranking = false
+reasoning = false
+structured_output = false
+tool_calling = false
+
+[pricing]
+currency = "USD"
+status = "not_published"
+provenance_note = "No individual per-token rate published on build.nvidia.com for this specialized model"
+
+[provenance]
+source_url = "https://build.nvidia.com/nvidia/nemotron-asr-streaming"
+source_type = "official_directory"
+observed_at = "2026-10-30T12:13:43.131Z"
+confidence = 1
+
+[eligibility]
+probe_eligible = false
+max_probe_tokens = 4
