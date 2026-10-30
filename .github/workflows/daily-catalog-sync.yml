@@ -41,7 +41,7 @@ jobs:
           if [ -n "$(git status --porcelain registry/ src/data/ public/data/)" ]; then
             git add registry/ src/data/ public/data/
             git commit -m "chore(registry): sync canonical NVIDIA Build catalog [skip ci]"
-            git push origin main
+            git push origin master
           else
             echo "No catalog changes detected."
           fi
