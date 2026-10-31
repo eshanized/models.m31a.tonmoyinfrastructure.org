@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: nvidia-catalog-sync
+  group: generated-registry-and-observability-publication
   cancel-in-progress: false
 
 jobs:
