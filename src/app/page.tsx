@@ -1,20 +1,20 @@
 import { getAllModels, getCatalogMetadata } from '@/lib/catalog';
-import { StatusRepository } from '@/lib/db/repository';
 import { deriveModelStatus } from '@/lib/status/classifier';
 import { ObservedHealthStatus } from '@/lib/types/registry';
 import { HomepageClient } from '@/components/dashboard/homepage-client';
+import {
+  getLatestObservationsForModels,
+  getObservabilityDocument,
+  getObservabilityFreshness,
+} from '@/lib/observability';
 
-export const revalidate = 60; // revalidate every 60s
-
-export default async function HomePage() {
+export default function HomePage() {
   const meta = getCatalogMetadata();
   const models = getAllModels();
-  const dbConnected = StatusRepository.isAvailable();
-
-  // Read observations if database is available
-  const modelIds = models.map((m) => m.id);
-  const obsMap = await StatusRepository.getLatestObservationsForModels(modelIds, 5);
-  const recentCycles = await StatusRepository.getRecentCycles(5);
+  const modelIds = models.map((model) => model.id);
+  const observations = getLatestObservationsForModels(modelIds, 10);
+  const document = getObservabilityDocument();
+  const freshness = getObservabilityFreshness();
 
   const statusDistribution: Record<ObservedHealthStatus, number> = {
     operational: 0,
@@ -29,20 +29,18 @@ export default async function HomePage() {
   const publisherMap: Record<string, number> = {};
   const modalityMap: Record<string, number> = {};
 
-  for (const m of models) {
-    publisherMap[m.publisher] = (publisherMap[m.publisher] || 0) + 1;
-
-    for (const mod of m.input_modalities) {
-      modalityMap[mod] = (modalityMap[mod] || 0) + 1;
+  for (const model of models) {
+    publisherMap[model.publisher] = (publisherMap[model.publisher] || 0) + 1;
+    for (const modality of new Set([...model.input_modalities, ...model.output_modalities])) {
+      modalityMap[modality] = (modalityMap[modality] || 0) + 1;
     }
 
-    const obs = obsMap.get(m.id) || [];
-    const derived = deriveModelStatus(
-      obs,
-      m.eligibility.probe_eligible,
-      m.access_classification === 'downloadable'
+    const result = deriveModelStatus(
+      observations.get(model.id) || [],
+      model.eligibility.probe_eligible,
+      model.access_classification === 'downloadable',
     );
-    statusDistribution[derived.status] = (statusDistribution[derived.status] || 0) + 1;
+    statusDistribution[result.status] += 1;
   }
 
   const publisherCounts = Object.entries(publisherMap)
@@ -63,8 +61,10 @@ export default async function HomePage() {
       publisherCounts={publisherCounts}
       modalityCounts={modalityCounts}
       recentModels={models}
-      dbConnected={dbConnected}
-      recentCyclesCount={recentCycles.length}
+      monitoringAvailable={freshness.available}
+      monitoringFresh={freshness.fresh}
+      lastProbeAt={document.last_successful_cycle_at}
+      recentCyclesCount={document.recent_cycles.length}
     />
   );
 }
