@@ -19,11 +19,12 @@ describe('M31A Autonomous Agent Contract Validation', () => {
       expect(typeof model.slug).toBe('string');
       expect(model.slug).toContain('/');
       expect(typeof model.display_name).toBe('string');
-      expect(typeof model.context_window).toBe('number');
-      expect(model.context_window).toBeGreaterThan(0);
-      expect(typeof model.supports_tools).toBe('boolean');
-      expect(typeof model.supports_thinking).toBe('boolean');
-      expect(typeof model.supports_vision).toBe('boolean');
+      expect(model.context_window === null || (Number.isInteger(model.context_window) && model.context_window > 0)).toBe(true);
+      expect(model.supports_tools === null || typeof model.supports_tools === 'boolean').toBe(true);
+      expect(model.supports_thinking === null || typeof model.supports_thinking === 'boolean').toBe(true);
+      expect(model.supports_vision === null || typeof model.supports_vision === 'boolean').toBe(true);
+      expect(model.supports_audio === null || typeof model.supports_audio === 'boolean').toBe(true);
+      expect(['direct', 'unsupported', 'unknown']).toContain(model.tool_mode);
       expect(typeof model.originator).toBe('string');
       expect(['standard', 'fast', 'reasoning']).toContain(model.service_tier);
     }
