@@ -359,7 +359,7 @@ export async function syncRegistry() {
     syncedModels.push(validated);
 
     // Stage canonical TOML until every source record has passed validation.
-    const safeFilename = `${validated.id.replace(/\\//g, '__')}.toml`;
+    const safeFilename = `${validated.id.replace(/\//g, '__')}.toml`;
     stagedRecords.push({
       tomlPath: path.join(MODELS_DIR, safeFilename),
       tomlString: stringify(validated),
