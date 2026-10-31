@@ -143,36 +143,29 @@ export async function syncRegistry() {
   const syncedModels: CanonicalModel[] = [];
   const existingFiles = new Set(fs.readdirSync(MODELS_DIR));
   const writtenFilenames = new Set<string>();
+  const stagedRecords: Array<{ tomlPath: string; tomlString: string; safeFilename: string }> = [];
 
   for (const relPath of targetPaths) {
     const basename = path.basename(relPath);
     const localCachePath = path.join(RAW_CACHE_DIR, basename);
     let cardContent = '';
 
-    if (fs.existsSync(localCachePath)) {
-      cardContent = fs.readFileSync(localCachePath, 'utf-8');
-    } else if (fs.existsSync(path.join('/tmp/nvidia_build_raw', basename))) {
-      cardContent = fs.readFileSync(path.join('/tmp/nvidia_build_raw', basename), 'utf-8');
-      fs.writeFileSync(localCachePath, cardContent);
+    const fullUrl = 'https://build.nvidia.com' + relPath;
+    const cardController = new AbortController();
+    const cardTimeout = setTimeout(() => cardController.abort(), 20_000);
+    try {
+      const res = await fetch(fullUrl, {
+        signal: cardController.signal,
+        headers: { 'User-Agent': 'M31A-NVIDIA-Model-Registry/1.0' },
+      });
+      if (!res.ok) throw new Error(`Model card ${relPath} returned HTTP ${res.status}`);
+      cardContent = await res.text();
+    } finally {
+      clearTimeout(cardTimeout);
     }
-
-    if (!cardContent) {
-      try {
-        const fullUrl = 'https://build.nvidia.com' + relPath;
-        const res = await fetch(fullUrl, { headers: { 'User-Agent': 'Mozilla/5.0 (NVIDIA-Catalog-Sync)' } });
-        if (res.ok) {
-          cardContent = await res.text();
-          fs.writeFileSync(localCachePath, cardContent);
-        }
-      } catch (err: any) {
-        console.warn(`Failed to fetch card for ${relPath}: ${err.message}`);
-      }
-    }
-
-    if (!cardContent) continue;
-
-    const frontmatch = cardContent.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-    if (!frontmatch) continue;
+    if (cardContent.length < 80) throw new Error(`Model card ${relPath} is unexpectedly small`);
+    const frontmatch = cardContent.match(/^---\\r?\\n([\\s\\S]*?)\\r?\\n---/);
+    if (!frontmatch) throw new Error(`Model card ${relPath} has unrecognized front matter; refusing partial sync`);
 
     const meta = parseYamlSimple(frontmatch[1]);
     const canonical = meta.canonical || '';
@@ -371,16 +364,21 @@ export async function syncRegistry() {
     writtenFilenames.add(safeFilename);
   }
 
-  // Prune any legacy files that do not exist on build.nvidia.com
-  let prunedCount = 0;
-  for (const file of existingFiles) {
-    if (!writtenFilenames.has(file)) {
-      fs.unlinkSync(path.join(MODELS_DIR, file));
-      prunedCount++;
-    }
+  if (syncedModels.length < Number(process.env.REGISTRY_MIN_DISCOVERED_MODELS || 50)) {
+    throw new Error(`Only ${syncedModels.length} model cards parsed; refusing to publish partial catalog.`);
   }
 
-  console.log(`🧹 Pruned ${prunedCount} defunct non-build.nvidia.com models.`);
+  // Commit staged model records only after every discovered card passes parsing and schema validation.
+  for (const record of stagedRecords) {
+    fs.writeFileSync(record.tomlPath, record.tomlString);
+    writtenFilenames.add(record.safeFilename);
+  }
+
+  // Absence from a single listing snapshot is not proof of retirement.
+  // Keep unseen records until a separately verified retirement signal is available.
+  const retainedCount = [...existingFiles].filter((file) => !writtenFilenames.has(file)).length;
+  console.log(`ℹ️ Preserved ${retainedCount} records not observed in this successful source snapshot.`);
+
   console.log(`✅ Written ${syncedModels.length} authoritative models to registry/models/`);
 
   // Build Registry Index
