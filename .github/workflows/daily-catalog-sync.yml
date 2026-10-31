@@ -27,6 +27,9 @@ jobs:
 
       - name: Run Registry Synchronization
         run: npm run registry:sync
+        env:
+          REGISTRY_ALLOW_STALE_CACHE: 'false'
+          REGISTRY_MIN_DISCOVERED_MODELS: '50'
 
       - name: Validate Canonical Schema
         run: npm run registry:validate
