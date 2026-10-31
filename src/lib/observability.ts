@@ -59,7 +59,7 @@ export function getObservabilityFreshness(nowMs = Date.now()) {
   }
   const ageMs = Math.max(0, nowMs - Date.parse(lastSuccessfulCycleAt));
   return {
-    available: document.observations.length > 0,
+    available: lastSuccessfulCycleAt !== null,
     fresh: ageMs <= 3 * 60 * 60 * 1000,
     lastSuccessfulCycleAt,
     ageMs,
