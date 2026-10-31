@@ -64,6 +64,7 @@ export function ModelDetailClient({
 }: ModelDetailClientProps) {
   const [activeTab, setActiveTab] = useState<'specs' | 'performance' | 'usage' | 'provenance'>('specs');
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
+  const capabilityLabel = (value: boolean | null) => value === null ? 'Unknown' : value ? '✓ Yes' : '✕ No';
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text);
@@ -75,8 +76,8 @@ export function ModelDetailClient({
   const chartData = observations.slice(0, 20).reverse().map((o, idx) => ({
     name: new Date(o.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     latency: o.latencyMs,
-    ttft: o.ttftMs || o.latencyMs,
-    tokensPerSec: o.tokensPerSec || 0,
+    ttft: o.ttftMs,
+    tokensPerSec: o.tokensPerSec,
   }));
 
   // Code snippets
@@ -317,34 +318,34 @@ main();`;
             <div className="grid grid-cols-2 gap-2 text-xs">
               <div className="p-2.5 rounded bg-secondary/50 border border-border/60 flex items-center justify-between">
                 <span className="text-muted-foreground">Chat Conversation</span>
-                <span className="font-mono font-medium">{model.capabilities.chat ? '✓ Yes' : '✕ No'}</span>
+                <span className="font-mono font-medium">{capabilityLabel(model.capabilities.chat)}</span>
               </div>
               <div className="p-2.5 rounded bg-secondary/50 border border-border/60 flex items-center justify-between">
                 <span className="text-muted-foreground">Tool / Function Calling</span>
-                <span className="font-mono font-medium">{model.capabilities.tool_calling ? '✓ Yes' : '✕ No'}</span>
+                <span className="font-mono font-medium">{capabilityLabel(model.capabilities.tool_calling)}</span>
               </div>
               <div className="p-2.5 rounded bg-secondary/50 border border-border/60 flex items-center justify-between">
                 <span className="text-muted-foreground">Reasoning / Thinking</span>
-                <span className="font-mono font-medium">{model.capabilities.reasoning ? '✓ Yes' : '✕ No'}</span>
+                <span className="font-mono font-medium">{capabilityLabel(model.capabilities.reasoning)}</span>
               </div>
               <div className="p-2.5 rounded bg-secondary/50 border border-border/60 flex items-center justify-between">
                 <span className="text-muted-foreground">Structured Output (JSON)</span>
-                <span className="font-mono font-medium">{model.capabilities.structured_output ? '✓ Yes' : '✕ No'}</span>
+                <span className="font-mono font-medium">{capabilityLabel(model.capabilities.structured_output)}</span>
               </div>
               <div className="p-2.5 rounded bg-secondary/50 border border-border/60 flex items-center justify-between">
                 <span className="text-muted-foreground">Vision / Multimodal</span>
-                <span className="font-mono font-medium">{model.capabilities.vision ? '✓ Yes' : '✕ No'}</span>
+                <span className="font-mono font-medium">{capabilityLabel(model.capabilities.vision)}</span>
               </div>
               <div className="p-2.5 rounded bg-secondary/50 border border-border/60 flex items-center justify-between">
                 <span className="text-muted-foreground">Audio Processing</span>
-                <span className="font-mono font-medium">{model.capabilities.audio ? '✓ Yes' : '✕ No'}</span>
+                <span className="font-mono font-medium">{capabilityLabel(model.capabilities.audio)}</span>
               </div>
             </div>
 
             <div className="pt-3 border-t border-border space-y-2 text-xs">
               <div className="font-medium text-foreground">License & Restrictions</div>
               <div className="text-muted-foreground leading-relaxed">{model.license || 'Not published'}</div>
-              <div className="text-[11px] text-muted-foreground/80">{model.usage_restrictions || 'Standard terms apply.'}</div>
+              <div className="text-[11px] text-muted-foreground/80">{model.usage_restrictions || 'No additional restrictions published.'}</div>
             </div>
           </div>
         </div>
