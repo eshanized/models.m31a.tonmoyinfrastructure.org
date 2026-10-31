@@ -8,7 +8,7 @@ documentation_urls = [ "https://assets.ngc.nvidia.com/products/api-catalog/legal
 description = "Nemotron 3 Nano Omni is an omni-modal reasoning model that understands images, video, speech, text."
 catalog_status = "active"
 first_seen_at = "2026-04-28T15:37:00.315Z"
-last_seen_at = "2026-10-30T12:13:43.110Z"
+last_seen_at = "2026-10-31T08:07:32.955Z"
 endpoint_type = "chat"
 protocol = "openai-chat"
 access_classification = "free_endpoint"
@@ -18,7 +18,7 @@ context_window = 262144
 max_output_tokens = 4096
 license = "Governing Terms: This trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of this model is governed by the [NVIDIA Open Model Agreement](https://www.nvidia.com/en-us/agreem"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.110Z"
+verified_at = "2026-10-31T08:07:32.955Z"
 
 [capabilities]
 chat = true
@@ -40,7 +40,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.110Z"
+observed_at = "2026-10-31T08:07:32.955Z"
 confidence = 1
 
 [eligibility]

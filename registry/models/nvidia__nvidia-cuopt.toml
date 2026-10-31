@@ -7,7 +7,7 @@ documentation_urls = [ "https://www.nvidia.com/en-us/data-center/products/nvidia
 description = "World-record accuracy and performance for complex route optimization."
 catalog_status = "active"
 first_seen_at = "2025-05-21T21:16:32.788Z"
-last_seen_at = "2026-10-30T12:13:43.040Z"
+last_seen_at = "2026-10-31T08:07:23.933Z"
 endpoint_type = "completion"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -15,7 +15,7 @@ input_modalities = [ "text" ]
 output_modalities = [ "text" ]
 license = "NVIDIA API Trial Terms of Service"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.040Z"
+verified_at = "2026-10-31T08:07:23.933Z"
 
 [capabilities]
 chat = false
@@ -37,7 +37,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/nvidia-cuopt"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.040Z"
+observed_at = "2026-10-31T08:07:23.933Z"
 confidence = 1
 
 [eligibility]

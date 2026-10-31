@@ -7,7 +7,7 @@ documentation_urls = [ "https://assets.ngc.nvidia.com/products/api-catalog/legal
 description = "Generates a multiple sequence alignment from a query sequence and a protein sequence database search."
 catalog_status = "active"
 first_seen_at = "2025-06-16T15:53:34.676Z"
-last_seen_at = "2026-10-30T12:13:43.100Z"
+last_seen_at = "2026-10-31T08:07:31.752Z"
 endpoint_type = "completion"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -15,7 +15,7 @@ input_modalities = [ "text" ]
 output_modalities = [ "text" ]
 license = "NVIDIA API Trial Terms of Service"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.100Z"
+verified_at = "2026-10-31T08:07:31.752Z"
 
 [capabilities]
 chat = false
@@ -37,7 +37,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/colabfold/msa-search"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.100Z"
+observed_at = "2026-10-31T08:07:31.752Z"
 confidence = 1
 
 [eligibility]

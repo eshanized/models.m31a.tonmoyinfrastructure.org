@@ -8,7 +8,7 @@ documentation_urls = [ "https://arxiv.org/abs/2305.05084", "https://docs.nvidia.
 description = "Record-setting accuracy and performance for Mandarin English transcriptions."
 catalog_status = "active"
 first_seen_at = "2025-09-09T10:36:17.833Z"
-last_seen_at = "2026-10-30T12:13:43.149Z"
+last_seen_at = "2026-10-31T08:07:38.059Z"
 endpoint_type = "audio_speech"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -16,7 +16,7 @@ input_modalities = [ "text", "audio" ]
 output_modalities = [ "text" ]
 license = "GOVERNING TERMS: The use of this model is governed by the NVIDIA Community Model License (found at https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-community-models-license/)."
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.149Z"
+verified_at = "2026-10-31T08:07:38.059Z"
 
 [capabilities]
 chat = false
@@ -38,7 +38,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/parakeet-ctc-0_6b-zh-cn"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.149Z"
+observed_at = "2026-10-31T08:07:38.059Z"
 confidence = 1
 
 [eligibility]

@@ -1,6 +1,6 @@
 schema_version = "1.0.0"
-generated_at = "2026-10-30T12:13:43.179Z"
-last_synced_at = "2026-10-30T12:13:43.179Z"
+generated_at = "2026-10-31T08:07:43.071Z"
+last_synced_at = "2026-10-31T08:07:43.071Z"
 total_models = 109
 publishers = [ "ansys", "arc", "baidu", "black-forest-labs", "cadence", "colabfold", "deepseek-ai", "google", "ipd", "meta", "microsoft", "minimaxai", "mistralai", "mit", "nvidia", "openai", "openfold", "poolside", "qwen", "resembleai", "siemens", "stabilityai", "stepfun-ai", "wan-ai", "z-ai" ]
 modalities = [ "image", "video", "text", "audio", "embedding" ]

@@ -8,7 +8,7 @@ documentation_urls = [ "https://raw.githubusercontent.com/OpenMDW/OpenMDW/refs/h
 description = "Fastest 30B A3B MoE model with leading domain accuracy for specialized agentic tasks"
 catalog_status = "active"
 first_seen_at = "2026-08-11T12:16:36.092Z"
-last_seen_at = "2026-10-30T12:13:43.123Z"
+last_seen_at = "2026-10-31T08:07:34.160Z"
 endpoint_type = "chat"
 protocol = "openai-chat"
 access_classification = "free_endpoint"
@@ -18,7 +18,7 @@ context_window = 1048576
 max_output_tokens = 4096
 license = "**GOVERNING TERMS:** The trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of this model is governed by the [OpenMDW License Agreement, version 1.1](https://openmdw.ai/li"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.123Z"
+verified_at = "2026-10-31T08:07:34.160Z"
 
 [capabilities]
 chat = true
@@ -40,7 +40,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/nemotron-3.5-lightning-30b-a3b"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.123Z"
+observed_at = "2026-10-31T08:07:34.160Z"
 confidence = 1
 
 [eligibility]

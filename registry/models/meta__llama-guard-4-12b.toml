@@ -8,7 +8,7 @@ documentation_urls = [ "https://huggingface.co/meta-llama/Llama-Guard-4-12B/blob
 description = "Multi-modal model to classify safety for input prompts as well output responses."
 catalog_status = "active"
 first_seen_at = "2025-07-01T03:52:04.752Z"
-last_seen_at = "2026-10-30T12:13:43.085Z"
+last_seen_at = "2026-10-31T08:07:29.982Z"
 endpoint_type = "guardrail"
 protocol = "openai-chat"
 access_classification = "free_endpoint"
@@ -18,7 +18,7 @@ context_window = 163840
 max_output_tokens = 4096
 license = "GOVERNING TERMS: The trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf); and the use of this model is governed by the [NVIDIA Community Model License](https://www.nvidia.com/en"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.085Z"
+verified_at = "2026-10-31T08:07:29.982Z"
 
 [capabilities]
 chat = false
@@ -43,7 +43,7 @@ provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M to
 [provenance]
 source_url = "https://build.nvidia.com/meta/llama-guard-4-12b"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.085Z"
+observed_at = "2026-10-31T08:07:29.982Z"
 confidence = 1
 
 [eligibility]

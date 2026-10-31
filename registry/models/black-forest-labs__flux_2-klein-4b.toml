@@ -8,7 +8,7 @@ documentation_urls = [ "https://huggingface.co/black-forest-labs/FLUX.2-klein-4B
 description = "FLUX.2-klein-4B is a distilled image generation and editing model, producing outputs at lighting speed"
 catalog_status = "active"
 first_seen_at = "2026-03-13T18:11:29.520Z"
-last_seen_at = "2026-10-30T12:13:43.059Z"
+last_seen_at = "2026-10-31T08:07:26.707Z"
 endpoint_type = "image_generation"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -16,7 +16,7 @@ input_modalities = [ "text", "image", "video" ]
 output_modalities = [ "image" ]
 license = "NVIDIA API Trial Terms of Service"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.059Z"
+verified_at = "2026-10-31T08:07:26.707Z"
 
 [capabilities]
 chat = false
@@ -41,7 +41,7 @@ provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M to
 [provenance]
 source_url = "https://build.nvidia.com/black-forest-labs/flux_2-klein-4b"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.059Z"
+observed_at = "2026-10-31T08:07:26.707Z"
 confidence = 1
 
 [eligibility]

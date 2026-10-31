@@ -8,7 +8,7 @@ documentation_urls = [ "https://github.com/RosettaCommons/RFdiffusion", "https:/
 description = "A generative model of protein backbones for protein binder design."
 catalog_status = "active"
 first_seen_at = "2025-05-28T21:48:43.610Z"
-last_seen_at = "2026-10-30T12:13:43.166Z"
+last_seen_at = "2026-10-31T08:07:40.365Z"
 endpoint_type = "image_generation"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -16,7 +16,7 @@ input_modalities = [ "text", "video" ]
 output_modalities = [ "image" ]
 license = "GOVERNING TERMS: This trial service is governed by the [NVIDIA API Trial Service Terms of Use](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of this model is governed by the [NVIDIA Community Model License](https://www.nvidia.com/en-us"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.166Z"
+verified_at = "2026-10-31T08:07:40.365Z"
 
 [capabilities]
 chat = false
@@ -38,7 +38,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/ipd/rfdiffusion"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.166Z"
+observed_at = "2026-10-31T08:07:40.365Z"
 confidence = 1
 
 [eligibility]

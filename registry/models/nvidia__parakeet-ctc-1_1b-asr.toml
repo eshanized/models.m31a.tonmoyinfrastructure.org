@@ -8,7 +8,7 @@ documentation_urls = [ "https://www.nvidia.com/en-us/agreements/enterprise-softw
 description = "Record-setting accuracy and performance for English transcription."
 catalog_status = "active"
 first_seen_at = "2025-06-26T20:47:19.082Z"
-last_seen_at = "2026-10-30T12:13:43.153Z"
+last_seen_at = "2026-10-31T08:07:38.457Z"
 endpoint_type = "audio_speech"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -16,7 +16,7 @@ input_modalities = [ "text", "audio", "image", "video" ]
 output_modalities = [ "text" ]
 license = "NVIDIA API Trial Terms of Service"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.153Z"
+verified_at = "2026-10-31T08:07:38.457Z"
 
 [capabilities]
 chat = false
@@ -41,7 +41,7 @@ provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M to
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/parakeet-ctc-1_1b-asr"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.153Z"
+observed_at = "2026-10-31T08:07:38.457Z"
 confidence = 1
 
 [eligibility]

@@ -8,7 +8,7 @@ documentation_urls = [ "https://huggingface.co/datasets/nvidia/Aegis-AI-Content-
 description = "Multilingual, multimodal model for detecting unsafe and toxic content."
 catalog_status = "active"
 first_seen_at = "2026-06-02T16:37:26.248Z"
-last_seen_at = "2026-10-30T12:13:43.116Z"
+last_seen_at = "2026-10-31T08:07:33.436Z"
 endpoint_type = "guardrail"
 protocol = "openai-chat"
 access_classification = "free_endpoint"
@@ -18,7 +18,7 @@ context_window = 131072
 max_output_tokens = 4096
 license = "**Governing Terms:** Use of the model is governed by the [OpenMDW License Agreement, version 1.1 (OpenMDW-1.1)](https://raw.githubusercontent.com/OpenMDW/OpenMDW/refs/heads/main/1.1/LICENSE.OpenMDW-1.1), [Gemma Terms of Use](https://ai.google.dev/gemma/terms) and [Gemma Prohibited Use Policy](https:"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.116Z"
+verified_at = "2026-10-31T08:07:33.436Z"
 
 [capabilities]
 chat = true
@@ -40,7 +40,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/nemotron-3.5-content-safety"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.116Z"
+observed_at = "2026-10-31T08:07:33.436Z"
 confidence = 1
 
 [eligibility]

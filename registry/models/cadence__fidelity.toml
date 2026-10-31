@@ -7,7 +7,7 @@ documentation_urls = [ "https://www.cadence.com/en_US/home/tools/system-analysis
 description = "Run computational-fluid dynamics (CFD) simulations"
 catalog_status = "active"
 first_seen_at = "2025-03-25T14:58:04.483Z"
-last_seen_at = "2026-10-30T12:13:43.050Z"
+last_seen_at = "2026-10-31T08:07:25.686Z"
 endpoint_type = "completion"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -15,7 +15,7 @@ input_modalities = [ "text" ]
 output_modalities = [ "text" ]
 license = "NVIDIA API Trial Terms of Service"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.050Z"
+verified_at = "2026-10-31T08:07:25.686Z"
 
 [capabilities]
 chat = false
@@ -37,7 +37,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/cadence/fidelity"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.050Z"
+observed_at = "2026-10-31T08:07:25.686Z"
 confidence = 1
 
 [eligibility]

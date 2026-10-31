@@ -8,7 +8,7 @@ documentation_urls = [ "https://www.nvidia.com/en-us/agreements/enterprise-softw
 description = "NVIDIA Synthetic Video Detector is an AI-powered micro-service for detecting AI‑generated (synthetic) videos."
 catalog_status = "active"
 first_seen_at = "2026-04-16T21:22:39.226Z"
-last_seen_at = "2026-10-30T12:13:43.175Z"
+last_seen_at = "2026-10-31T08:07:42.365Z"
 endpoint_type = "completion"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -16,7 +16,7 @@ input_modalities = [ "text", "image", "video" ]
 output_modalities = [ "image", "video" ]
 license = "GOVERNING TERMS: Use of this model is governed by the [NVIDIA Software and Model Evaluation License](https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-software-and-model-evaluation-license/) and the [DINOv3 License](https://github.com/facebookresearch/dinov3/blob/main/LICENSE.md). A"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.175Z"
+verified_at = "2026-10-31T08:07:42.365Z"
 
 [capabilities]
 chat = false
@@ -38,7 +38,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/synthetic-video-detector"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.175Z"
+observed_at = "2026-10-31T08:07:42.365Z"
 confidence = 1
 
 [eligibility]

@@ -8,7 +8,7 @@ documentation_urls = [ "https://huggingface.co/zai-org/GLM-5.3-Flash", "https://
 description = "Multimodal 320B-total / 18B-active MoE with hybrid KDA and sparse MLA attention, native FP8 weights, reasoning and tool calling."
 catalog_status = "active"
 first_seen_at = "2026-09-15T19:46:42.256Z"
-last_seen_at = "2026-10-30T12:13:43.065Z"
+last_seen_at = "2026-10-31T08:07:27.379Z"
 endpoint_type = "chat"
 protocol = "openai-chat"
 access_classification = "free_endpoint"
@@ -18,7 +18,7 @@ context_window = 1048576
 max_output_tokens = 4096
 license = "**GOVERNING TERMS:** Use of this trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf).\nADDITIONAL INFORMATION: Use of the model is governed by the [MIT License](https://huggingfa"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.066Z"
+verified_at = "2026-10-31T08:07:27.379Z"
 
 [capabilities]
 chat = true
@@ -40,7 +40,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/z-ai/glm-5-3-flash"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.066Z"
+observed_at = "2026-10-31T08:07:27.379Z"
 confidence = 1
 
 [eligibility]

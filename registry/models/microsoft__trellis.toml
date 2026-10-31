@@ -7,7 +7,7 @@ documentation_urls = [ "https://huggingface.co/microsoft/TRELLIS-image-large", "
 description = "MSFT TRELLIS is a 3D AI model that generates high-quality 3D assets from text or image inputs."
 catalog_status = "active"
 first_seen_at = "2025-09-03T07:04:29.314Z"
-last_seen_at = "2026-10-30T12:13:43.176Z"
+last_seen_at = "2026-10-31T08:07:42.564Z"
 endpoint_type = "image_generation"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -15,7 +15,7 @@ input_modalities = [ "text", "image" ]
 output_modalities = [ "text" ]
 license = "GOVERNING TERMS: This trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of this model is governed by the [NVIDIA Community Model License](https://www.nvidia.com/en-us/agr"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.176Z"
+verified_at = "2026-10-31T08:07:42.564Z"
 
 [capabilities]
 chat = false
@@ -37,7 +37,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/microsoft/trellis"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.176Z"
+observed_at = "2026-10-31T08:07:42.564Z"
 confidence = 1
 
 [eligibility]

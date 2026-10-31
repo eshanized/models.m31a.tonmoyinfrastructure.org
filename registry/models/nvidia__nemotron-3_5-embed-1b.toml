@@ -8,7 +8,7 @@ documentation_urls = [ "https://huggingface.co/nvidia/Nemotron-3.5-Embed-1B-BF16
 description = "1B multimodal embedding model for text and document-image retrieval in RAG applications."
 catalog_status = "active"
 first_seen_at = "2026-10-20T23:06:34.068Z"
-last_seen_at = "2026-10-30T12:13:43.118Z"
+last_seen_at = "2026-10-31T08:07:33.617Z"
 endpoint_type = "embedding"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -16,7 +16,7 @@ input_modalities = [ "text", "image", "video" ]
 output_modalities = [ "embedding" ]
 license = "**Governing Hosted-Service Terms:** Use of this trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf) <br>\n**Source Model License:** Use of the model is governed by the [OpenMDW L"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.118Z"
+verified_at = "2026-10-31T08:07:33.617Z"
 
 [capabilities]
 chat = false
@@ -41,7 +41,7 @@ provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M to
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/nemotron-3_5-embed-1b"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.118Z"
+observed_at = "2026-10-31T08:07:33.617Z"
 confidence = 1
 
 [eligibility]

@@ -8,7 +8,7 @@ documentation_urls = [ "https://www.nvidia.com/en-us/agreements/enterprise-softw
 description = "Robust Speech Recognition via Large-Scale Weak Supervision."
 catalog_status = "active"
 first_seen_at = "2025-04-10T15:18:41.346Z"
-last_seen_at = "2026-10-30T12:13:43.178Z"
+last_seen_at = "2026-10-31T08:07:43.070Z"
 endpoint_type = "audio_speech"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -16,7 +16,7 @@ input_modalities = [ "text", "audio", "image" ]
 output_modalities = [ "text" ]
 license = "GOVERNING TERMS: Use of this model is governed by the [NVIDIA Community Model License Agreement](https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-community-models-license/).\nADDITIONAL INFORMATION: [MIT License](https://github.com/openai/whisper/blob/main/LICENSE)."
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.178Z"
+verified_at = "2026-10-31T08:07:43.070Z"
 
 [capabilities]
 chat = false
@@ -38,7 +38,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/openai/whisper-large-v3"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.178Z"
+observed_at = "2026-10-31T08:07:43.070Z"
 confidence = 1
 
 [eligibility]

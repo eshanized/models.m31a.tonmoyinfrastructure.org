@@ -8,7 +8,7 @@ documentation_urls = [ "https://github.com/meta-llama/llama-models/blob/main/mod
 description = "Cutting-edge vision-language model exceling in high-quality reasoning from images."
 catalog_status = "active"
 first_seen_at = "2025-05-30T20:06:54.722Z"
-last_seen_at = "2026-10-30T12:13:43.081Z"
+last_seen_at = "2026-10-31T08:07:29.384Z"
 endpoint_type = "visual_language"
 protocol = "openai-chat"
 access_classification = "free_endpoint"
@@ -18,7 +18,7 @@ context_window = 131072
 max_output_tokens = 4096
 license = "NVIDIA API Trial Terms of Service"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.081Z"
+verified_at = "2026-10-31T08:07:29.384Z"
 
 [capabilities]
 chat = false
@@ -43,7 +43,7 @@ provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M to
 [provenance]
 source_url = "https://build.nvidia.com/meta/llama-3.2-11b-vision-instruct"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.081Z"
+observed_at = "2026-10-31T08:07:29.384Z"
 confidence = 1
 
 [eligibility]

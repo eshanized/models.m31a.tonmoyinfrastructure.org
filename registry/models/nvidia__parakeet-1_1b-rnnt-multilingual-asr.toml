@@ -8,7 +8,7 @@ documentation_urls = [ "https://arxiv.org/abs/2305.05084", "https://docs.nvidia.
 description = "High accuracy and optimized performance for transcription in 25 languages"
 catalog_status = "active"
 first_seen_at = "2025-04-30T17:29:30.445Z"
-last_seen_at = "2026-10-30T12:13:43.145Z"
+last_seen_at = "2026-10-31T08:07:37.352Z"
 endpoint_type = "audio_speech"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -16,7 +16,7 @@ input_modalities = [ "text", "audio" ]
 output_modalities = [ "text" ]
 license = "GOVERNING TERMS: The use of this model is governed by the NVIDIA Community Model License (found at https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-community-models-license/)."
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.145Z"
+verified_at = "2026-10-31T08:07:37.352Z"
 
 [capabilities]
 chat = false
@@ -41,7 +41,7 @@ provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M to
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/parakeet-1_1b-rnnt-multilingual-asr"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.145Z"
+observed_at = "2026-10-31T08:07:37.352Z"
 confidence = 1
 
 [eligibility]

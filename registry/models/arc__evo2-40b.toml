@@ -8,7 +8,7 @@ documentation_urls = [ "https://www.nvidia.com/en-us/agreements/enterprise-softw
 description = "Evo 2 is a biological foundation model that is able to integrate information over long genomic sequences while retaining sensitivity to single-nucleotide changes."
 catalog_status = "active"
 first_seen_at = "2025-05-28T21:49:14.751Z"
-last_seen_at = "2026-10-30T12:13:43.045Z"
+last_seen_at = "2026-10-31T08:07:25.003Z"
 endpoint_type = "completion"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -16,7 +16,7 @@ input_modalities = [ "text", "image" ]
 output_modalities = [ "text" ]
 license = "GOVERNING TERMS: This trial service is governed by the <a href=\"https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf\">NVIDIA API Trial Terms of Service</a>. Use of this model is governed by the [NVIDIA Open Model License Agreement](https://www.nvid"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.045Z"
+verified_at = "2026-10-31T08:07:25.003Z"
 
 [capabilities]
 chat = false
@@ -38,7 +38,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/arc/evo2-40b"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.045Z"
+observed_at = "2026-10-31T08:07:25.003Z"
 confidence = 1
 
 [eligibility]

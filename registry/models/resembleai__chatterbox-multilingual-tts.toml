@@ -7,7 +7,7 @@ documentation_urls = [ "https://huggingface.co/ResembleAI/chatterbox", "https://
 description = "Natural and expressive voices in 23 languages. For voice agents and brand ambassadors."
 catalog_status = "active"
 first_seen_at = "2026-06-03T19:38:39.980Z"
-last_seen_at = "2026-10-30T12:13:43.031Z"
+last_seen_at = "2026-10-31T08:07:23.050Z"
 endpoint_type = "audio_speech"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -15,7 +15,7 @@ input_modalities = [ "text", "audio", "video" ]
 output_modalities = [ "image", "audio" ]
 license = "Governing Terms: The Chatterbox model governed by the [NVIDIA Open Model Agreement](https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-agreement/).\n\nADDITIONAL INFORMATION: The Chatterbox base model is governed by [MIT License](https://huggingface.co/datasets/choosealicens"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.031Z"
+verified_at = "2026-10-31T08:07:23.050Z"
 
 [capabilities]
 chat = false
@@ -37,7 +37,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/resembleai/chatterbox-multilingual-tts"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.031Z"
+observed_at = "2026-10-31T08:07:23.050Z"
 confidence = 1
 
 [eligibility]

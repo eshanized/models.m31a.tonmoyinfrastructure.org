@@ -8,7 +8,7 @@ documentation_urls = [ "https://raw.githubusercontent.com/OpenMDW/OpenMDW/refs/h
 description = "Open, efficient hybrid Mamba-Transformer MoE with 1M context, excelling in agentic reasoning, coding, planning, tool calling, and more"
 catalog_status = "active"
 first_seen_at = "2026-06-04T11:22:41.002Z"
-last_seen_at = "2026-10-30T12:13:43.114Z"
+last_seen_at = "2026-10-31T08:07:33.176Z"
 endpoint_type = "chat"
 protocol = "openai-chat"
 access_classification = "free_endpoint"
@@ -18,7 +18,7 @@ context_window = 1048576
 max_output_tokens = 4096
 license = "Governing Terms: The trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf).\n\nUse of this model is governed by the [OpenMDW License Agreement, version 1.1](https://raw.githubuserco"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.114Z"
+verified_at = "2026-10-31T08:07:33.176Z"
 
 [capabilities]
 chat = true
@@ -40,7 +40,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/nemotron-3-ultra-550b-a55b"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.114Z"
+observed_at = "2026-10-31T08:07:33.176Z"
 confidence = 1
 
 [eligibility]

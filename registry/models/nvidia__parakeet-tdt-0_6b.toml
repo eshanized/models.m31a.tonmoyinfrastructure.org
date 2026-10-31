@@ -8,7 +8,7 @@ documentation_urls = [ "https://huggingface.co/spaces/nvidia/parakeet-tdt-0.6b-v
 description = "Multilingual ASR across 25 European languages with punctuation, capitalization, and word timestamps"
 catalog_status = "active"
 first_seen_at = "2026-09-08T07:26:44.914Z"
-last_seen_at = "2026-10-30T12:13:43.155Z"
+last_seen_at = "2026-10-31T08:07:38.617Z"
 endpoint_type = "audio_speech"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -16,7 +16,7 @@ input_modalities = [ "text", "audio" ]
 output_modalities = [ "embedding" ]
 license = "NVIDIA API Trial Terms of Service"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.155Z"
+verified_at = "2026-10-31T08:07:38.617Z"
 
 [capabilities]
 chat = false
@@ -38,7 +38,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/parakeet-tdt-0_6b"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.155Z"
+observed_at = "2026-10-31T08:07:38.617Z"
 confidence = 1
 
 [eligibility]

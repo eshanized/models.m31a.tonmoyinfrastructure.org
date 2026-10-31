@@ -8,7 +8,7 @@ documentation_urls = [ "https://github.com/nvidia/cosmos-framework", "https://hu
 description = "Vision language model that excels in understanding the physical world using structured reasoning on videos or images."
 catalog_status = "active"
 first_seen_at = "2026-06-01T04:48:10.668Z"
-last_seen_at = "2026-10-30T12:13:43.037Z"
+last_seen_at = "2026-10-31T08:07:23.760Z"
 endpoint_type = "chat"
 protocol = "openai-chat"
 access_classification = "free_endpoint"
@@ -16,7 +16,7 @@ input_modalities = [ "text", "image", "video" ]
 output_modalities = [ "text" ]
 license = "GOVERNING TERMS: This trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of the model is governed by [OpenMDW1.1 license](https://openmdw.ai/license/1-1/)\n\nModels are comm"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.038Z"
+verified_at = "2026-10-31T08:07:23.760Z"
 
 [capabilities]
 chat = true
@@ -38,7 +38,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/cosmos3-nano-reasoner"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.038Z"
+observed_at = "2026-10-31T08:07:23.760Z"
 confidence = 1
 
 [eligibility]

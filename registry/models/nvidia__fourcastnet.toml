@@ -7,7 +7,7 @@ documentation_urls = [ "https://arxiv.org/abs/2306.03838", "https://arxiv.org/ab
 description = "FourCastNet predicts global atmospheric dynamics of various weather / climate variables."
 catalog_status = "active"
 first_seen_at = "2025-03-22T01:59:48.383Z"
-last_seen_at = "2026-10-30T12:13:43.061Z"
+last_seen_at = "2026-10-31T08:07:26.852Z"
 endpoint_type = "completion"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -15,7 +15,7 @@ input_modalities = [ "text" ]
 output_modalities = [ "text" ]
 license = "This model is licensed under the [NVIDIA AI Product Agreement](https://www.nvidia.com/en-us/agreements/enterprise-software/product-specific-terms-for-ai-products/). By pulling and using this model, you accept the terms and conditions of this license.\n\n**You are responsible for ensuring that your use"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.061Z"
+verified_at = "2026-10-31T08:07:26.852Z"
 
 [capabilities]
 chat = false
@@ -37,7 +37,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/fourcastnet"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.061Z"
+observed_at = "2026-10-31T08:07:26.852Z"
 confidence = 1
 
 [eligibility]

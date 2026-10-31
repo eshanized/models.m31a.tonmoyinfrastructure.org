@@ -8,7 +8,7 @@ documentation_urls = [ "https://assets.ngc.nvidia.com/products/api-catalog/legal
 description = "1B embedding model for semantic search, retrieval, and RAG applications."
 catalog_status = "active"
 first_seen_at = "2026-07-16T19:07:19.287Z"
-last_seen_at = "2026-10-30T12:13:43.108Z"
+last_seen_at = "2026-10-31T08:07:32.750Z"
 endpoint_type = "embedding"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -18,7 +18,7 @@ context_window = 32768
 max_output_tokens = 4096
 license = "**GOVERNING TERMS:** Use of this trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of the model and associated software are governed by the [OpenMDW License Agreement, ve"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.108Z"
+verified_at = "2026-10-31T08:07:32.750Z"
 
 [capabilities]
 chat = false
@@ -43,7 +43,7 @@ provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M to
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/nemotron-3-embed-1b"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.108Z"
+observed_at = "2026-10-31T08:07:32.750Z"
 confidence = 1
 
 [eligibility]

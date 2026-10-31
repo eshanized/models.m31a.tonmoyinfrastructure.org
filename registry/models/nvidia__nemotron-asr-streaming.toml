@@ -8,7 +8,7 @@ documentation_urls = [ "https://assets.ngc.nvidia.com/products/api-catalog/legal
 description = "Real-time speech recognition for English"
 catalog_status = "active"
 first_seen_at = "2026-03-14T12:33:34.989Z"
-last_seen_at = "2026-10-30T12:13:43.131Z"
+last_seen_at = "2026-10-31T08:07:34.873Z"
 endpoint_type = "audio_speech"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -16,7 +16,7 @@ input_modalities = [ "text", "audio" ]
 output_modalities = [ "text" ]
 license = "**GOVERNING TERMS:** This trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). The NIM container is governed by the [NVIDIA Software License Agreement](https://www.nvidia.com/en"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.131Z"
+verified_at = "2026-10-31T08:07:34.873Z"
 
 [capabilities]
 chat = false
@@ -38,7 +38,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/nemotron-asr-streaming"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.131Z"
+observed_at = "2026-10-31T08:07:34.873Z"
 confidence = 1
 
 [eligibility]

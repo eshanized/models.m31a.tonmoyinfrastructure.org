@@ -7,7 +7,7 @@ documentation_urls = [ "https://docs.nvidia.com/nemo-framework/user-guide/latest
 description = "Automatic speech recognition model that transcribes speech in lower case Spanish with record-setting accuracy and performance"
 catalog_status = "active"
 first_seen_at = "2025-04-10T15:19:39.201Z"
-last_seen_at = "2026-10-30T12:13:43.032Z"
+last_seen_at = "2026-10-31T08:07:23.202Z"
 endpoint_type = "audio_speech"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -15,7 +15,7 @@ input_modalities = [ "text", "audio", "image", "video" ]
 output_modalities = [ "text" ]
 license = "GOVERNING TERMS: The use of this model is governed by the NVIDIA Community Model License (found at https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-community-models-license/).\n\n# Disclaimer\nAI models generate responses and outputs based on complex algorithms and machine learning te"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.032Z"
+verified_at = "2026-10-31T08:07:23.202Z"
 
 [capabilities]
 chat = false
@@ -37,7 +37,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/conformer-ctc-asr"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.032Z"
+observed_at = "2026-10-31T08:07:23.202Z"
 confidence = 1
 
 [eligibility]

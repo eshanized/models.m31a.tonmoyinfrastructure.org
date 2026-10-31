@@ -8,7 +8,7 @@ documentation_urls = [ "https://huggingface.co/google/gemma-4-31B-it", "https://
 description = "Dense 31B model delivering frontier reasoning for coding, agentic workflows, and fine-tuning."
 catalog_status = "active"
 first_seen_at = "2026-04-02T16:23:29.660Z"
-last_seen_at = "2026-10-30T12:13:43.062Z"
+last_seen_at = "2026-10-31T08:07:27.011Z"
 endpoint_type = "chat"
 protocol = "openai-chat"
 access_classification = "free_endpoint"
@@ -18,7 +18,7 @@ context_window = 262144
 max_output_tokens = 4096
 license = "**GOVERNING TERMS:** This trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of this model is governed by the [NVIDIA Open Model License Agreement](https://www.nvidia.com/"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.062Z"
+verified_at = "2026-10-31T08:07:27.011Z"
 
 [capabilities]
 chat = true
@@ -43,7 +43,7 @@ provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M to
 [provenance]
 source_url = "https://build.nvidia.com/google/gemma-4-31b-it"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.062Z"
+observed_at = "2026-10-31T08:07:27.011Z"
 confidence = 1
 
 [eligibility]

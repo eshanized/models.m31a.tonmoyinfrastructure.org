@@ -8,7 +8,7 @@ documentation_urls = [ "https://assets.ngc.nvidia.com/products/api-catalog/legal
 description = "Nemotron OCR v2 is a state-of-the-art multilingual text recognition model designed for robust end-to-end optical character recognition (OCR) on complex real-world images."
 catalog_status = "active"
 first_seen_at = "2026-06-24T19:01:13.735Z"
-last_seen_at = "2026-10-30T12:13:43.134Z"
+last_seen_at = "2026-10-31T08:07:35.540Z"
 endpoint_type = "visual_language"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -16,7 +16,7 @@ input_modalities = [ "text", "image" ]
 output_modalities = [ "text" ]
 license = "NVIDIA API Trial Terms of Service"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.134Z"
+verified_at = "2026-10-31T08:07:35.540Z"
 
 [capabilities]
 chat = false
@@ -38,7 +38,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/nemotron-ocr-v2"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.134Z"
+observed_at = "2026-10-31T08:07:35.540Z"
 confidence = 1
 
 [eligibility]

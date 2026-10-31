@@ -8,7 +8,7 @@ documentation_urls = [ "https://huggingface.co/nvidia/Cosmos3-Nano", "https://gi
 description = "Generates images, videos and action predictions from text, visual inputs and spatial controls, with mandatory input screening and visual SynthID watermarking."
 catalog_status = "active"
 first_seen_at = "2026-06-01T04:48:19.454Z"
-last_seen_at = "2026-10-30T12:13:43.036Z"
+last_seen_at = "2026-10-31T08:07:23.577Z"
 endpoint_type = "completion"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -18,7 +18,7 @@ context_window = 262144
 max_output_tokens = 4096
 license = "NVIDIA API Trial Terms of Service"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.036Z"
+verified_at = "2026-10-31T08:07:23.577Z"
 
 [capabilities]
 chat = false
@@ -40,7 +40,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/cosmos3-nano"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.036Z"
+observed_at = "2026-10-31T08:07:23.577Z"
 confidence = 1
 
 [eligibility]

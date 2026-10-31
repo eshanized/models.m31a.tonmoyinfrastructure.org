@@ -7,7 +7,7 @@ documentation_urls = [ "https://www.nvidia.com/en-us/support/submit-security-vul
 description = "Enable smooth global interactions in 36 languages."
 catalog_status = "active"
 first_seen_at = "2025-04-10T15:20:30.992Z"
-last_seen_at = "2026-10-30T12:13:43.095Z"
+last_seen_at = "2026-10-31T08:07:31.058Z"
 endpoint_type = "completion"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -15,7 +15,7 @@ input_modalities = [ "text" ]
 output_modalities = [ "text" ]
 license = "NVIDIA API Trial Terms of Service"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.095Z"
+verified_at = "2026-10-31T08:07:31.058Z"
 
 [capabilities]
 chat = false
@@ -40,7 +40,7 @@ provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M to
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/megatron-1b-nmt"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.095Z"
+observed_at = "2026-10-31T08:07:31.058Z"
 confidence = 1
 
 [eligibility]

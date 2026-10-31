@@ -8,7 +8,7 @@ documentation_urls = [ "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-
 description = "Nemotron 3.5 Super early-access reasoning model for agentic, coding, tool-calling, and multimodal workloads"
 catalog_status = "active"
 first_seen_at = "2026-10-15T14:13:52.977Z"
-last_seen_at = "2026-10-30T12:13:43.130Z"
+last_seen_at = "2026-10-31T08:07:34.730Z"
 endpoint_type = "chat"
 protocol = "openai-chat"
 access_classification = "free_endpoint"
@@ -18,7 +18,7 @@ context_window = 262144
 max_output_tokens = 4096
 license = "**GOVERNING TERMS**: The trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of the model is governed by the [OpenMDW License Agreement, version 1.1](https://github.com/Ope"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.130Z"
+verified_at = "2026-10-31T08:07:34.730Z"
 
 [capabilities]
 chat = true
@@ -43,7 +43,7 @@ provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M to
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/nemotron-3.5-super-vl-120b-a12b"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.130Z"
+observed_at = "2026-10-31T08:07:34.730Z"
 confidence = 1
 
 [eligibility]

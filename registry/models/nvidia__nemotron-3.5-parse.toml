@@ -8,7 +8,7 @@ documentation_urls = [ "https://assets.ngc.nvidia.com/products/api-catalog/legal
 description = "Extract text, tables, and document layout from page images."
 catalog_status = "active"
 first_seen_at = "2026-10-23T17:30:21.880Z"
-last_seen_at = "2026-10-30T12:13:43.125Z"
+last_seen_at = "2026-10-31T08:07:34.358Z"
 endpoint_type = "visual_language"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -18,7 +18,7 @@ context_window = 9000
 max_output_tokens = 4096
 license = "**GOVERNING TERMS:** Use of this trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of the model is governed by the [OpenMDW License Agreement, version 1.1](https://github"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.125Z"
+verified_at = "2026-10-31T08:07:34.358Z"
 
 [capabilities]
 chat = false
@@ -40,7 +40,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/nemotron-3.5-parse"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.125Z"
+observed_at = "2026-10-31T08:07:34.358Z"
 confidence = 1
 
 [eligibility]

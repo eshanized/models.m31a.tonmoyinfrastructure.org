@@ -7,7 +7,7 @@ documentation_urls = [ "https://www.nvidia.com/en-us/agreements/enterprise-softw
 description = "Detect and track speaker identities across video frames."
 catalog_status = "active"
 first_seen_at = "2026-04-16T18:32:58.699Z"
-last_seen_at = "2026-10-30T12:13:43.018Z"
+last_seen_at = "2026-10-31T08:07:21.902Z"
 endpoint_type = "visual_language"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -15,7 +15,7 @@ input_modalities = [ "text", "audio", "image", "video" ]
 output_modalities = [ "embedding" ]
 license = "The use of NVIDIA Active Speaker Detection is governed by the [NVIDIA SOFTWARE LICENSE AGREEMENT](https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-software-license-agreement/) and [Product-Specific Terms for NVIDIA AI Products](https://www.nvidia.com/en-us/agreements/enterprise-sof"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.018Z"
+verified_at = "2026-10-31T08:07:21.902Z"
 
 [capabilities]
 chat = false
@@ -37,7 +37,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/active-speaker-detection"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.018Z"
+observed_at = "2026-10-31T08:07:21.902Z"
 confidence = 1
 
 [eligibility]

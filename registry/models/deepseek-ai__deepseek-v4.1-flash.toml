@@ -8,7 +8,7 @@ documentation_urls = [ "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
 description = "552B MoE, 8B active params with native multimodal support and lower API cost using smaller KV cache"
 catalog_status = "active"
 first_seen_at = "2026-09-18T18:55:17.986Z"
-last_seen_at = "2026-10-30T12:13:43.041Z"
+last_seen_at = "2026-10-31T08:07:24.294Z"
 endpoint_type = "chat"
 protocol = "openai-chat"
 access_classification = "free_endpoint"
@@ -18,7 +18,7 @@ context_window = 1048576
 max_output_tokens = 4096
 license = "**GOVERNING TERMS**: This trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf); and the use of this model is governed by the [NVIDIA Open Model Agreement](https://www.nvidia.com/"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.041Z"
+verified_at = "2026-10-31T08:07:24.294Z"
 
 [capabilities]
 chat = true
@@ -40,7 +40,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/deepseek-ai/deepseek-v4.1-flash"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.041Z"
+observed_at = "2026-10-31T08:07:24.294Z"
 confidence = 1
 
 [eligibility]

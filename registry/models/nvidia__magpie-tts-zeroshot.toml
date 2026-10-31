@@ -7,7 +7,7 @@ documentation_urls = [ "https://www.nvidia.com/en-us/agreements/enterprise-softw
 description = "Expressive and engaging text-to-speech, generated from a short audio sample."
 catalog_status = "active"
 first_seen_at = "2025-06-12T15:03:36.401Z"
-last_seen_at = "2026-10-30T12:13:43.093Z"
+last_seen_at = "2026-10-31T08:07:30.878Z"
 endpoint_type = "audio_speech"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -15,7 +15,7 @@ input_modalities = [ "text", "audio", "image", "video" ]
 output_modalities = [ "audio" ]
 license = "NVIDIA API Trial Terms of Service"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.093Z"
+verified_at = "2026-10-31T08:07:30.878Z"
 
 [capabilities]
 chat = false
@@ -37,7 +37,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/magpie-tts-zeroshot"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.093Z"
+observed_at = "2026-10-31T08:07:30.878Z"
 confidence = 1
 
 [eligibility]

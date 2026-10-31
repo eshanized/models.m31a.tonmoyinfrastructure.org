@@ -8,7 +8,7 @@ documentation_urls = [ "https://openfold.io/", "https://www.aqlab.io/", "https:/
 description = "Predicts the 3D structure of a protein from its amino acid sequence, multiple sequence alignments, and templates."
 catalog_status = "active"
 first_seen_at = "2025-05-29T20:33:10.517Z"
-last_seen_at = "2026-10-30T12:13:43.142Z"
+last_seen_at = "2026-10-31T08:07:36.643Z"
 endpoint_type = "completion"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -16,7 +16,7 @@ input_modalities = [ "text", "audio", "image" ]
 output_modalities = [ "text" ]
 license = "GOVERNING HOSTING TERMS: Use of this trial service is governed by the [NVIDIA API Trial Service Terms of Use](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of this model is governed by the [NVIDIA Open Model Agreement](https://www.nvid"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.142Z"
+verified_at = "2026-10-31T08:07:36.643Z"
 
 [capabilities]
 chat = false
@@ -38,7 +38,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/openfold/openfold2"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.142Z"
+observed_at = "2026-10-31T08:07:36.643Z"
 confidence = 1
 
 [eligibility]

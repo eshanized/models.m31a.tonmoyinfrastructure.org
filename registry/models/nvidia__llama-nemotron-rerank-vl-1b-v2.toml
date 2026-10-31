@@ -8,7 +8,7 @@ documentation_urls = [ "https://huggingface.co/spaces/vidore/vidore-leaderboard"
 description = "GPU-accelerated model optimized for providing a probability score that a given passage contains the information to answer a question."
 catalog_status = "active"
 first_seen_at = "2026-03-31T05:46:54.638Z"
-last_seen_at = "2026-10-30T12:13:43.089Z"
+last_seen_at = "2026-10-31T08:07:30.501Z"
 endpoint_type = "reranking"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -18,7 +18,7 @@ context_window = 10240
 max_output_tokens = 4096
 license = "**GOVERNING TERMS:** The trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf); and use of this model is governed by the [NVIDIA Open Model License](https://www.nvidia.com/en-us/a"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.089Z"
+verified_at = "2026-10-31T08:07:30.501Z"
 
 [capabilities]
 chat = false
@@ -43,7 +43,7 @@ provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M to
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/llama-nemotron-rerank-vl-1b-v2"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.089Z"
+observed_at = "2026-10-31T08:07:30.501Z"
 confidence = 1
 
 [eligibility]

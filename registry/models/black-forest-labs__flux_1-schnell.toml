@@ -8,7 +8,7 @@ documentation_urls = [ "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
 description = "FLUX.1-schnell is a distilled image generation model, producing high quality images at fast speeds"
 catalog_status = "active"
 first_seen_at = "2025-06-13T13:37:07.149Z"
-last_seen_at = "2026-10-30T12:13:43.056Z"
+last_seen_at = "2026-10-31T08:07:26.551Z"
 endpoint_type = "image_generation"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -16,7 +16,7 @@ input_modalities = [ "text", "image" ]
 output_modalities = [ "image" ]
 license = "NVIDIA API Trial Terms of Service"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.056Z"
+verified_at = "2026-10-31T08:07:26.551Z"
 
 [capabilities]
 chat = false
@@ -38,7 +38,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/black-forest-labs/flux_1-schnell"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.056Z"
+observed_at = "2026-10-31T08:07:26.551Z"
 confidence = 1
 
 [eligibility]

@@ -8,7 +8,7 @@ documentation_urls = [ "https://assets.ngc.nvidia.com/products/api-catalog/legal
 description = "8B multimodal reranking model that scores how relevant a text or document-image passage is to a query."
 catalog_status = "active"
 first_seen_at = "2026-10-20T23:06:40.172Z"
-last_seen_at = "2026-10-30T12:13:43.126Z"
+last_seen_at = "2026-10-31T08:07:34.523Z"
 endpoint_type = "reranking"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -16,7 +16,7 @@ input_modalities = [ "text", "image", "video" ]
 output_modalities = [ "embedding" ]
 license = "**GOVERNING HOSTING TERMS:** Use of this trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of the model is governed by [OpenMDW License Agreement, version 1.1](https://gi"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.126Z"
+verified_at = "2026-10-31T08:07:34.523Z"
 
 [capabilities]
 chat = false
@@ -41,7 +41,7 @@ provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M to
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/nemotron-3_5-rerank-8b"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.126Z"
+observed_at = "2026-10-31T08:07:34.523Z"
 confidence = 1
 
 [eligibility]

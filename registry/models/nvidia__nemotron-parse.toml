@@ -8,7 +8,7 @@ documentation_urls = [ "https://assets.ngc.nvidia.com/products/api-catalog/legal
 description = "Cutting-edge vision-language model exceling in retrieving text and metadata from images."
 catalog_status = "active"
 first_seen_at = "2025-10-28T18:51:38.495Z"
-last_seen_at = "2026-10-30T12:13:43.137Z"
+last_seen_at = "2026-10-31T08:07:35.981Z"
 endpoint_type = "visual_language"
 protocol = "openai-chat"
 access_classification = "free_endpoint"
@@ -16,7 +16,7 @@ input_modalities = [ "text", "image" ]
 output_modalities = [ "text" ]
 license = "GOVERNING TERMS: This trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of this model is governed by the [NVIDIA Community Model License](https://www.nvidia.com/en-us/agr"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.137Z"
+verified_at = "2026-10-31T08:07:35.981Z"
 
 [capabilities]
 chat = false
@@ -38,7 +38,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/nemotron-parse"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.137Z"
+observed_at = "2026-10-31T08:07:35.981Z"
 confidence = 1
 
 [eligibility]

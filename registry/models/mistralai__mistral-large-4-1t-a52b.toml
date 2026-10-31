@@ -8,7 +8,7 @@ documentation_urls = [ "https://docs.mistral.ai/models/mistral-large-4-0", "http
 description = "Mistral Large 4 from Mistral AI, a 1T-total / 52B-active granular MoE for text and image input with reasoning, function calling and structured outputs, served in NVFP4 with DSpark speculative decoding."
 catalog_status = "active"
 first_seen_at = "2026-10-29T14:10:58.920Z"
-last_seen_at = "2026-10-30T12:13:43.097Z"
+last_seen_at = "2026-10-31T08:07:31.397Z"
 endpoint_type = "chat"
 protocol = "openai-chat"
 access_classification = "free_endpoint"
@@ -18,7 +18,7 @@ context_window = 262144
 max_output_tokens = 4096
 license = "**GOVERNING TERMS:** The trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). To deploy and customize the model in your environment, please [contact Mistral](https://mistral.ai/"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.097Z"
+verified_at = "2026-10-31T08:07:31.397Z"
 
 [capabilities]
 chat = true
@@ -43,7 +43,7 @@ provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M to
 [provenance]
 source_url = "https://build.nvidia.com/mistralai/mistral-large-4-1t-a52b"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.097Z"
+observed_at = "2026-10-31T08:07:31.397Z"
 confidence = 1
 
 [eligibility]

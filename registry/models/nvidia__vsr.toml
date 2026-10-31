@@ -7,7 +7,7 @@ documentation_urls = [ "https://catalog.ngc.nvidia.com/orgs/nvidia/teams/maxine/
 description = "Upscale encoded or ST 2110 video to higher resolutions with NVIDIA Video Super Resolution."
 catalog_status = "active"
 first_seen_at = "2026-07-22T21:24:15.027Z"
-last_seen_at = "2026-10-30T12:13:43.177Z"
+last_seen_at = "2026-10-31T08:07:42.740Z"
 endpoint_type = "completion"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -15,7 +15,7 @@ input_modalities = [ "image", "video" ]
 output_modalities = [ "text" ]
 license = "NVIDIA API Trial Terms of Service"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.177Z"
+verified_at = "2026-10-31T08:07:42.740Z"
 
 [capabilities]
 chat = false
@@ -37,7 +37,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/vsr"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.177Z"
+observed_at = "2026-10-31T08:07:42.740Z"
 confidence = 1
 
 [eligibility]

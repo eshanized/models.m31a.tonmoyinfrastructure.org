@@ -8,7 +8,7 @@ documentation_urls = [ "https://github.com/RosettaCommons/RFD4-Proteina", "https
 description = "A unified generative model for protein, enzyme, binder and antibody design."
 catalog_status = "active"
 first_seen_at = "2026-10-20T15:06:59.535Z"
-last_seen_at = "2026-10-30T12:13:43.165Z"
+last_seen_at = "2026-10-31T08:07:40.176Z"
 endpoint_type = "completion"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -16,7 +16,7 @@ input_modalities = [ "text" ]
 output_modalities = [ "image" ]
 license = "GOVERNING TERMS: This trial service is governed by the [NVIDIA API Trial Service Terms of Use](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of this model is governed by the [BSD 3-Clause License](https://opensource.org/licenses/BSD-3-"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.165Z"
+verified_at = "2026-10-31T08:07:40.176Z"
 
 [capabilities]
 chat = false
@@ -38,7 +38,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/ipd/rfd4-proteina"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.165Z"
+observed_at = "2026-10-31T08:07:40.176Z"
 confidence = 1
 
 [eligibility]

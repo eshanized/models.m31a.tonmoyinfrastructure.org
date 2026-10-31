@@ -7,7 +7,7 @@ documentation_urls = [ "https://www.nvidia.com/en-us/agreements/enterprise-softw
 description = "Re-illuminate people in video to match target lighting from a 360 HDRI environment map."
 catalog_status = "active"
 first_seen_at = "2026-04-17T04:01:50.298Z"
-last_seen_at = "2026-10-30T12:13:43.164Z"
+last_seen_at = "2026-10-31T08:07:40.021Z"
 endpoint_type = "image_generation"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -15,7 +15,7 @@ input_modalities = [ "image", "video" ]
 output_modalities = [ "text" ]
 license = "Refer to [NVIDIA SOFTWARE LICENSE AGREEMENT](https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-software-license-agreement/) and [Product-Specific Terms for NVIDIA AI Products](https://www.nvidia.com/en-us/agreements/enterprise-software/product-specific-terms-for-ai-products/). Use o"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.164Z"
+verified_at = "2026-10-31T08:07:40.021Z"
 
 [capabilities]
 chat = false
@@ -37,7 +37,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/relighting"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.164Z"
+observed_at = "2026-10-31T08:07:40.021Z"
 confidence = 1
 
 [eligibility]

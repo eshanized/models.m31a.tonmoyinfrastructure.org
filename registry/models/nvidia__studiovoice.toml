@@ -7,7 +7,7 @@ documentation_urls = [ "https://www.nvidia.com/en-us/agreements/enterprise-softw
 description = "Enhance input speech recorded with low-quality microphones in noisy or reverberant environments, producing studio-quality speech."
 catalog_status = "active"
 first_seen_at = "2025-06-13T14:12:57.045Z"
-last_seen_at = "2026-10-30T12:13:43.174Z"
+last_seen_at = "2026-10-31T08:07:42.081Z"
 endpoint_type = "audio_speech"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -15,7 +15,7 @@ input_modalities = [ "text", "audio", "video" ]
 output_modalities = [ "audio" ]
 license = "Use of this model is governed by the [NVIDIA Open Model License](https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/)."
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.174Z"
+verified_at = "2026-10-31T08:07:42.081Z"
 
 [capabilities]
 chat = false
@@ -37,7 +37,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/studiovoice"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.174Z"
+observed_at = "2026-10-31T08:07:42.081Z"
 confidence = 1
 
 [eligibility]

@@ -7,7 +7,7 @@ documentation_urls = [ "https://arxiv.org/abs/2203.17270", "https://github.com/N
 description = "Advanced transformer for multi-frame bird's-eye-view 3D perception in autonomous driving."
 catalog_status = "active"
 first_seen_at = "2025-07-20T16:35:28.946Z"
-last_seen_at = "2026-10-30T12:13:43.023Z"
+last_seen_at = "2026-10-31T08:07:22.280Z"
 endpoint_type = "visual_language"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -15,7 +15,7 @@ input_modalities = [ "text", "image", "video" ]
 output_modalities = [ "text" ]
 license = "**GOVERNING TERMS:** The trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of this model is governed by the [NVIDIA Community Model License](https://www.nvidia.com/en-us/"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.023Z"
+verified_at = "2026-10-31T08:07:22.280Z"
 
 [capabilities]
 chat = false
@@ -37,7 +37,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/bevformer"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.023Z"
+observed_at = "2026-10-31T08:07:22.280Z"
 confidence = 1
 
 [eligibility]

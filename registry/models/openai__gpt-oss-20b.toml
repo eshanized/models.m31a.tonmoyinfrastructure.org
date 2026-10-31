@@ -7,7 +7,7 @@ documentation_urls = [ "https://huggingface.co/openai/gpt-oss-20b", "https://ass
 description = "Smaller Mixture of Experts (MoE) text-only LLM for efficient AI reasoning and math"
 catalog_status = "active"
 first_seen_at = "2025-08-05T16:46:10.339Z"
-last_seen_at = "2026-10-30T12:13:43.067Z"
+last_seen_at = "2026-10-31T08:07:27.546Z"
 endpoint_type = "chat"
 protocol = "openai-chat"
 access_classification = "free_endpoint"
@@ -17,7 +17,7 @@ context_window = 131072
 max_output_tokens = 4096
 license = "NVIDIA API Trial Terms of Service"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.067Z"
+verified_at = "2026-10-31T08:07:27.546Z"
 
 [capabilities]
 chat = true
@@ -39,7 +39,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/openai/gpt-oss-20b"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.067Z"
+observed_at = "2026-10-31T08:07:27.546Z"
 confidence = 1
 
 [eligibility]

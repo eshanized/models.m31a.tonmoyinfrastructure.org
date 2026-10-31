@@ -8,7 +8,7 @@ documentation_urls = [ "https://ai.google.dev/gemma/docs/paligemma/model-card", 
 description = "Vision language model adept at comprehending text and visual inputs to produce informative responses"
 catalog_status = "active"
 first_seen_at = "2024-08-26T16:47:12.134Z"
-last_seen_at = "2026-10-30T12:13:43.144Z"
+last_seen_at = "2026-10-31T08:07:37.118Z"
 endpoint_type = "visual_language"
 protocol = "nim-custom"
 access_classification = "free_endpoint"
@@ -18,7 +18,7 @@ context_window = 8192
 max_output_tokens = 4096
 license = "NVIDIA API Trial Terms of Service"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.144Z"
+verified_at = "2026-10-31T08:07:37.118Z"
 
 [capabilities]
 chat = false
@@ -40,7 +40,7 @@ provenance_note = "No individual per-token rate published on build.nvidia.com fo
 [provenance]
 source_url = "https://build.nvidia.com/google/google-paligemma"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.144Z"
+observed_at = "2026-10-31T08:07:37.118Z"
 confidence = 1
 
 [eligibility]

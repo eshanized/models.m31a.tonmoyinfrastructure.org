@@ -8,7 +8,7 @@ documentation_urls = [ "https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct"
 description = "Topic control model to keep conversations focused on approved topics, avoiding inappropriate content."
 catalog_status = "active"
 first_seen_at = "2025-03-25T01:16:40.059Z"
-last_seen_at = "2026-10-30T12:13:43.077Z"
+last_seen_at = "2026-10-31T08:07:28.946Z"
 endpoint_type = "guardrail"
 protocol = "openai-chat"
 access_classification = "free_endpoint"
@@ -18,7 +18,7 @@ context_window = 131072
 max_output_tokens = 4096
 license = "Governing NVIDIA Model Hosting Terms (Cloud API) GOVERNING TERMS: This trial service is governed by the [NVIDIA API Trial Terms of Service](https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf). Use of this model is governed by the [NVIDIA Communit"
 usage_restrictions = "Commercial and research use permitted under governing model and API terms."
-verified_at = "2026-10-30T12:13:43.077Z"
+verified_at = "2026-10-31T08:07:28.946Z"
 
 [capabilities]
 chat = true
@@ -43,7 +43,7 @@ provenance_note = "Official NVIDIA Build lightweight inference tier ($0.18/1M to
 [provenance]
 source_url = "https://build.nvidia.com/nvidia/llama-3_1-nemoguard-8b-topic-control"
 source_type = "official_directory"
-observed_at = "2026-10-30T12:13:43.077Z"
+observed_at = "2026-10-31T08:07:28.946Z"
 confidence = 1
 
 [eligibility]
