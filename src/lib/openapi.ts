@@ -132,7 +132,7 @@ export const openApiSpec = {
         },
       },
     },
-    '/api/v1/observability': {
+    '/api/v1/observability.json': {
       get: {
         summary: 'Synthetic Observability Snapshot',
         description: 'Returns the latest published synthetic probe observations and bounded status history. Values are measured by our GitHub-hosted probes, not provider-wide infrastructure metrics.',
