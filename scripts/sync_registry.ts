@@ -85,55 +85,16 @@ function resolveArchitecture(text: string, id: string): string {
   return 'Transformer';
 }
 
-function resolvePricing(id: string, text: string): CanonicalModel['pricing'] {
-  const lower = id.toLowerCase();
-  if (lower.includes('8b') || lower.includes('7b') || lower.includes('4b') || lower.includes('2b') || lower.includes('1b')) {
-    return {
-      currency: 'USD',
-      input_per_million: 0.18,
-      output_per_million: 0.18,
-      status: 'published',
-      source: 'https://build.nvidia.com/pricing',
-      provenance_note: 'Official NVIDIA Build lightweight inference tier ($0.18/1M tokens)',
-    };
-  }
-  if (lower.includes('70b') || lower.includes('72b') || lower.includes('90b') || lower.includes('120b')) {
-    return {
-      currency: 'USD',
-      input_per_million: 0.70,
-      output_per_million: 0.70,
-      status: 'published',
-      source: 'https://build.nvidia.com/pricing',
-      provenance_note: 'Official NVIDIA Build high-capacity inference tier ($0.70/1M tokens)',
-    };
-  }
-  if (lower.includes('405b') || lower.includes('552b') || lower.includes('1t')) {
-    return {
-      currency: 'USD',
-      input_per_million: 5.00,
-      output_per_million: 5.00,
-      status: 'published',
-      source: 'https://build.nvidia.com/pricing',
-      provenance_note: 'Official NVIDIA Build frontier MoE/flagship tier ($5.00/1M tokens)',
-    };
-  }
-  if (lower.includes('embed') || lower.includes('rerank')) {
-    return {
-      currency: 'USD',
-      input_per_million: 0.05,
-      output_per_million: 0.00,
-      status: 'published',
-      source: 'https://build.nvidia.com/pricing',
-      provenance_note: 'Official NVIDIA Build embedding/reranking tier ($0.05/1M tokens)',
-    };
-  }
+function resolvePricing(_id: string, _text: string): CanonicalModel['pricing'] {
+  // NVIDIA Build pricing is not safely derivable from a model name or parameter count.
+  // Leave rates unknown until a model-specific authoritative price source is parsed.
   return {
     currency: 'USD',
     input_per_million: null,
     output_per_million: null,
     status: 'not_published',
     source: null,
-    provenance_note: 'No individual per-token rate published on build.nvidia.com for this specialized model',
+    provenance_note: 'No verified model-specific pricing source is available in the catalog sync.',
   };
 }
 
