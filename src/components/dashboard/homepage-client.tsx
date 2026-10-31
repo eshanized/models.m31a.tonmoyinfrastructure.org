@@ -162,7 +162,7 @@ export function HomepageClient({
             <AlertTriangle className="w-4 h-4 text-amber-500" />
           </div>
           <div className="text-2xl font-bold font-mono tracking-tight text-amber-600 dark:text-amber-400">
-            {monitoringAvailable ? degradedCount : '0'}
+            {monitoringAvailable ? degradedCount : '—'}
           </div>
           <div className="text-[11px] text-muted-foreground">
             {monitoringAvailable ? `${unavailableCount} unavailable` : 'No probe data; status unknown'}
@@ -179,7 +179,7 @@ export function HomepageClient({
             {formatTimeAgo(lastSyncedAt)}
           </div>
           <div className="text-[11px] text-muted-foreground flex items-center gap-1.5">
-            <span className={`w-1.5 h-1.5 rounded-full ${monitoringAvailable ? 'bg-emerald-500' : 'bg-amber-500'}`} />
+            <span className={`w-1.5 h-1.5 rounded-full ${monitoringFresh ? 'bg-emerald-500' : 'bg-amber-500'}`} />
             <span>{monitoringAvailable ? (monitoringFresh ? 'Monitoring snapshot: fresh' : 'Monitoring snapshot: stale') : 'Monitoring snapshot: awaiting data'}{lastProbeAt ? ` · Last cycle ${formatTimeAgo(lastProbeAt)}` : ''}</span>
           </div>
         </div>
