@@ -180,7 +180,7 @@ export function HomepageClient({
           </div>
           <div className="text-[11px] text-muted-foreground flex items-center gap-1.5">
             <span className={`w-1.5 h-1.5 rounded-full ${monitoringAvailable ? 'bg-emerald-500' : 'bg-amber-500'}`} />
-            <span>{monitoringAvailable ? (monitoringFresh ? 'Monitoring snapshot: fresh' : 'Monitoring snapshot: stale') : 'Monitoring snapshot: awaiting data'}</span>
+            <span>{monitoringAvailable ? (monitoringFresh ? 'Monitoring snapshot: fresh' : 'Monitoring snapshot: stale') : 'Monitoring snapshot: awaiting data'}{lastProbeAt ? ` · Last cycle ${formatTimeAgo(lastProbeAt)}` : ''}</span>
           </div>
         </div>
       </section>
