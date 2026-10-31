@@ -38,6 +38,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Export generated catalog contracts
+        run: npm run registry:export
+
       - name: Validate registry schema integrity
         run: npm run registry:validate
 
