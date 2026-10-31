@@ -125,8 +125,8 @@ export interface M31AModelCacheEntry {
   slug: string;
   display_name: string;
   description: string;
-  context_window: number;
-  max_output_tokens: number;
+  context_window: number | null;
+  max_output_tokens: number | null;
   supports_tools: boolean;
   supports_thinking: boolean;
   supports_vision: boolean;
