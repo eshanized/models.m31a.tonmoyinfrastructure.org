@@ -111,11 +111,11 @@ export function HomepageClient({
           lastSuccessfulAt = successfulAt;
         }
         const cycleCount = (summary as Record<string, unknown>).recent_cycles_count;
-        if (typeof cycleCount === 'number' && Number.isSafeInteger(cycleCount) && cycleCount >= 0) {
-          setLiveCycleCount(cycleCount);
-        }
 
         if (active) {
+          if (typeof cycleCount === 'number' && Number.isSafeInteger(cycleCount) && cycleCount >= 0) {
+            setLiveCycleCount(cycleCount);
+          }
           setLiveStatusDistribution((previous) => ({ ...previous, ...nextDistribution }));
           setLiveLastProbeAt(lastSuccessfulAt);
           setLiveMonitoringFresh(
@@ -253,7 +253,7 @@ export function HomepageClient({
           </div>
           <div className="text-[11px] text-muted-foreground flex items-center gap-1.5">
             <span className={`w-1.5 h-1.5 rounded-full ${liveMonitoringFresh ? 'bg-emerald-500' : 'bg-amber-500'}`} />
-            <span>{monitoringAvailableNow ? (monitoringFresh ? 'Monitoring snapshot: fresh' : 'Monitoring snapshot: stale') : 'Monitoring snapshot: awaiting data'}{liveLastProbeAt ? ` · Last successful cycle ${formatTimeAgo(liveLastProbeAt)}` : ''}</span>
+            <span>{monitoringAvailableNow ? (liveMonitoringFresh ? 'Monitoring snapshot: fresh' : 'Monitoring snapshot: stale') : 'Monitoring snapshot: awaiting data'}{liveLastProbeAt ? ` · Last successful cycle ${formatTimeAgo(liveLastProbeAt)}` : ''}</span>
           </div>
         </div>
       </section>
