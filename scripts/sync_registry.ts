@@ -338,8 +338,8 @@ export async function syncRegistry() {
       context_window,
       max_output_tokens: null,
       pricing: resolvePricing(id, cardContent),
-      license: license || 'NVIDIA API Trial Terms of Service',
-      usage_restrictions: 'Commercial and research use permitted under governing model and API terms.',
+      license,
+      usage_restrictions: null,
       provenance: {
         source_url: canonical || `https://build.nvidia.com/${id}`,
         source_type: 'official_directory',
