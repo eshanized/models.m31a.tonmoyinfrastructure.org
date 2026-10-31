@@ -94,6 +94,7 @@ async function main() {
     downloadable_only: perModelStatus.filter((model) => model.status === 'downloadable_only').length,
     probe_eligible_total: models.filter((model) => model.eligibility.probe_eligible).length,
     last_probe_cycle_at: observability.last_successful_cycle_at,
+    recent_cycles_count: observability.recent_cycles.length,
     total_observations: observationCount,
     success_rate_percentage: observationCount > 0
       ? Number(((successfulObservations / observationCount) * 100).toFixed(2))
