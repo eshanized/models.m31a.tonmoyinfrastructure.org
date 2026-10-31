@@ -56,7 +56,7 @@ function resolveFamily(id: string, text: string): string | null {
   return null;
 }
 
-function resolveArchitecture(text: string, id: string): string {
+function resolveArchitecture(text: string, id: string): string | null {
   const archMatch = text.match(/\*\*Architecture Type:\*\*\s*([^\r\n]+)/i);
   const netMatch = text.match(/\*\*Network Architecture:\*\*\s*([^\r\n]+)/i);
   if (netMatch && netMatch[1].trim()) {
@@ -82,7 +82,7 @@ function resolveArchitecture(text: string, id: string): string {
   if (lower.includes('mamba') || lower.includes('ssm')) {
     return 'State Space Model (SSM) Hybrid';
   }
-  return 'Transformer';
+  return null;
 }
 
 function resolvePricing(_id: string, _text: string): CanonicalModel['pricing'] {
@@ -150,8 +150,6 @@ export async function syncRegistry() {
   const stagedRecords: Array<{ tomlPath: string; tomlString: string }> = [];
 
   for (const relPath of targetPaths) {
-    const basename = path.basename(relPath);
-    const localCachePath = path.join(RAW_CACHE_DIR, basename);
     let cardContent = '';
 
     const fullUrl = 'https://build.nvidia.com' + relPath;
@@ -175,7 +173,7 @@ export async function syncRegistry() {
     const canonical = meta.canonical || '';
     const id = canonical.replace('https://build.nvidia.com/', '').trim();
     if (!id || !/^[a-zA-Z0-9_-]+\/[a-zA-Z0-9_.-]+$/.test(id)) {
-      continue;
+      throw new Error(`Model card ${relPath} has an invalid canonical ID`);
     }
 
     const publisher = meta.publisher || id.split('/')[0] || 'nvidia';
@@ -303,16 +301,16 @@ export async function syncRegistry() {
     const hasToolCalling = lower.includes('function calling: supported') || lower.includes('tool calling') || lower.includes('tool-calling');
 
     const capabilities = {
-      chat: hasChat,
-      completion: true,
-      vision: hasVision,
-      audio: hasAudio,
-      video: hasVideo,
-      embedding: endpoint_type === 'embedding',
-      reranking: endpoint_type === 'reranking',
-      reasoning: hasReasoning,
-      structured_output: hasChat || lower.includes('structured outputs'),
-      tool_calling: hasToolCalling,
+      chat: hasChat ? true : null,
+      completion: endpoint_type === 'chat' || endpoint_type === 'completion' ? true : null,
+      vision: hasVision ? true : null,
+      audio: hasAudio ? true : null,
+      video: hasVideo ? true : null,
+      embedding: endpoint_type === 'embedding' ? true : null,
+      reranking: endpoint_type === 'reranking' ? true : null,
+      reasoning: hasReasoning ? true : null,
+      structured_output: lower.includes('structured outputs') ? true : null,
+      tool_calling: hasToolCalling ? true : null,
     };
 
     const probeEligible = protocol === 'openai-chat' && endpoint_type === 'chat';
