@@ -3,6 +3,8 @@ import path from 'node:path';
 import { execSync } from 'node:child_process';
 import { getAllModels, getCatalogMetadata } from '../src/lib/catalog';
 import { openApiSpec } from '../src/lib/openapi';
+import { deriveModelStatus } from '../src/lib/status/classifier';
+import { getObservabilityDocument, getObservationsForModel } from '../src/lib/observability';
 
 const CWD = process.cwd();
 const APP_API_DIR = path.join(CWD, 'src/app/api');
@@ -29,15 +31,15 @@ async function main() {
   const healthData = {
     status: 'healthy',
     timestamp: new Date().toISOString(),
-    uptime_seconds: 86400,
+    uptime_seconds: null,
     catalog: {
       status: 'synced',
       total_models: metadata.total_models,
       last_synced_at: metadata.last_synced_at,
     },
     persistence: {
-      mode: 'static_fallback',
-      status: 'operational',
+      mode: 'static_json',
+      status: 'available',
     },
   };
   fs.writeFileSync(path.join(PUBLIC_API_DIR, 'health'), JSON.stringify(healthData, null, 2));
@@ -51,31 +53,57 @@ async function main() {
   fs.writeFileSync(path.join(PUBLIC_API_DIR, 'catalog'), JSON.stringify(catalogData, null, 2));
   fs.writeFileSync(path.join(PUBLIC_API_DIR, 'catalog.json'), JSON.stringify(catalogData, null, 2));
 
-  // /api/v1/status
+  // /api/v1/status — derived only from the published synthetic-observability snapshot.
+  const observability = getObservabilityDocument();
+  fs.writeFileSync(
+    path.join(PUBLIC_API_DIR, 'observability.json'),
+    JSON.stringify(observability, null, 2),
+  );
+  const perModelStatus = models.map((model) => {
+    const observations = getObservationsForModel(model.id, 10);
+    const derived = deriveModelStatus(
+      observations,
+      model.eligibility.probe_eligible,
+      model.access_classification === 'downloadable',
+    );
+    return {
+      id: model.id,
+      name: model.name,
+      publisher: model.publisher,
+      status: derived.status,
+      last_observed: derived.lastObservedAt,
+      latency_ms: derived.averageLatencyMs,
+      success_rate: derived.successRate,
+      sample_count: derived.sampleCount,
+      probe_eligible: model.eligibility.probe_eligible,
+    };
+  });
+
+  const observationCount = observability.observations.length;
+  const successfulObservations = observability.observations.filter(
+    (item) => item.result_category === 'success',
+  ).length;
   const statusSummary = {
     total_models: models.length,
-    operational: 0,
-    degraded: 0,
-    unavailable: 0,
-    unknown: 0,
-    stale: 0,
-    catalog_only: models.filter((m) => !m.eligibility.probe_eligible).length,
-    downloadable_only: 0,
-    probe_eligible_total: models.filter((m) => m.eligibility.probe_eligible).length,
-    last_probe_cycle_at: null,
-    uptime_percentage: 100.0,
+    operational: perModelStatus.filter((model) => model.status === 'operational').length,
+    degraded: perModelStatus.filter((model) => model.status === 'degraded').length,
+    unavailable: perModelStatus.filter((model) => model.status === 'unavailable').length,
+    unknown: perModelStatus.filter((model) => model.status === 'unknown').length,
+    stale: perModelStatus.filter((model) => model.status === 'stale').length,
+    catalog_only: perModelStatus.filter((model) => model.status === 'catalog_only').length,
+    downloadable_only: perModelStatus.filter((model) => model.status === 'downloadable_only').length,
+    probe_eligible_total: models.filter((model) => model.eligibility.probe_eligible).length,
+    last_probe_cycle_at: observability.last_successful_cycle_at,
+    recent_cycles_count: observability.recent_cycles.length,
+    total_observations: observationCount,
+    success_rate_percentage: observationCount > 0
+      ? Number(((successfulObservations / observationCount) * 100).toFixed(2))
+      : null,
   };
   const statusData = {
-    generated_at: new Date().toISOString(),
+    generated_at: observability.generated_at,
     summary: statusSummary,
-    models: models.map((m) => ({
-      id: m.id,
-      name: m.name,
-      publisher: m.publisher,
-      status: m.eligibility.probe_eligible ? 'unknown' : 'catalog_only',
-      last_observed: null,
-      probe_eligible: m.eligibility.probe_eligible,
-    })),
+    models: perModelStatus,
   };
   fs.writeFileSync(path.join(PUBLIC_API_DIR, 'status'), JSON.stringify(statusData, null, 2));
   fs.writeFileSync(path.join(PUBLIC_API_DIR, 'status.json'), JSON.stringify(statusData, null, 2));

@@ -42,16 +42,16 @@ export interface ModelPricing {
 }
 
 export interface ModelCapabilities {
-  chat: boolean;
-  completion: boolean;
-  vision: boolean;
-  audio: boolean;
-  video: boolean;
-  embedding: boolean;
-  reranking: boolean;
-  reasoning: boolean;
-  structured_output: boolean;
-  tool_calling: boolean;
+  chat: boolean | null;
+  completion: boolean | null;
+  vision: boolean | null;
+  audio: boolean | null;
+  video: boolean | null;
+  embedding: boolean | null;
+  reranking: boolean | null;
+  reasoning: boolean | null;
+  structured_output: boolean | null;
+  tool_calling: boolean | null;
 }
 
 export interface ModelProvenance {
@@ -125,14 +125,14 @@ export interface M31AModelCacheEntry {
   slug: string;
   display_name: string;
   description: string;
-  context_window: number;
-  max_output_tokens: number;
-  supports_tools: boolean;
-  supports_thinking: boolean;
-  supports_vision: boolean;
-  supports_audio: boolean;
+  context_window: number | null;
+  max_output_tokens: number | null;
+  supports_tools: boolean | null;
+  supports_thinking: boolean | null;
+  supports_vision: boolean | null;
+  supports_audio: boolean | null;
   default_temperature: number;
-  tool_mode: 'direct' | 'unsupported';
+  tool_mode: 'direct' | 'unsupported' | 'unknown';
   input_modalities: string[];
   truncation_policy: 'truncate' | 'error';
   service_tier: 'standard' | 'fast' | 'reasoning';

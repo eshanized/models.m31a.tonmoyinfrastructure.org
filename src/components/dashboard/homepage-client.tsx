@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
   Layers,
@@ -41,7 +41,9 @@ interface HomepageClientProps {
   publisherCounts: Array<{ name: string; count: number }>;
   modalityCounts: Array<{ name: string; count: number }>;
   recentModels: CanonicalModel[];
-  dbConnected: boolean;
+  monitoringAvailable: boolean;
+  monitoringFresh: boolean;
+  lastProbeAt: string | null;
   recentCyclesCount: number;
 }
 
@@ -54,16 +56,91 @@ export function HomepageClient({
   publisherCounts,
   modalityCounts,
   recentModels,
-  dbConnected,
+  monitoringAvailable,
+  monitoringFresh,
+  lastProbeAt,
   recentCyclesCount,
 }: HomepageClientProps) {
   const [selectedPublisher, setSelectedPublisher] = useState<string>('all');
+  const [liveStatusDistribution, setLiveStatusDistribution] = useState(statusDistribution);
+  const [liveLastProbeAt, setLiveLastProbeAt] = useState(lastProbeAt);
+  const [liveMonitoringFresh, setLiveMonitoringFresh] = useState(monitoringFresh);
+  const [liveCycleCount, setLiveCycleCount] = useState(recentCyclesCount);
 
-  const operationalCount = statusDistribution.operational || 0;
-  const degradedCount = statusDistribution.degraded || 0;
-  const unavailableCount = statusDistribution.unavailable || 0;
-  const unknownCount = statusDistribution.unknown || 0;
-  const catalogOnlyCount = (statusDistribution.catalog_only || 0) + (statusDistribution.downloadable_only || 0);
+  useEffect(() => {
+    let active = true;
+    let lastSuccessfulAt = lastProbeAt;
+
+    const refreshStatus = async () => {
+      const now = Date.now();
+      setLiveMonitoringFresh(
+        Boolean(lastSuccessfulAt && now - Date.parse(lastSuccessfulAt) <= 3 * 60 * 60 * 1000),
+      );
+
+      try {
+        const response = await fetch(`/api/v1/status.json?t=${Math.floor(now / 60_000)}`, {
+          cache: 'no-store',
+          headers: { accept: 'application/json' },
+        });
+        if (!response.ok) return;
+
+        const payload: unknown = await response.json();
+        if (!payload || typeof payload !== 'object' || !('summary' in payload)) return;
+        const summary = payload.summary;
+        if (!summary || typeof summary !== 'object') return;
+
+        const keys: ObservedHealthStatus[] = [
+          'operational',
+          'degraded',
+          'unavailable',
+          'unknown',
+          'stale',
+          'catalog_only',
+          'downloadable_only',
+        ];
+        const nextDistribution: Partial<Record<ObservedHealthStatus, number>> = {};
+        for (const key of keys) {
+          const value = (summary as Record<string, unknown>)[key];
+          if (typeof value === 'number' && Number.isSafeInteger(value) && value >= 0) {
+            nextDistribution[key] = value;
+          }
+        }
+
+        const successfulAt = (summary as Record<string, unknown>).last_probe_cycle_at;
+        if (successfulAt === null || typeof successfulAt === 'string') {
+          lastSuccessfulAt = successfulAt;
+        }
+        const cycleCount = (summary as Record<string, unknown>).recent_cycles_count;
+
+        if (active) {
+          if (typeof cycleCount === 'number' && Number.isSafeInteger(cycleCount) && cycleCount >= 0) {
+            setLiveCycleCount(cycleCount);
+          }
+          setLiveStatusDistribution((previous) => ({ ...previous, ...nextDistribution }));
+          setLiveLastProbeAt(lastSuccessfulAt);
+          setLiveMonitoringFresh(
+            Boolean(lastSuccessfulAt && now - Date.parse(lastSuccessfulAt) <= 3 * 60 * 60 * 1000),
+          );
+        }
+      } catch {
+        // Preserve the last known snapshot when GitHub Pages or its CDN is temporarily unavailable.
+      }
+    };
+
+    void refreshStatus();
+    const timer = window.setInterval(() => void refreshStatus(), 60_000);
+    return () => {
+      active = false;
+      window.clearInterval(timer);
+    };
+  }, [lastProbeAt]);
+
+  const monitoringAvailableNow = liveLastProbeAt !== null;
+  const operationalCount = liveStatusDistribution.operational || 0;
+  const degradedCount = liveStatusDistribution.degraded || 0;
+  const unavailableCount = liveStatusDistribution.unavailable || 0;
+  const unknownCount = liveStatusDistribution.unknown || 0;
+  const catalogOnlyCount = (liveStatusDistribution.catalog_only || 0) + (liveStatusDistribution.downloadable_only || 0);
 
   return (
     <div className="space-y-8 animate-fade-in">
@@ -100,10 +177,10 @@ export function HomepageClient({
               <span>Which endpoints pass availability checks?</span>
             </div>
             <p className="text-xs text-muted-foreground">
-              Synthetic canaries verify health. {dbConnected ? (
+              Synthetic canaries verify health. {monitoringAvailableNow ? (
                 <span><strong className="text-emerald-600 dark:text-emerald-400 font-mono">{operationalCount} operational</strong>, {degradedCount} degraded, {unavailableCount} unavailable.</span>
               ) : (
-                <span className="text-zinc-500 dark:text-zinc-400">Database monitoring pending configuration. Catalog integrity active.</span>
+                <span className="text-zinc-500 dark:text-zinc-400">Monitoring observations are not published yet. Catalog synchronization remains independent.</span>
               )}
             </p>
           </div>
@@ -114,7 +191,7 @@ export function HomepageClient({
               <span>How has observed latency changed?</span>
             </div>
             <p className="text-xs text-muted-foreground">
-              Per-model probe telemetry tracks HTTP duration, TTFT, and token throughput with zero manufactured statistics.
+              Per-model canaries track observed HTTP duration and token usage. TTFT is reported only when a streaming probe measures it.
             </p>
           </div>
         </div>
@@ -144,10 +221,10 @@ export function HomepageClient({
             <CheckCircle2 className="w-4 h-4 text-emerald-500" />
           </div>
           <div className="text-2xl font-bold font-mono tracking-tight text-emerald-600 dark:text-emerald-400">
-            {dbConnected ? operationalCount : '—'}
+            {monitoringAvailableNow ? operationalCount : '—'}
           </div>
           <div className="text-[11px] text-muted-foreground">
-            {dbConnected ? 'Eligible probes passing' : 'Awaiting worker cycle'}
+            {monitoringAvailableNow ? `${liveCycleCount} published monitoring cycles` : 'Awaiting first published cycle'}
           </div>
         </div>
 
@@ -158,10 +235,10 @@ export function HomepageClient({
             <AlertTriangle className="w-4 h-4 text-amber-500" />
           </div>
           <div className="text-2xl font-bold font-mono tracking-tight text-amber-600 dark:text-amber-400">
-            {dbConnected ? degradedCount : '0'}
+            {monitoringAvailableNow ? degradedCount : '—'}
           </div>
           <div className="text-[11px] text-muted-foreground">
-            {dbConnected ? `${unavailableCount} unavailable` : 'No anomalies flagged'}
+            {monitoringAvailableNow ? `${unavailableCount} unavailable` : 'No probe data; status unknown'}
           </div>
         </div>
 
@@ -175,8 +252,8 @@ export function HomepageClient({
             {formatTimeAgo(lastSyncedAt)}
           </div>
           <div className="text-[11px] text-muted-foreground flex items-center gap-1.5">
-            <span className={`w-1.5 h-1.5 rounded-full ${dbConnected ? 'bg-emerald-500' : 'bg-amber-500'}`} />
-            <span>{dbConnected ? 'PostgreSQL Active' : 'Static Mode (DB Unset)'}</span>
+            <span className={`w-1.5 h-1.5 rounded-full ${liveMonitoringFresh ? 'bg-emerald-500' : 'bg-amber-500'}`} />
+            <span>{monitoringAvailableNow ? (liveMonitoringFresh ? 'Monitoring snapshot: fresh' : 'Monitoring snapshot: stale') : 'Monitoring snapshot: awaiting data'}{liveLastProbeAt ? ` · Last successful cycle ${formatTimeAgo(liveLastProbeAt)}` : ''}</span>
           </div>
         </div>
       </section>

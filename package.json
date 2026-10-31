@@ -15,6 +15,7 @@
     "registry:validate": "tsx scripts/validate_registry.ts",
     "registry:export": "tsx scripts/export_catalog.ts",
     "probe:run": "tsx scripts/probe_worker.ts",
+    "probe:publish": "tsx scripts/publish_observability.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx scripts/migrate.ts",
     "test": "vitest run",

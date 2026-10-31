@@ -9,7 +9,8 @@
    - Provider-published metrics are explicitly labeled as provider metrics when documented.
    - Synthetic canaries are explicitly labeled as observations from our monitoring system.
    - Provider-wide GPU load, cluster queue depth, or demand is never fabricated or inferred.
-   - Upstream HTTP 401/403 (authentication anomalies) or HTTP 429 (rate limits) trigger operator alerts and are classified independently; they **never** mark a healthy model as "unavailable".
+   - Upstream HTTP 401/403 (authentication anomalies) and HTTP 429 (rate limits) are classified independently; they **never** mark a model unavailable by themselves.
+   - Public monitoring history is committed as a bounded, validated static JSON snapshot. GitHub Pages never receives a runtime POST.
 
 3. **Safe Ingestion & Zero Secret Leakage**:
    - The ingestion Route Handler (`/api/v1/ingest`) compares bearer tokens using constant-time `crypto.timingSafeEqual`.
@@ -25,37 +26,32 @@
 ## 2. Data Flow Architecture
 
 ```mermaid
-sequenceDiagram
-    autonumber
-    actor Cron as GitHub Actions / Worker
-    participant Ext as NVIDIA API Catalog
-    participant TOML as Canonical TOML Registry
-    participant Export as Export Pipeline
-    participant Ingest as /api/v1/ingest
-    participant DB as PostgreSQL / Supabase
-    participant Web as Next.js Web Dashboard
-    actor User as Developer / M31A Agent
+flowchart TD
+  NVIDIA["NVIDIA Build public model directory"] --> CATALOG["Daily catalog sync"]
+  CATALOG --> TOML["Canonical TOML registry"]
+  TOML --> VALIDATE["Schema + completeness validation"]
+  VALIDATE --> EXPORT["Catalog JSON + M31A JSON export"]
+  EXPORT --> COMMIT1["GitHub commit"]
+  COMMIT1 --> DEPLOY1["Reusable GitHub Pages deployment"]
 
-    Note over Cron,TOML: Daily Sync (02:00 UTC)
-    Cron->>Ext: Fetch official models feed
-    Cron->>TOML: Update canonical TOML records & provenance
-    Cron->>Export: Validate schema & generate JSON distribution
+  INFERENCE["Eligible NVIDIA Build chat endpoints"] --> PROBE["30-minute synthetic probe worker"]
+  PROBE --> ARTIFACT["Validated per-run artifact"]
+  ARTIFACT --> MERGE["Bounded, idempotent history merge"]
+  MERGE --> SNAPSHOT["public/data/observability.json"]
+  SNAPSHOT --> COMMIT2["GitHub commit"]
+  COMMIT2 --> DEPLOY2["Reusable GitHub Pages deployment"]
 
-    Note over Cron,DB: Synthetic Monitoring (Every 30m)
-    Cron->>Ext: Send minimal canary ("Ping", max_tokens=4)
-    Cron->>Cron: Record latency, TTFT, HTTP status
-    Cron->>Ingest: POST /api/v1/ingest (Bearer token)
-    Ingest->>DB: Persist observations, cycle & audit
-
-    Note over User,Web: Read Request
-    User->>Web: Visit /models or call /api/v1/models
-    Web->>DB: Fetch latest observations (or static fallback)
-    Web->>User: Render responsive table & honest status badges
+  EXPORT --> WEBSITE["Static Next.js dashboard + API JSON"]
+  SNAPSHOT --> WEBSITE
+  WEBSITE --> M31A["M31A model discovery contract"]
+  WEBSITE --> USERS["Public developers"]
 ```
 
----
+The catalog and monitoring workflows are independent. Both call the reusable Pages deployment workflow after publishing changes. This is required because repository pushes made with the workflow's `GITHUB_TOKEN` do not automatically start another push-triggered workflow.
 
-## 3. Database Schema Design (Drizzle ORM)
+## 3. Optional Relational Schema Reference (Not Used by GitHub Pages)
+
+The following Drizzle tables are retained as an optional reference for a future server-backed deployment. The current public GitHub Pages deployment does **not** connect to PostgreSQL and does **not** ingest data through Next.js Route Handlers. Its active monitoring path is the versioned static JSON publisher described above.
 
 ### `model_observations`
 - `id` (SERIAL PRIMARY KEY)

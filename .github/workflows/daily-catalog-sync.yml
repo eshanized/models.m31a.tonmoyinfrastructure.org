@@ -2,49 +2,73 @@ name: Daily NVIDIA Catalog Sync
 
 on:
   schedule:
-    - cron: '0 2 * * *' # Every day at 02:00 UTC
+    - cron: '0 2 * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
 
+concurrency:
+  group: generated-registry-and-observability-publication
+  cancel-in-progress: false
+
 jobs:
   sync:
     name: Sync Canonical Registry
     runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
     steps:
-      - name: Checkout Repository
+      - name: Checkout latest default branch
         uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'npm'
+          cache: npm
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm ci
 
-      - name: Run Registry Synchronization
+      - name: Synchronize from NVIDIA's live catalog
         run: npm run registry:sync
         env:
-          REGISTRY_ALLOW_STALE_CACHE: 'false'
           REGISTRY_MIN_DISCOVERED_MODELS: '50'
 
-      - name: Validate Canonical Schema
+      - name: Validate canonical TOML registry
         run: npm run registry:validate
 
-      - name: Export JSON Distribution Artifacts
+      - name: Export website and M31A catalogs
         run: npm run registry:export
 
-      - name: Commit & Push Changes
+      - name: Commit validated catalog changes
+        id: commit
+        shell: bash
         run: |
+          set -euo pipefail
           git config user.name "m31a-catalog-bot"
           git config user.email "bot@m31a.tonmoyinfrastructure.org"
-          if [ -n "$(git status --porcelain registry/ src/data/ public/data/)" ]; then
-            git add registry/ src/data/ public/data/
-            git commit -m "chore(registry): sync canonical NVIDIA Build catalog [skip ci]"
-            git push origin master
-          else
+          git add registry/ src/data/catalog.json public/data/catalog.json public/data/m31a-models.json
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No catalog changes detected."
+            exit 0
           fi
+          git commit -m "chore(registry): sync NVIDIA Build catalog"
+          git pull --rebase origin master
+          git push origin HEAD:master
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    name: Deploy refreshed catalog to GitHub Pages
+    needs: sync
+    if: needs.sync.outputs.changed == 'true'
+    uses: ./.github/workflows/deploy.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write

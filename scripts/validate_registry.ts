@@ -44,8 +44,18 @@ export function validateRegistry(): { valid: boolean; totalModels: number } {
 
   console.log(`✓ Validated ${modelFiles.length} individual model TOML files successfully.`);
 
+  if (validatedIndex.total_models !== modelFiles.length) {
+    throw new Error(`Index total_models (${validatedIndex.total_models}) does not match TOML file count (${modelFiles.length})`);
+  }
+  if (validatedIndex.models.length !== modelFiles.length) {
+    throw new Error(`Index model entries (${validatedIndex.models.length}) do not match TOML file count (${modelFiles.length})`);
+  }
+
   // Verify alignment between index and individual files
   const indexIds = new Set(validatedIndex.models.map((m) => m.id));
+  if (indexIds.size !== validatedIndex.models.length) {
+    throw new Error('Duplicate model IDs detected in registry/index.toml');
+  }
   for (const id of modelIdsInFiles) {
     if (!indexIds.has(id)) {
       throw new Error(`Model ${id} exists in models/ directory but is missing from index.toml`);

@@ -56,7 +56,7 @@ function resolveFamily(id: string, text: string): string | null {
   return null;
 }
 
-function resolveArchitecture(text: string, id: string): string {
+function resolveArchitecture(text: string, id: string): string | null {
   const archMatch = text.match(/\*\*Architecture Type:\*\*\s*([^\r\n]+)/i);
   const netMatch = text.match(/\*\*Network Architecture:\*\*\s*([^\r\n]+)/i);
   if (netMatch && netMatch[1].trim()) {
@@ -82,7 +82,7 @@ function resolveArchitecture(text: string, id: string): string {
   if (lower.includes('mamba') || lower.includes('ssm')) {
     return 'State Space Model (SSM) Hybrid';
   }
-  return 'Transformer';
+  return null;
 }
 
 function resolvePricing(_id: string, _text: string): CanonicalModel['pricing'] {
@@ -126,12 +126,12 @@ export async function syncRegistry() {
 
   // Parse only official model-card Markdown links.
   const targetPaths = new Set<string>();
-  for (const line of mdContent.split('\\n')) {
-    const match = line.match(/^\\s*-\\s*\\[(.*?)\\]\\((.*?)\\)\\s*[—-]\\s*(.*)$/);
+  for (const line of mdContent.split('\n')) {
+    const match = line.match(/^\s*-\s*\[(.*?)\]\((.*?)\)\s*[—-]\s*(.*)$/);
     if (!match?.[2]) continue;
     const parsed = new URL(match[2], 'https://build.nvidia.com');
     if (parsed.protocol !== 'https:' || parsed.hostname !== 'build.nvidia.com') continue;
-    if (!/^\\/[a-zA-Z0-9_-]+\\/[a-zA-Z0-9_.-]+\\.md$/.test(parsed.pathname)) continue;
+    if (!/^\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_.-]+\.md$/.test(parsed.pathname)) continue;
     targetPaths.add(parsed.pathname);
   }
 
@@ -141,13 +141,16 @@ export async function syncRegistry() {
 
   // 2. Fetch and parse each model markdown card
   const syncedModels: CanonicalModel[] = [];
-  const existingFiles = new Set(fs.readdirSync(MODELS_DIR));
-  const writtenFilenames = new Set<string>();
-  const stagedRecords: Array<{ tomlPath: string; tomlString: string; safeFilename: string }> = [];
+  const discoveredIds = new Set<string>();
+  const existingFiles = new Set(fs.readdirSync(MODELS_DIR).filter((file) => file.endsWith('.toml')));
+  const existingModels = new Map<string, CanonicalModel>();
+  for (const file of existingFiles) {
+    const existing = CanonicalModelSchema.parse(parse(fs.readFileSync(path.join(MODELS_DIR, file), 'utf-8')));
+    existingModels.set(existing.id, existing);
+  }
+  const stagedRecords: Array<{ tomlPath: string; tomlString: string }> = [];
 
   for (const relPath of targetPaths) {
-    const basename = path.basename(relPath);
-    const localCachePath = path.join(RAW_CACHE_DIR, basename);
     let cardContent = '';
 
     const fullUrl = 'https://build.nvidia.com' + relPath;
@@ -164,15 +167,19 @@ export async function syncRegistry() {
       clearTimeout(cardTimeout);
     }
     if (cardContent.length < 80) throw new Error(`Model card ${relPath} is unexpectedly small`);
-    const frontmatch = cardContent.match(/^---\\r?\\n([\\s\\S]*?)\\r?\\n---/);
+    const frontmatch = cardContent.match(/^---\r?\n([\s\S]*?)\r?\n---/);
     if (!frontmatch) throw new Error(`Model card ${relPath} has unrecognized front matter; refusing partial sync`);
 
     const meta = parseYamlSimple(frontmatch[1]);
     const canonical = meta.canonical || '';
     const id = canonical.replace('https://build.nvidia.com/', '').trim();
     if (!id || !/^[a-zA-Z0-9_-]+\/[a-zA-Z0-9_.-]+$/.test(id)) {
-      continue;
+      throw new Error(`Model card ${relPath} has an invalid canonical ID`);
     }
+    if (discoveredIds.has(id)) {
+      throw new Error(`NVIDIA directory contains duplicate canonical model ID: ${id}`);
+    }
+    discoveredIds.add(id);
 
     const publisher = meta.publisher || id.split('/')[0] || 'nvidia';
     const name = meta.title || id.split('/')[1] || id;
@@ -299,16 +306,16 @@ export async function syncRegistry() {
     const hasToolCalling = lower.includes('function calling: supported') || lower.includes('tool calling') || lower.includes('tool-calling');
 
     const capabilities = {
-      chat: hasChat,
-      completion: true,
-      vision: hasVision,
-      audio: hasAudio,
-      video: hasVideo,
-      embedding: endpoint_type === 'embedding',
-      reranking: endpoint_type === 'reranking',
-      reasoning: hasReasoning,
-      structured_output: hasChat || lower.includes('structured outputs'),
-      tool_calling: hasToolCalling,
+      chat: hasChat ? true : null,
+      completion: endpoint_type === 'chat' || endpoint_type === 'completion' ? true : null,
+      vision: hasVision ? true : null,
+      audio: hasAudio ? true : null,
+      video: hasVideo ? true : null,
+      embedding: endpoint_type === 'embedding' ? true : null,
+      reranking: endpoint_type === 'reranking' ? true : null,
+      reasoning: hasReasoning ? true : null,
+      structured_output: lower.includes('structured outputs') ? true : null,
+      tool_calling: hasToolCalling ? true : null,
     };
 
     const probeEligible = protocol === 'openai-chat' && endpoint_type === 'chat';
@@ -323,7 +330,7 @@ export async function syncRegistry() {
       documentation_urls: docUrls.slice(0, 5),
       description,
       catalog_status: id.includes('preview') ? 'preview' : 'active',
-      first_seen_at: meta.updated || '2026-01-01T00:00:00.000Z',
+      first_seen_at: existingModels.get(id)?.first_seen_at || new Date().toISOString(),
       last_seen_at: new Date().toISOString(),
       endpoint_type,
       protocol,
@@ -332,10 +339,10 @@ export async function syncRegistry() {
       output_modalities,
       capabilities,
       context_window,
-      max_output_tokens: context_window && context_window > 4096 ? 4096 : null,
+      max_output_tokens: null,
       pricing: resolvePricing(id, cardContent),
-      license: license || 'NVIDIA API Trial Terms of Service',
-      usage_restrictions: 'Commercial and research use permitted under governing model and API terms.',
+      license,
+      usage_restrictions: null,
       provenance: {
         source_url: canonical || `https://build.nvidia.com/${id}`,
         source_type: 'official_directory',
@@ -356,45 +363,47 @@ export async function syncRegistry() {
     const validated = CanonicalModelSchema.parse(modelRecord);
     syncedModels.push(validated);
 
-    // Write TOML record
+    // Stage canonical TOML until every source record has passed validation.
     const safeFilename = `${validated.id.replace(/\//g, '__')}.toml`;
-    const tomlPath = path.join(MODELS_DIR, safeFilename);
-    const tomlString = stringify(validated);
-    fs.writeFileSync(tomlPath, tomlString);
-    writtenFilenames.add(safeFilename);
+    stagedRecords.push({
+      tomlPath: path.join(MODELS_DIR, safeFilename),
+      tomlString: stringify(validated),
+    });
   }
 
-  if (syncedModels.length < Number(process.env.REGISTRY_MIN_DISCOVERED_MODELS || 50)) {
-    throw new Error(`Only ${syncedModels.length} model cards parsed; refusing to publish partial catalog.`);
+  const minimumModels = Number(process.env.REGISTRY_MIN_DISCOVERED_MODELS || 50);
+  if (syncedModels.length < minimumModels) {
+    throw new Error(`Only ${syncedModels.length} model cards parsed; minimum is ${minimumModels}. No registry files were changed.`);
+  }
+  if (syncedModels.length !== targetPaths.size) {
+    throw new Error(`Discovered ${targetPaths.size} model pages but parsed ${syncedModels.length}; refusing partial publication.`);
   }
 
-  // Commit staged model records only after every discovered card passes parsing and schema validation.
+  // Preserve models that disappear from a single listing snapshot. Retirement must
+  // be a separate, explicitly verified operation rather than a side effect of scraping.
+  const mergedModels = new Map(existingModels);
+  for (const model of syncedModels) mergedModels.set(model.id, model);
+  const allModels = [...mergedModels.values()].sort((a, b) => a.id.localeCompare(b.id));
+
+  // All upstream records have been fetched and validated. Only now touch canonical files.
   for (const record of stagedRecords) {
     fs.writeFileSync(record.tomlPath, record.tomlString);
-    writtenFilenames.add(record.safeFilename);
   }
 
-  // Absence from a single listing snapshot is not proof of retirement.
-  // Keep unseen records until a separately verified retirement signal is available.
-  const retainedCount = [...existingFiles].filter((file) => !writtenFilenames.has(file)).length;
-  console.log(`ℹ️ Preserved ${retainedCount} records not observed in this successful source snapshot.`);
-
-  console.log(`✅ Written ${syncedModels.length} authoritative models to registry/models/`);
-
   // Build Registry Index
-  const publishers = Array.from(new Set(syncedModels.map((m) => m.publisher))).sort();
+  const publishers = Array.from(new Set(allModels.map((m) => m.publisher))).sort();
   const allModalities = Array.from(
-    new Set(syncedModels.flatMap((m) => [...m.input_modalities, ...m.output_modalities]))
+    new Set(allModels.flatMap((m) => [...m.input_modalities, ...m.output_modalities]))
   ) as Array<'text' | 'image' | 'audio' | 'video' | 'embedding'>;
 
   const index: RegistryIndex = {
     schema_version: '1.0.0',
     generated_at: new Date().toISOString(),
     last_synced_at: new Date().toISOString(),
-    total_models: syncedModels.length,
+    total_models: allModels.length,
     publishers,
     modalities: allModalities,
-    models: syncedModels.map((m) => ({
+    models: allModels.map((m) => ({
       id: m.id,
       name: m.name,
       publisher: m.publisher,
@@ -408,7 +417,9 @@ export async function syncRegistry() {
     })),
   };
 
-  fs.writeFileSync(INDEX_PATH, stringify(index));
+  const indexTempPath = `${INDEX_PATH}.tmp`;
+  fs.writeFileSync(indexTempPath, stringify(index));
+  fs.renameSync(indexTempPath, INDEX_PATH);
   console.log(`📇 Generated registry index at ${INDEX_PATH} with ${index.total_models} models and ${publishers.length} publishers`);
 }
 

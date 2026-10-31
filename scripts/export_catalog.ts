@@ -37,6 +37,16 @@ export function exportCatalog() {
 
   // Sort models deterministically
   models.sort((a, b) => a.id.localeCompare(b.id));
+  const fileModelIds = new Set(models.map((model) => model.id));
+  const indexedModelIds = new Set(indexData.models.map((model) => model.id));
+  if (models.length !== indexData.total_models || fileModelIds.size !== models.length) {
+    throw new Error('TOML model records do not match the registry index count or contain duplicate IDs.');
+  }
+  if (indexedModelIds.size !== indexData.models.length ||
+      indexedModelIds.size !== fileModelIds.size ||
+      [...fileModelIds].some((id) => !indexedModelIds.has(id))) {
+    throw new Error('TOML model records and registry index IDs do not match.');
+  }
 
   // Build website catalog payload
   const catalogPayload = {
@@ -59,14 +69,14 @@ export function exportCatalog() {
       slug: m.id,
       display_name: m.name,
       description: m.description,
-      context_window: m.context_window ?? 0,
-      max_output_tokens: m.max_output_tokens ?? 0,
-      supports_tools: m.capabilities.tool_calling ?? false,
-      supports_thinking: m.capabilities.reasoning ?? false,
-      supports_vision: m.capabilities.vision ?? false,
-      supports_audio: m.capabilities.audio ?? false,
+      context_window: m.context_window,
+      max_output_tokens: m.max_output_tokens,
+      supports_tools: m.capabilities.tool_calling,
+      supports_thinking: m.capabilities.reasoning,
+      supports_vision: m.capabilities.vision,
+      supports_audio: m.capabilities.audio,
       default_temperature: 0.2,
-      tool_mode: m.capabilities.tool_calling ? 'direct' : 'unsupported',
+      tool_mode: m.capabilities.tool_calling === true ? 'direct' : m.capabilities.tool_calling === false ? 'unsupported' : 'unknown',
       input_modalities: m.input_modalities,
       truncation_policy: 'truncate',
       service_tier: serviceTier,

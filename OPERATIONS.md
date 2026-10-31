@@ -1,44 +1,70 @@
-# Operational & Deployment Guide
+# Operations Guide
 
-## 1. Initial Deployment Checklist
+## Hosting and data publication
 
-1. **Deploy Next.js Application**:
-   - Host on Vercel, Netlify, Cloudflare Workers/Pages, or Node.js Docker.
-   - Configure environment variables:
-     - `NEXT_PUBLIC_APP_URL`
-     - `DATABASE_URL` (optional: omit for static mode)
-     - `INGESTION_SECRET` (generate using `openssl rand -hex 32`)
+The public dashboard is a Next.js static export on GitHub Pages. GitHub Pages cannot execute Next.js Route Handlers or accept runtime POST ingestion requests.
 
-2. **Initialize PostgreSQL Database (if enabling persistent observability)**:
-   ```bash
-   # Run versioned migrations
-   DATABASE_URL="postgresql://user:pass@host:5432/db" npm run db:migrate
-   ```
+The application publishes two independently generated data sets:
 
-3. **Configure GitHub Actions Secrets**:
-   In your repository Settings -> Secrets and variables -> Actions:
-   - `NVIDIA_API_KEY`: Server-side API key for synthetic monitoring.
-   - `INGESTION_SECRET`: Must match the secret configured in the web deployment.
+- **Model catalog:** canonical TOML in `registry/`, synchronized from NVIDIA Build daily and exported to `src/data/catalog.json`, `public/data/catalog.json`, and the M31A contract.
+- **Synthetic observability:** monitoring observations published to `src/data/observability.json` and `public/data/observability.json` every 30 minutes.
 
-4. **Verify First Successful Monitoring Cycle**:
-   - Trigger the `Scheduled Synthetic Endpoint Monitoring` workflow manually via GitHub Actions (`workflow_dispatch`).
-   - Check workflow logs: confirm models are probed and batch payload is accepted by `/api/v1/ingest`.
-   - Visit `/` and `/models`: confirm status badges update to `Operational`.
+The website and static API endpoints consume these committed snapshots. No database or long-running server is required for the public dashboard.
 
----
+## GitHub Actions configuration
 
-## 2. Disaster Recovery & Fallback Procedures
+Configure the following repository secret:
 
-### Upstream NVIDIA API Outage
-- The daily catalog sync workflow will fail gracefully and retain the last-known-good catalog.
-- Previous historical observations are retained intact.
-- The web dashboard marks endpoints as `unavailable` or `degraded` honestly without wiping catalog records.
+- `NVIDIA_API_KEY`: dedicated NVIDIA Build inference credential used only by the scheduled monitoring worker.
 
-### Database Outage or Maintenance
-- The web application instantly and gracefully falls back to static catalog rendering (`db_persisted: false`).
-- Models remain completely discoverable, searchable, filterable, and comparable.
-- Observability badges report `Unknown` or `Catalog Only` without throwing 500 errors.
+Optional repository variables:
 
-### Emergency Probe Halt
-- Set GitHub Actions repository secret or variable `PROBE_KILL_SWITCH=true`.
-- The probe worker will immediately exit before making any outbound HTTP requests.
+- `PROBE_KILL_SWITCH`: set to `true` to disable outbound synthetic probes.
+- `PROBE_PER_CYCLE_LIMIT`: maximum models probed per cycle (default 8, maximum 40).
+- `PROBE_CONCURRENCY`: concurrent requests (default 2, maximum 5).
+- `PROBE_TIMEOUT_MS`: per-request timeout (default 15000 ms).
+- `PROBE_MAX_RETRIES`: bounded retries for transient failures (default 2).
+
+The workflows use the repository-scoped `GITHUB_TOKEN` with `contents: write` to commit generated public data. The catalog and monitoring workflows explicitly invoke the reusable GitHub Pages deployment workflow after successful publication because pushes made with `GITHUB_TOKEN` do not automatically trigger other push workflows.
+
+No `INGESTION_URL`, `INGESTION_SECRET`, or database secret is required for GitHub Pages monitoring.
+
+## Manual operation
+
+Run the following locally when you want to verify catalog parsing:
+
+```bash
+npm ci
+npm run registry:sync
+npm run registry:validate
+npm run registry:export
+npm run typecheck
+npm test
+npm run build
+```
+
+To run a live probe cycle, provide `NVIDIA_API_KEY` in the local environment:
+
+```bash
+NVIDIA_API_KEY="$NVIDIA_API_KEY" npm run probe:run
+npm run probe:publish
+```
+
+The probe command writes a temporary run artifact under `.cache/`. The publisher validates model IDs and the payload schema, merges bounded history, then atomically updates both committed observability JSON files.
+
+## Monitoring semantics
+
+- A successful HTTP response is an observation of the shared endpoint from a GitHub-hosted runner, not a provider-wide availability guarantee.
+- HTTP 401/403 is an authentication/configuration issue, not an outage.
+- HTTP 429 is a rate-limit observation, not proof of provider downtime.
+- Repeated server/network/timeout failures are required before the classifier reports unavailable.
+- This worker uses non-streaming canaries. It records total response duration, not TTFT. TTFT remains unknown until a streaming probe measures it.
+- NVIDIA Build does not expose shared-service GPU utilization or queue depth through this public monitoring pipeline. Those metrics are never inferred.
+
+## Data retention and recovery
+
+The publication contract retains at most 30 observations per model, 48 recent monitoring cycles, 14 days of observations, and 3000 observations total, with a 2 MiB maximum document size.
+
+If a probe run fails, the last published snapshot remains intact. If publication or push fails, the GitHub Actions job fails and the website continues serving the last known-good snapshot. The dashboard reports freshness from the last published cycle; it does not pretend stale data is current.
+
+If catalog discovery fails or any discovered model card cannot be validated, the catalog workflow stops before committing. Records missing from one successful listing are preserved until retirement is independently verified.
