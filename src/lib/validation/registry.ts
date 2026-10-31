@@ -26,16 +26,16 @@ export const ModelPricingSchema = z.object({
 });
 
 export const ModelCapabilitiesSchema = z.object({
-  chat: z.boolean(),
-  completion: z.boolean(),
-  vision: z.boolean(),
-  audio: z.boolean(),
-  video: z.boolean(),
-  embedding: z.boolean(),
-  reranking: z.boolean(),
-  reasoning: z.boolean(),
-  structured_output: z.boolean(),
-  tool_calling: z.boolean(),
+  chat: z.boolean().nullable(),
+  completion: z.boolean().nullable(),
+  vision: z.boolean().nullable(),
+  audio: z.boolean().nullable(),
+  video: z.boolean().nullable(),
+  embedding: z.boolean().nullable(),
+  reranking: z.boolean().nullable(),
+  reasoning: z.boolean().nullable(),
+  structured_output: z.boolean().nullable(),
+  tool_calling: z.boolean().nullable(),
 });
 
 export const ModelProvenanceSchema = z.object({
