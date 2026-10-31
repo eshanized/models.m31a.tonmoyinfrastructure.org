@@ -55,6 +55,10 @@ async function main() {
 
   // /api/v1/status — derived only from the published synthetic-observability snapshot.
   const observability = getObservabilityDocument();
+  fs.writeFileSync(
+    path.join(PUBLIC_API_DIR, 'observability.json'),
+    JSON.stringify(observability, null, 2),
+  );
   const perModelStatus = models.map((model) => {
     const observations = getObservationsForModel(model.id, 10);
     const derived = deriveModelStatus(
