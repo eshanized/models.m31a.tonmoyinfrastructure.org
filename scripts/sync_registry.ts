@@ -141,6 +141,7 @@ export async function syncRegistry() {
 
   // 2. Fetch and parse each model markdown card
   const syncedModels: CanonicalModel[] = [];
+  const discoveredIds = new Set<string>();
   const existingFiles = new Set(fs.readdirSync(MODELS_DIR).filter((file) => file.endsWith('.toml')));
   const existingModels = new Map<string, CanonicalModel>();
   for (const file of existingFiles) {
@@ -175,6 +176,10 @@ export async function syncRegistry() {
     if (!id || !/^[a-zA-Z0-9_-]+\/[a-zA-Z0-9_.-]+$/.test(id)) {
       throw new Error(`Model card ${relPath} has an invalid canonical ID`);
     }
+    if (discoveredIds.has(id)) {
+      throw new Error(`NVIDIA directory contains duplicate canonical model ID: ${id}`);
+    }
+    discoveredIds.add(id);
 
     const publisher = meta.publisher || id.split('/')[0] || 'nvidia';
     const name = meta.title || id.split('/')[1] || id;
