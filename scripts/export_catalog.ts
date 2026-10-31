@@ -66,7 +66,7 @@ export function exportCatalog() {
       supports_vision: m.capabilities.vision ?? false,
       supports_audio: m.capabilities.audio ?? false,
       default_temperature: 0.2,
-      tool_mode: m.capabilities.tool_calling ? 'direct' : 'unsupported',
+      tool_mode: m.capabilities.tool_calling === true ? 'direct' : m.capabilities.tool_calling === false ? 'unsupported' : 'unknown',
       input_modalities: m.input_modalities,
       truncation_policy: 'truncate',
       service_tier: serviceTier,
