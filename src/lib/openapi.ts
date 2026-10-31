@@ -132,27 +132,15 @@ export const openApiSpec = {
         },
       },
     },
-    '/api/v1/ingest': {
-      post: {
-        summary: 'Ingest Probe Observations',
-        description: 'Internal protected endpoint for synthetic monitoring workers to submit batch observations.',
-        security: [{ BearerAuth: [] }],
+    '/api/v1/observability': {
+      get: {
+        summary: 'Synthetic Observability Snapshot',
+        description: 'Returns the latest published synthetic probe observations and bounded status history. Values are measured by our GitHub-hosted probes, not provider-wide infrastructure metrics.',
         responses: {
-          '200': { description: 'Observations accepted' },
-          '401': { description: 'Missing authentication' },
-          '403': { description: 'Invalid ingestion token' },
-          '400': { description: 'Schema or timestamp validation failed' },
+          '200': { description: 'Versioned observability document' },
         },
       },
     },
   },
-  components: {
-    securitySchemes: {
-      BearerAuth: {
-        type: 'http',
-        scheme: 'bearer',
-        description: 'Shared server-side ingestion token',
-      },
-    },
-  },
+  components: {},
 };
