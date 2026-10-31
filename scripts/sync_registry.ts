@@ -140,51 +140,43 @@ function resolvePricing(id: string, text: string): CanonicalModel['pricing'] {
 export async function syncRegistry() {
   console.log('🔄 Starting Canonical NVIDIA Registry Synchronization from build.nvidia.com...');
 
-  // 1. Fetch official models markdown directory
+  // 1. Fetch the official NVIDIA model directory. Never fall back to cached
+  // discovery data: a stale cache must not be mistaken for a successful sync.
   const modelsMdUrl = 'https://build.nvidia.com/models.md';
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 30_000);
   let mdContent = '';
   try {
-    const res = await fetch(modelsMdUrl, { headers: { 'User-Agent': 'Mozilla/5.0 (NVIDIA-Catalog-Sync)' } });
-    if (res.ok) {
-      mdContent = await res.text();
-      fs.writeFileSync(path.join(RAW_CACHE_DIR, 'models.md'), mdContent);
+    const res = await fetch(modelsMdUrl, {
+      signal: controller.signal,
+      headers: { 'User-Agent': 'M31A-NVIDIA-Model-Registry/1.0' },
+    });
+    if (!res.ok) {
+      throw new Error(`NVIDIA models directory returned HTTP ${res.status}`);
     }
-  } catch (err: any) {
-    console.warn('⚠️ Could not fetch remote models.md, falling back to cache:', err.message);
+    mdContent = await res.text();
+  } finally {
+    clearTimeout(timeout);
   }
-
-  if (!mdContent && fs.existsSync(path.join(RAW_CACHE_DIR, 'models.md'))) {
-    mdContent = fs.readFileSync(path.join(RAW_CACHE_DIR, 'models.md'), 'utf-8');
-  } else if (!mdContent && fs.existsSync('/tmp/nvidia_build_models.md')) {
-    mdContent = fs.readFileSync('/tmp/nvidia_build_models.md', 'utf-8');
+  if (mdContent.trim().length < 100) {
+    throw new Error('NVIDIA models directory response is unexpectedly small; refusing to publish');
   }
+  fs.writeFileSync(path.join(RAW_CACHE_DIR, 'models.md'), mdContent);
 
-  // Parse links from models.md
+  // Parse only official model-card Markdown links.
   const targetPaths = new Set<string>();
-  for (const line of mdContent.split('\n')) {
-    const match = line.match(/^\s*-\s*\[(.*?)\]\((.*?)\)\s*—\s*(.*)$/);
-    if (match && match[2]) {
-      targetPaths.add(match[2]);
-    }
+  for (const line of mdContent.split('\\n')) {
+    const match = line.match(/^\\s*-\\s*\\[(.*?)\\]\\((.*?)\\)\\s*[—-]\\s*(.*)$/);
+    if (!match?.[2]) continue;
+    const parsed = new URL(match[2], 'https://build.nvidia.com');
+    if (parsed.protocol !== 'https:' || parsed.hostname !== 'build.nvidia.com') continue;
+    if (!/^\\/[a-zA-Z0-9_-]+\\/[a-zA-Z0-9_.-]+\\.md$/.test(parsed.pathname)) continue;
+    targetPaths.add(parsed.pathname);
   }
 
-  // Also include standalone endpoint models from sitemap
-  const extraEndpoints = [
-    '/stabilityai/stable-diffusion-3_5-large.md',
-    '/stepfun-ai/step-5-preview.md',
-    '/nvidia/streampetr.md',
-    '/nvidia/studiovoice.md',
-    '/nvidia/synthetic-video-detector.md',
-    '/microsoft/trellis.md',
-    '/nvidia/vsr.md',
-    '/wan-ai/wan2.2-animate-2-14b.md',
-    '/openai/whisper-large-v3.md',
-  ];
-  for (const ep of extraEndpoints) {
-    targetPaths.add(ep);
+  if (targetPaths.size < Number(process.env.REGISTRY_MIN_DISCOVERED_MODELS || 50)) {
+    throw new Error(`Only ${targetPaths.size} models discovered; below safety floor. Refusing to prune or publish.`);
   }
-
-  console.log(`📡 Discovered ${targetPaths.size} official model endpoints on build.nvidia.com`);
 
   // 2. Fetch and parse each model markdown card
   const syncedModels: CanonicalModel[] = [];
