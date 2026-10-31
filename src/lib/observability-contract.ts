@@ -109,7 +109,9 @@ export function mergeObservabilityDocument(
     schema_version: '1.0.0',
     provider: 'nvidia-build',
     generated_at: now.toISOString(),
-    last_successful_cycle_at: incoming.cycle.timestamp,
+    last_successful_cycle_at: incoming.cycle.cycle_status === 'failed'
+      ? current.last_successful_cycle_at
+      : incoming.cycle.timestamp,
     monitoring_region: incoming.cycle.region,
     latest_cycle: incoming.cycle,
     recent_cycles: recentCycles,
