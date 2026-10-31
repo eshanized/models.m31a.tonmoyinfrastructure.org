@@ -100,7 +100,7 @@ export function ModelExplorer({ initialModels, publishers, statusMap }: ModelExp
       // Capability
       if (selectedCapability !== 'all') {
         const cap = selectedCapability as keyof CanonicalModel['capabilities'];
-        if (!m.capabilities[cap]) return false;
+        if (m.capabilities[cap] !== true) return false;
       }
 
       // Status
