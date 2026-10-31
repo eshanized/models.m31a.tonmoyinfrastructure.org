@@ -49,7 +49,9 @@ flowchart TD
 
 The catalog and monitoring workflows are independent. Both call the reusable Pages deployment workflow after publishing changes. This is required because repository pushes made with the workflow's `GITHUB_TOKEN` do not automatically start another push-triggered workflow.
 
-## 3. Database Schema Design (Drizzle ORM)
+## 3. Optional Relational Schema Reference (Not Used by GitHub Pages)
+
+The following Drizzle tables are retained as an optional reference for a future server-backed deployment. The current public GitHub Pages deployment does **not** connect to PostgreSQL and does **not** ingest data through Next.js Route Handlers. Its active monitoring path is the versioned static JSON publisher described above.
 
 ### `model_observations`
 - `id` (SERIAL PRIMARY KEY)
