@@ -2,15 +2,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { getAllModels } from '../src/lib/catalog';
-import { CanonicalModel } from '../src/lib/types/registry';
-import { deriveModelStatus } from '../src/lib/status/classifier';
-import { IngestionPayload } from '../src/lib/validation/ingest';
+import type { CanonicalModel } from '../src/lib/types/registry';
+import type { ProbeArtifact, RegistryObservation } from '../src/lib/observability-contract';
 
 interface ProbeConfig {
   apiKey: string;
   baseUrl: string;
-  ingestionUrl?: string;
-  ingestionSecret?: string;
   perCycleLimit: number;
   concurrencyLimit: number;
   timeoutMs: number;
@@ -18,309 +15,269 @@ interface ProbeConfig {
   killSwitch: boolean;
 }
 
+interface ProbeResult extends RegistryObservation {}
+
+function positiveInteger(value: string | undefined, fallback: number, maximum: number): number {
+  const parsed = Number(value ?? fallback);
+  if (!Number.isSafeInteger(parsed) || parsed < 1 || parsed > maximum) return fallback;
+  return parsed;
+}
+
 function loadConfig(): ProbeConfig {
   return {
-    apiKey: process.env.NVIDIA_API_KEY || '',
-    baseUrl: process.env.NVIDIA_BASE_URL || 'https://integrate.api.nvidia.com/v1',
-    ingestionUrl: process.env.INGESTION_URL,
-    ingestionSecret: process.env.INGESTION_SECRET,
-    perCycleLimit: parseInt(process.env.PROBE_PER_CYCLE_LIMIT || '5', 10),
-    concurrencyLimit: parseInt(process.env.PROBE_CONCURRENCY || '2', 10),
-    timeoutMs: parseInt(process.env.PROBE_TIMEOUT_MS || '10000', 10),
-    maxRetries: parseInt(process.env.PROBE_MAX_RETRIES || '2', 10),
+    apiKey: process.env.NVIDIA_API_KEY?.trim() ?? '',
+    baseUrl: (process.env.NVIDIA_BASE_URL || 'https://integrate.api.nvidia.com/v1').replace(/\/+$/, ''),
+    perCycleLimit: positiveInteger(process.env.PROBE_PER_CYCLE_LIMIT, 8, 40),
+    concurrencyLimit: positiveInteger(process.env.PROBE_CONCURRENCY, 2, 5),
+    timeoutMs: positiveInteger(process.env.PROBE_TIMEOUT_MS, 15000, 60000),
+    maxRetries: Number.isInteger(Number(process.env.PROBE_MAX_RETRIES))
+      ? Math.min(3, Math.max(0, Number(process.env.PROBE_MAX_RETRIES)))
+      : 2,
     killSwitch: process.env.PROBE_KILL_SWITCH === 'true',
   };
 }
 
-interface ProbeResult {
-  modelId: string;
-  status: 'operational' | 'degraded' | 'unavailable' | 'unknown';
-  resultCategory: 'success' | 'rate_limit' | 'http_error' | 'timeout' | 'invalid_response' | 'network_error' | 'auth_error';
-  latencyMs: number;
-  ttftMs: number | null;
-  tokensOut: number | null;
-  tokensPerSec: number | null;
-  failureCategory: string | null;
-  errorMessage: string | null;
-  httpStatus: number | null;
-  timestamp: string;
+function observation(
+  model: CanonicalModel,
+  runId: string,
+  startedAt: string,
+  status: ProbeResult['status'],
+  resultCategory: ProbeResult['result_category'],
+  latencyMs: number,
+  httpStatus: number | null,
+  failureCategory: string | null,
+  errorMessage: string | null,
+  usage?: { completion_tokens?: unknown },
+): ProbeResult {
+  const rawTokens = usage?.completion_tokens;
+  const tokensOut = typeof rawTokens === 'number' && Number.isInteger(rawTokens) && rawTokens >= 0
+    ? rawTokens
+    : null;
+  return {
+    model_id: model.id,
+    status,
+    result_category: resultCategory,
+    latency_ms: Math.max(0, Math.round(latencyMs)),
+    // This worker uses non-streaming canaries. Total duration is not TTFT.
+    ttft_ms: null,
+    tokens_out: tokensOut,
+    tokens_per_second: tokensOut !== null && latencyMs > 0
+      ? Number((tokensOut / (latencyMs / 1000)).toFixed(2))
+      : null,
+    failure_category: failureCategory,
+    error_message: errorMessage,
+    http_status: httpStatus,
+    timestamp: startedAt,
+    region: 'github-hosted-runner',
+    run_id: runId,
+  };
 }
 
-async function probeModelWithRetry(
+async function probeModel(
   model: CanonicalModel,
-  config: ProbeConfig
+  config: ProbeConfig,
+  runId: string,
 ): Promise<ProbeResult> {
   const endpoint = `${config.baseUrl}/chat/completions`;
-  const canaryPayload = {
+  const payload = {
     model: model.id,
-    messages: [{ role: 'user', content: 'Ping' }],
-    max_tokens: 4,
-    temperature: 0.1,
+    messages: [{ role: 'user', content: 'Reply with PONG.' }],
+    max_tokens: Math.min(4, model.eligibility.max_probe_tokens ?? 4),
+    temperature: 0,
+    stream: false,
   };
 
-  let attempt = 0;
-  while (attempt <= config.maxRetries) {
-    attempt++;
-    const start = performance.now();
+  for (let attempt = 0; attempt <= config.maxRetries; attempt += 1) {
     const timestamp = new Date().toISOString();
-
+    const started = performance.now();
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), config.timeoutMs);
+    const timeout = setTimeout(() => controller.abort(), config.timeoutMs);
 
     try {
-      const resp = await fetch(endpoint, {
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${config.apiKey}`,
-          'User-Agent': 'M31A-Model-Monitor/1.0',
+          'User-Agent': 'M31A-NVIDIA-Build-Monitor/1.1',
         },
-        body: JSON.stringify(canaryPayload),
+        body: JSON.stringify(payload),
         signal: controller.signal,
       });
 
-      clearTimeout(timer);
-      const latencyMs = Math.round(performance.now() - start);
-
-      if (resp.status === 200) {
-        const body = (await resp.json()) as any;
-        const text = body?.choices?.[0]?.message?.content || '';
-        const tokensOut = body?.usage?.completion_tokens || 1;
-        const tokensPerSec = latencyMs > 0 ? (tokensOut / (latencyMs / 1000)) : 0;
-
-        return {
-          modelId: model.id,
-          status: latencyMs > 4000 ? 'degraded' : 'operational',
-          resultCategory: 'success',
-          latencyMs,
-          ttftMs: latencyMs,
-          tokensOut,
-          tokensPerSec: parseFloat(tokensPerSec.toFixed(2)),
-          failureCategory: null,
-          errorMessage: null,
-          httpStatus: 200,
-          timestamp,
-        };
+      if (response.status === 401 || response.status === 403) {
+        return observation(model, runId, timestamp, 'unknown', 'auth_error',
+          performance.now() - started, response.status, 'authentication_failure',
+          'NVIDIA rejected the monitoring credential or its access permissions.');
       }
 
-      if (resp.status === 401 || resp.status === 403) {
-        return {
-          modelId: model.id,
-          status: 'unknown',
-          resultCategory: 'auth_error',
-          latencyMs,
-          ttftMs: null,
-          tokensOut: null,
-          tokensPerSec: null,
-          failureCategory: 'authentication_failure',
-          errorMessage: 'Server credential rejected or unauthorized',
-          httpStatus: resp.status,
-          timestamp,
-        };
+      if (response.status === 429) {
+        return observation(model, runId, timestamp, 'degraded', 'rate_limit',
+          performance.now() - started, 429, 'rate_limited',
+          'NVIDIA Build returned HTTP 429 for the synthetic canary.');
       }
 
-      if (resp.status === 429) {
-        return {
-          modelId: model.id,
-          status: 'degraded',
-          resultCategory: 'rate_limit',
-          latencyMs,
-          ttftMs: null,
-          tokensOut: null,
-          tokensPerSec: null,
-          failureCategory: 'rate_limited',
-          errorMessage: 'Endpoint returned 429 Too Many Requests',
-          httpStatus: 429,
-          timestamp,
-        };
-      }
-
-      // 5xx or other status
-      if (attempt <= config.maxRetries) {
-        // Exponential backoff with jitter
-        const backoff = Math.pow(2, attempt) * 500 + Math.random() * 200;
-        await new Promise((r) => setTimeout(r, backoff));
+      if (response.status >= 500 && attempt < config.maxRetries) {
+        await response.body?.cancel();
+        const delay = Math.min(8000, 500 * (2 ** attempt)) + Math.floor(Math.random() * 250);
+        await new Promise((resolve) => setTimeout(resolve, delay));
         continue;
       }
 
-      return {
-        modelId: model.id,
-        status: 'unavailable',
-        resultCategory: 'http_error',
-        latencyMs,
-        ttftMs: null,
-        tokensOut: null,
-        tokensPerSec: null,
-        failureCategory: `upstream_http_${resp.status}`,
-        errorMessage: `Upstream HTTP ${resp.status}`,
-        httpStatus: resp.status,
-        timestamp,
-      };
-    } catch (err: any) {
-      clearTimeout(timer);
-      const latencyMs = Math.round(performance.now() - start);
-
-      if (err.name === 'AbortError') {
-        if (attempt <= config.maxRetries) {
-          continue;
-        }
-        return {
-          modelId: model.id,
-          status: 'unavailable',
-          resultCategory: 'timeout',
-          latencyMs,
-          ttftMs: null,
-          tokensOut: null,
-          tokensPerSec: null,
-          failureCategory: 'request_timeout',
-          errorMessage: `Request timed out after ${config.timeoutMs}ms`,
-          httpStatus: null,
-          timestamp,
-        };
+      if (!response.ok) {
+        return observation(model, runId, timestamp, 'unknown', 'invalid_response',
+          performance.now() - started, response.status, 'request_rejected',
+          `NVIDIA Build rejected the canary with HTTP ${response.status}.`);
       }
 
-      if (attempt <= config.maxRetries) {
+      let body: unknown;
+      try {
+        body = await response.json();
+      } catch {
+        return observation(model, runId, timestamp, 'unknown', 'invalid_response',
+          performance.now() - started, response.status, 'invalid_json',
+          'NVIDIA Build returned a successful HTTP status with an invalid JSON body.');
+      }
+
+      const record = body && typeof body === 'object' ? body as Record<string, unknown> : null;
+      const choices = record?.choices;
+      if (!Array.isArray(choices) || choices.length === 0) {
+        return observation(model, runId, timestamp, 'unknown', 'invalid_response',
+          performance.now() - started, response.status, 'missing_completion',
+          'NVIDIA Build response did not contain a completion choice.');
+      }
+
+      const latencyMs = performance.now() - started;
+      const usage = record?.usage && typeof record.usage === 'object'
+        ? record.usage as { completion_tokens?: unknown }
+        : undefined;
+      return observation(
+        model, runId, timestamp, latencyMs > 4000 ? 'degraded' : 'operational',
+        'success', latencyMs, response.status, null, null, usage,
+      );
+    } catch (error) {
+      const latencyMs = performance.now() - started;
+      const aborted = error instanceof Error && error.name === 'AbortError';
+      if (attempt < config.maxRetries) {
+        const delay = Math.min(8000, 500 * (2 ** attempt)) + Math.floor(Math.random() * 250);
+        await new Promise((resolve) => setTimeout(resolve, delay));
         continue;
       }
-
-      return {
-        modelId: model.id,
-        status: 'unavailable',
-        resultCategory: 'network_error',
-        latencyMs,
-        ttftMs: null,
-        tokensOut: null,
-        tokensPerSec: null,
-        failureCategory: 'connection_failure',
-        errorMessage: 'Network connection error',
-        httpStatus: null,
+      return observation(
+        model,
+        runId,
         timestamp,
-      };
+        'unavailable',
+        aborted ? 'timeout' : 'network_error',
+        latencyMs,
+        null,
+        aborted ? 'request_timeout' : 'connection_failure',
+        aborted
+          ? `Synthetic request exceeded the ${config.timeoutMs}ms timeout.`
+          : 'Synthetic request could not establish a successful network response.',
+      );
+    } finally {
+      clearTimeout(timeout);
     }
   }
 
-  // Fallback
-  return {
-    modelId: model.id,
-    status: 'unknown',
-    resultCategory: 'invalid_response',
-    latencyMs: 0,
-    ttftMs: null,
-    tokensOut: null,
-    tokensPerSec: null,
-    failureCategory: 'exhausted_retries',
-    errorMessage: 'Exhausted retries',
-    httpStatus: null,
-    timestamp: new Date().toISOString(),
-  };
+  return observation(model, runId, new Date().toISOString(), 'unknown',
+    'invalid_response', 0, null, 'retry_exhausted', 'Probe retries were exhausted.');
 }
 
-export async function runMonitoringCycle() {
-  console.log('🩺 Launching scheduled synthetic endpoint monitoring cycle...');
+async function runBounded<T, R>(
+  items: T[],
+  concurrency: number,
+  task: (item: T, index: number) => Promise<R>,
+): Promise<R[]> {
+  const results = new Array<R>(items.length);
+  let cursor = 0;
+  const workers = Array.from({ length: Math.min(concurrency, items.length) }, async () => {
+    while (true) {
+      const index = cursor;
+      cursor += 1;
+      if (index >= items.length) return;
+      results[index] = await task(items[index], index);
+    }
+  });
+  await Promise.all(workers);
+  return results;
+}
+
+function writeArtifact(artifact: ProbeArtifact): void {
+  const outputPath = path.resolve(process.cwd(), '.cache/observability-run.json');
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+  const temporaryPath = `${outputPath}.${process.pid}.tmp`;
+  fs.writeFileSync(temporaryPath, `${JSON.stringify(artifact, null, 2)}\n`, { flag: 'wx' });
+  fs.renameSync(temporaryPath, outputPath);
+}
+
+export async function runMonitoringCycle(): Promise<void> {
+  console.log('Starting scheduled NVIDIA Build synthetic monitoring cycle...');
   const config = loadConfig();
 
   if (config.killSwitch) {
-    console.log('🛑 Kill switch is active (PROBE_KILL_SWITCH=true). Aborting cycle cleanly.');
+    console.log('PROBE_KILL_SWITCH is active. No requests or publication artifact will be produced.');
     return;
   }
-
-  if (!config.apiKey || config.apiKey.length < 5) {
-    console.log('ℹ️ NVIDIA_API_KEY is not configured or empty. Skipping live network probing.');
-    console.log('ℹ️ Operating in honest catalog-only mode.');
-    return;
+  if (config.apiKey.length < 8) {
+    throw new Error('NVIDIA_API_KEY is missing or too short; refusing to report a successful monitoring cycle.');
   }
 
-  const allModels = getAllModels();
-  const eligibleModels = allModels.filter((m) => m.eligibility.probe_eligible);
+  const eligibleModels = getAllModels()
+    .filter((model) => model.eligibility.probe_eligible && model.protocol === 'openai-chat')
+    .sort((a, b) => a.id.localeCompare(b.id));
 
   if (eligibleModels.length === 0) {
-    console.log('No probe-eligible models found in catalog.');
-    return;
+    throw new Error('The catalog contains no probe-eligible OpenAI-compatible models.');
   }
 
-  // Select rotating subset based on minute of day
-  const currentMinute = Math.floor(Date.now() / (1000 * 60));
-  const startIndex = (currentMinute * config.perCycleLimit) % eligibleModels.length;
-  const cycleBatch: CanonicalModel[] = [];
+  const count = Math.min(config.perCycleLimit, eligibleModels.length);
+  const rotation = Math.floor(Date.now() / (30 * 60 * 1000));
+  const startIndex = (rotation * count) % eligibleModels.length;
+  const selected = Array.from({ length: count }, (_, offset) =>
+    eligibleModels[(startIndex + offset) % eligibleModels.length]);
 
-  for (let i = 0; i < config.perCycleLimit; i++) {
-    cycleBatch.push(eligibleModels[(startIndex + i) % eligibleModels.length]);
-  }
+  const runId = `probe_${process.env.GITHUB_RUN_ID || Date.now()}_${process.env.GITHUB_RUN_ATTEMPT || crypto.randomBytes(3).toString('hex')}`;
+  console.log(`Probing ${selected.length} of ${eligibleModels.length} eligible models with concurrency ${config.concurrencyLimit}.`);
 
-  console.log(`🎯 Probing rotating subset of ${cycleBatch.length} models (limit: ${config.perCycleLimit})...`);
+  const observations = await runBounded(
+    selected,
+    config.concurrencyLimit,
+    async (model) => {
+      console.log(`Probing ${model.id}...`);
+      const result = await probeModel(model, config, runId);
+      console.log(`  ${result.result_category.toUpperCase()} — ${result.latency_ms}ms (HTTP ${result.http_status ?? 'n/a'})`);
+      return result;
+    },
+  );
 
-  const runId = `probe_${Date.now()}_${crypto.randomBytes(4).toString('hex')}`;
-  const observations: ProbeResult[] = [];
-
-  for (const model of cycleBatch) {
-    console.log(`  → Probing ${model.id}...`);
-    const res = await probeModelWithRetry(model, config);
-    observations.push(res);
-    console.log(`    ↳ ${res.status.toUpperCase()} (${res.resultCategory}, ${res.latencyMs}ms)`);
-  }
-
-  const succeeded = observations.filter((o) => o.resultCategory === 'success').length;
+  const succeeded = observations.filter((item) => item.result_category === 'success').length;
   const failed = observations.length - succeeded;
-
-  const payload: IngestionPayload = {
-    run_id: runId,
-    timestamp: new Date().toISOString(),
-    client_identity: 'github_actions_scheduled_worker_v1',
-    cycle_summary: {
-      models_attempted: cycleBatch.length,
+  const timestamp = new Date().toISOString();
+  const artifact: ProbeArtifact = {
+    schema_version: '1.0.0',
+    cycle: {
+      run_id: runId,
+      timestamp,
+      models_attempted: observations.length,
       probes_succeeded: succeeded,
       probes_failed: failed,
-      probes_skipped: 0,
-      budget_tokens_consumed: observations.reduce((acc, o) => acc + (o.tokensOut || 0), 0),
-      cycle_status: 'completed',
-      region: 'us-east',
+      probes_skipped: eligibleModels.length - observations.length,
+      tokens_consumed: observations.reduce((total, item) => total + (item.tokens_out ?? 0), 0),
+      cycle_status: failed === 0 ? 'completed' : succeeded === 0 ? 'failed' : 'partial',
+      region: 'github-hosted-runner',
     },
-    observations: observations.map((o) => ({
-      model_id: o.modelId,
-      status: o.status,
-      result_category: o.resultCategory,
-      latency_ms: o.latencyMs,
-      ttft_ms: o.ttftMs,
-      tokens_out: o.tokensOut,
-      tokens_per_sec: o.tokensPerSec,
-      failure_category: o.failureCategory,
-      error_message: o.errorMessage,
-      http_status: o.httpStatus,
-      timestamp: o.timestamp,
-      region: 'us-east',
-    })),
+    observations,
   };
 
-  // Deliver to ingestion endpoint if configured
-  if (config.ingestionUrl && config.ingestionSecret) {
-    console.log(`📡 Submitting observations to ingestion endpoint: ${config.ingestionUrl}...`);
-    try {
-      const resp = await fetch(config.ingestionUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${config.ingestionSecret}`,
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (resp.ok) {
-        const body = await resp.json();
-        console.log(`✅ Ingestion acknowledged:`, body);
-      } else {
-        console.error(`❌ Ingestion failed with HTTP ${resp.status}:`, await resp.text());
-      }
-    } catch (err) {
-      console.error(`❌ Failed to deliver to ingestion endpoint:`, (err as Error).message);
-    }
-  } else {
-    console.log(`ℹ️ INGESTION_URL or INGESTION_SECRET not configured. Cycle completed in local dry-run mode.`);
-  }
+  writeArtifact(artifact);
+  console.log(`Probe cycle complete: ${succeeded} succeeded, ${failed} failed. Artifact is ready for validated publication.`);
 }
 
-if (require.main === module || process.argv[1]?.includes('probe_worker')) {
-  runMonitoringCycle().catch((err) => {
-    console.error('Probe worker crashed:', err);
+if (require.main === module || process.argv[1]?.endsWith('probe_worker')) {
+  runMonitoringCycle().catch((error) => {
+    console.error('Probe worker failed:', (error as Error).message);
     process.exit(1);
   });
 }
