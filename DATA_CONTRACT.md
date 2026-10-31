@@ -24,28 +24,28 @@ export interface M31AModelCandidate {
   description: string;
 
   /** Maximum context capacity in tokens */
-  context_window: number;
+  context_window: number | null;
 
   /** Maximum generated output token limit */
-  max_output_tokens: number;
+  max_output_tokens: number | null;
 
   /** Whether the model supports function/tool execution */
-  supports_tools: boolean;
+  supports_tools: boolean | null;
 
   /** Whether the model supports native reasoning / chain-of-thought */
-  supports_thinking: boolean;
+  supports_thinking: boolean | null;
 
   /** Whether the model supports image/vision inputs */
-  supports_vision: boolean;
+  supports_vision: boolean | null;
 
   /** Whether the model supports audio inputs */
-  supports_audio: boolean;
+  supports_audio: boolean | null;
 
   /** Default recommended temperature (0.0 to 1.0) */
   default_temperature: number;
 
   /** Tool calling mode: "direct" | "unsupported" */
-  tool_mode: "direct" | "unsupported";
+  tool_mode: "direct" | "unsupported" | "unknown";
 
   /** Supported input modalities: ["text"], ["text", "image"], etc. */
   input_modalities: string[];
