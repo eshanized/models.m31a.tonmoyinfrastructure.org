@@ -41,7 +41,9 @@ interface HomepageClientProps {
   publisherCounts: Array<{ name: string; count: number }>;
   modalityCounts: Array<{ name: string; count: number }>;
   recentModels: CanonicalModel[];
-  dbConnected: boolean;
+  monitoringAvailable: boolean;
+  monitoringFresh: boolean;
+  lastProbeAt: string | null;
   recentCyclesCount: number;
 }
 
@@ -54,7 +56,9 @@ export function HomepageClient({
   publisherCounts,
   modalityCounts,
   recentModels,
-  dbConnected,
+  monitoringAvailable,
+  monitoringFresh,
+  lastProbeAt,
   recentCyclesCount,
 }: HomepageClientProps) {
   const [selectedPublisher, setSelectedPublisher] = useState<string>('all');
@@ -100,10 +104,10 @@ export function HomepageClient({
               <span>Which endpoints pass availability checks?</span>
             </div>
             <p className="text-xs text-muted-foreground">
-              Synthetic canaries verify health. {dbConnected ? (
+              Synthetic canaries verify health. {monitoringAvailable ? (
                 <span><strong className="text-emerald-600 dark:text-emerald-400 font-mono">{operationalCount} operational</strong>, {degradedCount} degraded, {unavailableCount} unavailable.</span>
               ) : (
-                <span className="text-zinc-500 dark:text-zinc-400">Database monitoring pending configuration. Catalog integrity active.</span>
+                <span className="text-zinc-500 dark:text-zinc-400">Monitoring observations are not published yet. Catalog synchronization remains independent.</span>
               )}
             </p>
           </div>
@@ -114,7 +118,7 @@ export function HomepageClient({
               <span>How has observed latency changed?</span>
             </div>
             <p className="text-xs text-muted-foreground">
-              Per-model probe telemetry tracks HTTP duration, TTFT, and token throughput with zero manufactured statistics.
+              Per-model canaries track observed HTTP duration and token usage. TTFT is reported only when a streaming probe measures it.
             </p>
           </div>
         </div>
@@ -144,10 +148,10 @@ export function HomepageClient({
             <CheckCircle2 className="w-4 h-4 text-emerald-500" />
           </div>
           <div className="text-2xl font-bold font-mono tracking-tight text-emerald-600 dark:text-emerald-400">
-            {dbConnected ? operationalCount : '—'}
+            {monitoringAvailable ? operationalCount : '—'}
           </div>
           <div className="text-[11px] text-muted-foreground">
-            {dbConnected ? 'Eligible probes passing' : 'Awaiting worker cycle'}
+            {monitoringAvailable ? `${recentCyclesCount} published monitoring cycles` : 'Awaiting first published cycle'}
           </div>
         </div>
 
@@ -158,10 +162,10 @@ export function HomepageClient({
             <AlertTriangle className="w-4 h-4 text-amber-500" />
           </div>
           <div className="text-2xl font-bold font-mono tracking-tight text-amber-600 dark:text-amber-400">
-            {dbConnected ? degradedCount : '0'}
+            {monitoringAvailable ? degradedCount : '0'}
           </div>
           <div className="text-[11px] text-muted-foreground">
-            {dbConnected ? `${unavailableCount} unavailable` : 'No anomalies flagged'}
+            {monitoringAvailable ? `${unavailableCount} unavailable` : 'No probe data; status unknown'}
           </div>
         </div>
 
@@ -175,8 +179,8 @@ export function HomepageClient({
             {formatTimeAgo(lastSyncedAt)}
           </div>
           <div className="text-[11px] text-muted-foreground flex items-center gap-1.5">
-            <span className={`w-1.5 h-1.5 rounded-full ${dbConnected ? 'bg-emerald-500' : 'bg-amber-500'}`} />
-            <span>{dbConnected ? 'PostgreSQL Active' : 'Static Mode (DB Unset)'}</span>
+            <span className={`w-1.5 h-1.5 rounded-full ${monitoringAvailable ? 'bg-emerald-500' : 'bg-amber-500'}`} />
+            <span>{monitoringAvailable ? (monitoringFresh ? 'Monitoring snapshot: fresh' : 'Monitoring snapshot: stale') : 'Monitoring snapshot: awaiting data'}</span>
           </div>
         </div>
       </section>
