@@ -37,6 +37,16 @@ export function exportCatalog() {
 
   // Sort models deterministically
   models.sort((a, b) => a.id.localeCompare(b.id));
+  const fileModelIds = new Set(models.map((model) => model.id));
+  const indexedModelIds = new Set(indexData.models.map((model) => model.id));
+  if (models.length !== indexData.total_models || fileModelIds.size !== models.length) {
+    throw new Error('TOML model records do not match the registry index count or contain duplicate IDs.');
+  }
+  if (indexedModelIds.size !== indexData.models.length ||
+      indexedModelIds.size !== fileModelIds.size ||
+      [...fileModelIds].some((id) => !indexedModelIds.has(id))) {
+    throw new Error('TOML model records and registry index IDs do not match.');
+  }
 
   // Build website catalog payload
   const catalogPayload = {
