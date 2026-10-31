@@ -62,8 +62,8 @@ Designed for AI architects, platform engineers, and autonomous coding agents (in
 | **📁 Canonical TOML Registry** | Pure human-and-machine-readable TOML files in `registry/models/*.toml`. Strict Zod runtime validation guarantees data integrity before any compilation or export. |
 | **🔭 Transparent Observability** | Synthetic workers probe live endpoints using minimal token footprints (`max_tokens: 4`). No fabricated GPU queue loads or speculative utilization percentages. |
 | **🤖 Native M31A Agent Contract** | Generates an optimized, deterministic cache specification (`/data/m31a-models.json`) enabling autonomous agents to route tasks without web scraping. |
-| **🛡️ Zero-Trust Ingestion** | Ingestion endpoints enforce constant-time cryptographic verification (`crypto.timingSafeEqual`), payload size limits, model ID whitelisting, and timestamp clock-skew validation. |
-| **💾 Dual Persistence Mode** | Connects to PostgreSQL / Supabase for full historical telemetry, but gracefully operates in static mode if no database is provided, reporting honest status states. |
+| **🛡️ Static Observability Publication** | GitHub Actions validates, merges, retains, and commits synthetic observations to a versioned public JSON snapshot. GitHub Pages never receives runtime ingestion requests. |
+| **💾 GitHub Pages Native History** | Monitoring data is committed as bounded static JSON, so status and history work without a database or permanently running backend. |
 | **⚡ Cutting-Edge Stack** | Built with Next.js 16 (App Router), React 19, TypeScript 6, Tailwind CSS v4, Lucide Icons, and Recharts with fluid dark/light themes. |
 
 ---
@@ -75,51 +75,40 @@ Designed for AI architects, platform engineers, and autonomous coding agents (in
 ```mermaid
 flowchart TD
     subgraph NVIDIA["Official NVIDIA Sources"]
-        N1["build.nvidia.com Catalog"]
-        N2["assets.ngc.nvidia.com Registry"]
-        N3["integrate.api.nvidia.com Endpoints"]
+        N1["build.nvidia.com Model Directory"]
+        N2["integrate.api.nvidia.com Chat Endpoints"]
     end
 
-    subgraph Pipeline["Automated Pipelines (GitHub Actions)"]
-        W1["Daily Catalog Sync Workflow\n(02:00 UTC)"]
-        W2["Synthetic Probe Worker\n(Every 30m)"]
+    subgraph Actions["GitHub Actions"]
+        W1["Daily Live Catalog Sync"]
+        W2["30-minute Synthetic Probe Worker"]
+        W3["Validated Static JSON Publisher"]
+        W4["GitHub Pages Deployment"]
     end
 
-    subgraph Registry["Canonical Source of Truth"]
-        R1["registry/index.toml"]
-        R2["registry/models/*.toml"]
-        V1["Strict Zod Schema Validator"]
-        E1["Deterministic Exporter"]
+    subgraph Registry["Canonical and Generated Data"]
+        R1["registry/models/*.toml"]
+        R2["registry/index.toml"]
+        J1["catalog.json + M31A JSON"]
+        J2["observability.json + bounded history"]
     end
 
-    subgraph Persistence["Storage & Database"]
-        DB[("PostgreSQL / Supabase\nObservations & Transitions")]
+    subgraph Site["Static Next.js Website"]
+        A1["Model Explorer and Detail Pages"]
+        A2["Dashboard Status and History"]
+        A3["Static JSON API"]
     end
 
-    subgraph Service["Next.js 16 Web & API Application"]
-        A1["Public API (/api/v1/models, /api/v1/status)"]
-        A2["Timing-Safe Ingest (/api/v1/ingest)"]
-        A3["Interactive UI (Dashboard, Explorer, Changelog)"]
-        A4["Interactive API Docs & OpenAPI 3.1"]
-    end
-
-    subgraph Clients["Consumers"]
-        C1["M31A Autonomous Agent\n(~/.config/m31a/models_cache.json)"]
-        C2["Engineers & AI Systems"]
-    end
-
-    N1 & N2 -->|Discover & Diff| W1
-    W1 -->|Write Records| R1 & R2
-    R1 & R2 --> V1 --> E1
-    E1 -->|Generate static catalog| Service
-    E1 -->|Export JSON cache| C1
-
-    W2 -->|Canary ping max_tokens=4| N3
-    N3 -->|TTFT & Latency| W2
-    W2 -->|Authenticated POST| A2
-    A2 -->|Persist metrics| DB
-    DB -->|Query telemetry| A1 & A3
-    Service -->|View & query| C2
+    N1 --> W1 --> R1
+    R1 --> R2
+    R1 --> J1
+    N2 --> W2 --> W3 --> J2
+    J1 --> W4
+    J2 --> W4
+    W4 --> A1
+    W4 --> A2
+    W4 --> A3
+    A3 --> M31A["M31A Model Discovery Contract"]
 ```
 
 ---
